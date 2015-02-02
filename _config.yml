@@ -2,12 +2,12 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://yoursite.com
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+url: http://sumomoshinqi.github.io
+title: sumomoshinqi
+subtitle: My simple blog.
+author: sumomoshinqi
 simple_search: https://www.google.com/search
-description:
+description: A simple blog of myself.
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
@@ -19,7 +19,7 @@ date_format: "ordinal"
 subscribe_rss: /atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
-email:
+email: edam.lqq@gmail.com
 
 # ----------------------- #
 #    Jekyll & Plugins     #
