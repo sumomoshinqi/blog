@@ -4,7 +4,7 @@
   <title><![CDATA[Category: testing | sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/blog/categories/testing/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-02-03T14:55:15+08:00</updated>
+  <updated>2015-02-03T16:49:39+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Test Post]]></title>
-    <link href="http://sumomoshinqi.github.io/blog/2015/02/02/test-post/"/>
-    <updated>2015-02-02T21:58:28+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/02/02/test-post</id>
+    <link href="http://sumomoshinqi.github.io/blog/2015/02/03/test-post/"/>
+    <updated>2015-02-03T16:36:18+08:00</updated>
+    <id>http://sumomoshinqi.github.io/blog/2015/02/03/test-post</id>
     <content type="html"><![CDATA[<p>Testing article</p>
 
 <p>中文显示测试</p>
