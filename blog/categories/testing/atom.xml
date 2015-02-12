@@ -4,7 +4,7 @@
   <title><![CDATA[Category: testing | sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/blog/categories/testing/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-02-12T21:10:21+08:00</updated>
+  <updated>2015-02-12T21:25:47+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -20,192 +20,385 @@
     <id>http://sumomoshinqi.github.io/blog/2015/02/03/test-post</id>
     <content type="html"><![CDATA[<p>Testing post</p>
 
+
+
+
 <p>中文显示测试</p>
 
+
+
+
 <p>😄😂 Emoji testing</p>
+
+
+
 
 <!--more-->
 
 
+
+
 <p><strong>Code snippets testing:</strong></p>
 
+
+
+
 <p>Syntax:</p>
+
+
+
 
 <pre><code>``` [language] [title] [url] [link text]
 code snippet
 ```  
 </code></pre>
 
+
+
+
 <p>Sample:</p>
 
-<pre><code class="C Simple shell written in C https://gist.github.com/sumomoshinqi/c0e8ceba3510877a6ecd">/* Compile with: g++ -Wall –Werror -o shell shell.c */
 
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;ctype.h&gt;
-#include &lt;unistd.h&gt;
 
-#include &lt;sys/types.h&gt;
-#include &lt;sys/wait.h&gt;
 
-/* The array below will hold the arguments: args[0] is the command. */
-static char* args[512];
-pid_t pid;
-int command_pipe[2];
+<figure class='code'><figcaption><span>Simple shell written in C</span><a href='https://gist.github.com/sumomoshinqi/c0e8ceba3510877a6ecd'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+<span class='line-number'>158</span>
+<span class='line-number'>159</span>
+<span class='line-number'>160</span>
+<span class='line-number'>161</span>
+<span class='line-number'>162</span>
+<span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+</pre></td><td class='code'><pre><code class='C'><span class='line'><span class="cm">/* Compile with: g++ -Wall –Werror -o shell shell.c */</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;stdio.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;stdlib.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;string.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;ctype.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;unistd.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;sys/types.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;sys/wait.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* The array below will hold the arguments: args[0] is the command. */</span>
+</span><span class='line'><span class="k">static</span> <span class="kt">char</span><span class="o">*</span> <span class="n">args</span><span class="p">[</span><span class="mi">512</span><span class="p">];</span>
+</span><span class='line'><span class="kt">pid_t</span> <span class="n">pid</span><span class="p">;</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">command_pipe</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define READ  0</span>
+</span><span class='line'><span class="cp">#define WRITE 1</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm"> * Handle commands separatly</span>
+</span><span class='line'><span class="cm"> * input: return value from previous command (useful for pipe file descriptor)</span>
+</span><span class='line'><span class="cm"> * first: 1 if first command in pipe-sequence (no input from previous pipe)</span>
+</span><span class='line'><span class="cm"> * last: 1 if last command in pipe-sequence (no input from previous pipe)</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * EXAMPLE: If you type &quot;ls | grep shell | wc&quot; in your shell:</span>
+</span><span class='line'><span class="cm"> *    fd1 = command(0, 1, 0), with args[0] = &quot;ls&quot;</span>
+</span><span class='line'><span class="cm"> *    fd2 = command(fd1, 0, 0), with args[0] = &quot;grep&quot; and args[1] = &quot;shell&quot;</span>
+</span><span class='line'><span class="cm"> *    fd3 = command(fd2, 0, 1), with args[0] = &quot;wc&quot;</span>
+</span><span class='line'><span class="cm"> *</span>
+</span><span class='line'><span class="cm"> * So if &#39;command&#39; returns a file descriptor, the next &#39;command&#39; has this</span>
+</span><span class='line'><span class="cm"> * descriptor as its &#39;input&#39;.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="k">static</span> <span class="kt">int</span> <span class="nf">command</span><span class="p">(</span><span class="kt">int</span> <span class="n">input</span><span class="p">,</span> <span class="kt">int</span> <span class="n">first</span><span class="p">,</span> <span class="kt">int</span> <span class="n">last</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">pipettes</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/* Invoke pipe */</span>
+</span><span class='line'>  <span class="n">pipe</span><span class="p">(</span> <span class="n">pipettes</span> <span class="p">);</span>   
+</span><span class='line'>  <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*</span>
+</span><span class='line'><span class="cm">  SCHEME:</span>
+</span><span class='line'><span class="cm">     STDIN --&gt; O --&gt; O --&gt; O --&gt; STDOUT</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">first</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">last</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">input</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="c1">// First command</span>
+</span><span class='line'>          <span class="n">dup2</span><span class="p">(</span> <span class="n">pipettes</span><span class="p">[</span><span class="n">WRITE</span><span class="p">],</span> <span class="n">STDOUT_FILENO</span> <span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">first</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">last</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">input</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="c1">// Middle command</span>
+</span><span class='line'>          <span class="n">dup2</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">STDIN_FILENO</span><span class="p">);</span>
+</span><span class='line'>          <span class="n">dup2</span><span class="p">(</span><span class="n">pipettes</span><span class="p">[</span><span class="n">WRITE</span><span class="p">],</span> <span class="n">STDOUT_FILENO</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>          <span class="c1">// Last command</span>
+</span><span class='line'>          <span class="n">dup2</span><span class="p">(</span> <span class="n">input</span><span class="p">,</span> <span class="n">STDIN_FILENO</span> <span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">execvp</span><span class="p">(</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>          <span class="n">_exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span> <span class="c1">// If child fails</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">input</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">close</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Nothing more needs to be written</span>
+</span><span class='line'>  <span class="n">close</span><span class="p">(</span><span class="n">pipettes</span><span class="p">[</span><span class="n">WRITE</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// If it&#39;s the last command, nothing more needs to be read</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">last</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">close</span><span class="p">(</span><span class="n">pipettes</span><span class="p">[</span><span class="n">READ</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="n">pipettes</span><span class="p">[</span><span class="n">READ</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* Final cleanup, &#39;wait&#39; for processes to terminate.</span>
+</span><span class='line'><span class="cm"> *  n : Number of times &#39;command&#39; was invoked.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="k">static</span> <span class="kt">void</span> <span class="nf">cleanup</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">wait</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">int</span> <span class="nf">run</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">cmd</span><span class="p">,</span> <span class="kt">int</span> <span class="n">input</span><span class="p">,</span> <span class="kt">int</span> <span class="n">first</span><span class="p">,</span> <span class="kt">int</span> <span class="n">last</span><span class="p">);</span>
+</span><span class='line'><span class="k">static</span> <span class="kt">char</span> <span class="n">line</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+</span><span class='line'><span class="k">static</span> <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* number of calls to &#39;command&#39; */</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;SIMPLE SHELL: Type &#39;exit&#39; or send EOF to exit.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="cm">/* Print the command prompt */</span>
+</span><span class='line'>      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;$&gt; &quot;</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">fflush</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="cm">/* Read a command line */</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">fgets</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="n">stdin</span><span class="p">))</span>
+</span><span class='line'>          <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">input</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>      <span class="kt">int</span> <span class="n">first</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="kt">char</span><span class="o">*</span> <span class="n">cmd</span> <span class="o">=</span> <span class="n">line</span><span class="p">;</span>
+</span><span class='line'>      <span class="kt">char</span><span class="o">*</span> <span class="n">next</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="sc">&#39;|&#39;</span><span class="p">);</span> <span class="cm">/* Find first &#39;|&#39; */</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">while</span> <span class="p">(</span><span class="n">next</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="cm">/* &#39;next&#39; points to &#39;|&#39; */</span>
+</span><span class='line'>          <span class="o">*</span><span class="n">next</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+</span><span class='line'>          <span class="n">input</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="n">cmd</span> <span class="o">=</span> <span class="n">next</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>          <span class="n">next</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="sc">&#39;|&#39;</span><span class="p">);</span> <span class="cm">/* Find next &#39;|&#39; */</span>
+</span><span class='line'>          <span class="n">first</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="n">input</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">cleanup</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">void</span> <span class="nf">split</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">cmd</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">int</span> <span class="nf">run</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">cmd</span><span class="p">,</span> <span class="kt">int</span> <span class="n">input</span><span class="p">,</span> <span class="kt">int</span> <span class="n">first</span><span class="p">,</span> <span class="kt">int</span> <span class="n">last</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">split</span><span class="p">(</span><span class="n">cmd</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">&quot;exit&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>          <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">command</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">char</span><span class="o">*</span> <span class="nf">skipwhite</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">s</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">while</span> <span class="p">(</span><span class="n">isspace</span><span class="p">(</span><span class="o">*</span><span class="n">s</span><span class="p">))</span> <span class="o">++</span><span class="n">s</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kt">void</span> <span class="nf">split</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">cmd</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">cmd</span> <span class="o">=</span> <span class="n">skipwhite</span><span class="p">(</span><span class="n">cmd</span><span class="p">);</span>
+</span><span class='line'>  <span class="kt">char</span><span class="o">*</span> <span class="n">next</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">next</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">next</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cmd</span><span class="p">;</span>
+</span><span class='line'>      <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">cmd</span> <span class="o">=</span> <span class="n">skipwhite</span><span class="p">(</span><span class="n">next</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">next</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">cmd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;\0&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cmd</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">next</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="sc">&#39;\n&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">next</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-#define READ  0
-#define WRITE 1
 
-/*
- * Handle commands separatly
- * input: return value from previous command (useful for pipe file descriptor)
- * first: 1 if first command in pipe-sequence (no input from previous pipe)
- * last: 1 if last command in pipe-sequence (no input from previous pipe)
- *
- * EXAMPLE: If you type "ls | grep shell | wc" in your shell:
- *    fd1 = command(0, 1, 0), with args[0] = "ls"
- *    fd2 = command(fd1, 0, 0), with args[0] = "grep" and args[1] = "shell"
- *    fd3 = command(fd2, 0, 1), with args[0] = "wc"
- *
- * So if 'command' returns a file descriptor, the next 'command' has this
- * descriptor as its 'input'.
- */
-static int command(int input, int first, int last)
-{
-    int pipettes[2];
 
-    /* Invoke pipe */
-    pipe( pipettes );   
-    pid = fork();
-
-    /*
-     SCHEME:
-        STDIN --&gt; O --&gt; O --&gt; O --&gt; STDOUT
-    */
-
-    if (pid == 0) {
-        if (first == 1 &amp;&amp; last == 0 &amp;&amp; input == 0) {
-            // First command
-            dup2( pipettes[WRITE], STDOUT_FILENO );
-        } else if (first == 0 &amp;&amp; last == 0 &amp;&amp; input != 0) {
-            // Middle command
-            dup2(input, STDIN_FILENO);
-            dup2(pipettes[WRITE], STDOUT_FILENO);
-        } else {
-            // Last command
-            dup2( input, STDIN_FILENO );
-        }
-
-        if (execvp( args[0], args) == -1)
-            _exit(EXIT_FAILURE); // If child fails
-    }
-
-    if (input != 0) 
-        close(input);
-
-    // Nothing more needs to be written
-    close(pipettes[WRITE]);
-
-    // If it's the last command, nothing more needs to be read
-    if (last == 1)
-        close(pipettes[READ]);
-
-    return pipettes[READ];
-}
-
-/* Final cleanup, 'wait' for processes to terminate.
- *  n : Number of times 'command' was invoked.
- */
-static void cleanup(int n)
-{
-    int i;
-    for (i = 0; i &lt; n; ++i) 
-        wait(NULL); 
-}
-
-static int run(char* cmd, int input, int first, int last);
-static char line[1024];
-static int n = 0; /* number of calls to 'command' */
-
-int main()
-{
-    printf("SIMPLE SHELL: Type 'exit' or send EOF to exit.\n");
-    while (1) {
-        /* Print the command prompt */
-        printf("$&gt; ");
-        fflush(NULL);
-
-        /* Read a command line */
-        if (!fgets(line, 1024, stdin)) 
-            return 0;
-
-        int input = 0;
-        int first = 1;
-
-        char* cmd = line;
-        char* next = strchr(cmd, '|'); /* Find first '|' */
-
-        while (next != NULL) {
-            /* 'next' points to '|' */
-            *next = '\0';
-            input = run(cmd, input, first, 0);
-
-            cmd = next + 1;
-            next = strchr(cmd, '|'); /* Find next '|' */
-            first = 0;
-        }
-        input = run(cmd, input, first, 1);
-        cleanup(n);
-        n = 0;
-    }
-    return 0;
-}
-
-static void split(char* cmd);
-
-static int run(char* cmd, int input, int first, int last)
-{
-    split(cmd);
-    if (args[0] != NULL) {
-        if (strcmp(args[0], "exit") == 0) 
-            exit(0);
-        n += 1;
-        return command(input, first, last);
-    }
-    return 0;
-}
-
-static char* skipwhite(char* s)
-{
-    while (isspace(*s)) ++s;
-    return s;
-}
-
-static void split(char* cmd)
-{
-    cmd = skipwhite(cmd);
-    char* next = strchr(cmd, ' ');
-    int i = 0;
-
-    while(next != NULL) {
-        next[0] = '\0';
-        args[i] = cmd;
-        ++i;
-        cmd = skipwhite(next + 1);
-        next = strchr(cmd, ' ');
-    }
-
-    if (cmd[0] != '\0') {
-        args[i] = cmd;
-        next = strchr(cmd, '\n');
-        next[0] = '\0';
-        ++i; 
-    }
-
-    args[i] = NULL;
-}
-</code></pre>
 ]]></content>
   </entry>
   
