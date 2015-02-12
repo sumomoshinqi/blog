@@ -4,7 +4,7 @@
   <title><![CDATA[sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-02-12T20:31:16+08:00</updated>
+  <updated>2015-02-12T20:33:36+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -90,12 +90,12 @@ I&rsquo;ve set up everything as usual (port, encryption, firewall &hellip;). Fin
 
 <p>😄😂 Emoji testing</p>
 
+<!--more-->
+
+
 <p><strong>Code snippets testing:</strong></p>
 
 <p>Syntax:</p>
-
-<!--more-->
-
 
 <pre><code>``` [language] [title] [url] [link text]
 code snippet
