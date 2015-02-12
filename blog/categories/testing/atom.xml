@@ -4,7 +4,7 @@
   <title><![CDATA[Category: testing | sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/blog/categories/testing/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-02-12T20:21:13+08:00</updated>
+  <updated>2015-02-12T20:30:28+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -18,11 +18,9 @@
     <link href="http://sumomoshinqi.github.io/blog/2015/02/03/test-post/"/>
     <updated>2015-02-03T16:36:18+08:00</updated>
     <id>http://sumomoshinqi.github.io/blog/2015/02/03/test-post</id>
-    <content type="html"><![CDATA[<p>Testing article</p>
+    <content type="html"><![CDATA[<p>Testing post</p>
 
 <p>中文显示测试</p>
-
-<p>日本語表示正常</p>
 
 <p>😄😂 Emoji testing</p>
 
