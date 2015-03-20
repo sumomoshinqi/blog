@@ -4,7 +4,7 @@
   <title><![CDATA[Category: english posts | sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/blog/categories/english-posts/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-03-20T19:54:08+08:00</updated>
+  <updated>2015-03-20T19:59:05+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -21,212 +21,49 @@
     <content type="html"><![CDATA[<p>Compare two version numbers version1 and version2.  <br/>
 If version1 > version2 return 1, if version1 &lt; version2 return -1, otherwise return 0.</p>
 
-
-
-
 <p>You may assume that the version strings are non-empty and contain only digits and the . character.   <br/>
 The <code>.</code> character does not represent a decimal point and is used to separate number sequences.  <br/>
 For instance, <code>2.5</code> is not &ldquo;two and a half&rdquo; or &ldquo;half way to version three&rdquo;, it is the fifth second-level revision of the second first-level revision.</p>
 
-
-
-
 <p>Here is an example of version numbers ordering: <br/>
 <code>0.1 &lt; 1.1 &lt; 1.2 &lt; 13.37</code></p>
 
-
-
-
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>compareVersion</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class='C'><span class='line'><span class="kt">int</span> <span class="nf">compareVersion</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span> <span class="n">version1</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">version2</span><span class="p">){</span>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">v1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">v2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">p1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">while</span> <span class="p">(</span><span class="n">p1</span> <span class="o">&lt;</span> <span class="n">strlen</span><span class="p">(</span><span class="n">version1</span><span class="p">)</span> <span class="o">||</span> <span class="n">p2</span> <span class="o">&lt;</span> <span class="n">strlen</span><span class="p">(</span><span class="n">version2</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">v1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">while</span> <span class="p">(</span><span class="n">p1</span> <span class="o">&lt;</span> <span class="n">strlen</span><span class="p">(</span><span class="n">version1</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">version1</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;.&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="o">++</span><span class="n">p1</span><span class="p">;</span>
-</span><span class='line'>                <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>            <span class="n">v1</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">v1</span> <span class="o">+</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">version1</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
-</span><span class='line'>            <span class="o">++</span><span class="n">p1</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">v2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">while</span> <span class="p">(</span><span class="n">p2</span> <span class="o">&lt;</span> <span class="n">strlen</span><span class="p">(</span><span class="n">version2</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">version2</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;.&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="o">++</span><span class="n">p2</span><span class="p">;</span>
-</span><span class='line'>                <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>            <span class="n">v2</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">v2</span> <span class="o">+</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">version2</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
-</span><span class='line'>            <span class="o">++</span><span class="n">p2</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">v1</span> <span class="o">&lt;</span> <span class="n">v2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">v1</span> <span class="o">&gt;</span> <span class="n">v2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Fixed: ARD cannot connect to Ubuntu 14.04]]></title>
-    <link href="http://sumomoshinqi.github.io/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04/"/>
-    <updated>2015-02-12T16:53:28+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve been so far using <a href="http://www.realvnc.com">RealVNC</a> as VNC client. It&rsquo;s perfect except one thing - the icon.<br/>
-The original icon appears really big when standing on dock. I even resized it to make the icon look <em>normal</em>.</p>
-
-
-
-
-<p><img src="http://sumomoshinqi.github.io/images/posts/2015-02-12-dock.png" alt="dock" /></p>
-
-
-
-
-<!--more-->
-
-
-
-
-<p>But what about the OS X&rsquo;s built-in <em>Screen Sharing</em>? Well, here comes the problems.</p>
-
-
-
-
-<blockquote><p>Connection failed to “XXX&rsquo;s remote desktop on XXX”. The software on the remote computer appears to be incompatible with this version of Screen Sharing.</p></blockquote>
-
-
-
-
-<p>This message was showing up again and again when I tried to connect to a server running Ubuntu 14.04.<br/>
-I&rsquo;ve set up everything as usual (port, encryption, firewall &hellip;). Finally I made it work.</p>
-
-
-
-
-<p>In fact this issue was caused by a <a href="https://bugs.launchpad.net/ubuntu/+source/vino/+bug/1281250">BUG</a> introduced into <a href="https://wiki.gnome.org/Projects/Vino">Vino</a> (Default VNC server for GNOME).</p>
-
-
-
-
-<h4>Here&rsquo;s the solution:</h4>
-
-
-
-
-<ul>
-<li>Make sure <code>Desktop Sharing</code> has been set up properly.</li>
-<li>Install <code>gconf-tools</code>. e.g. &lsquo;sudo apt-get install dconf-tools&rsquo;</li>
-<li>Run <code>dconf-Editor</code>.</li>
-<li>Expand &lsquo;org&rsquo;</li>
-<li>Expand &lsquo;gnome&rsquo;</li>
-<li>Expand &lsquo;Desktop&rsquo;</li>
-<li>Select &lsquo;Remote Access&rsquo;</li>
-<li>Uncheck &lsquo;Require Encrption&rsquo;</li>
-</ul>
-
-
-
-
-<p><img src="http://sumomoshinqi.github.io/images/posts/2015-02-12-Ubuntu-setting.png" alt="Desktop-Sharing-setting" /></p>
-
-
-
-
-<p><img src="http://sumomoshinqi.github.io/images/posts/2015-02-12-gconf-Editor.png" alt="gconf-Editor" /></p>
-
-
-
-
-<p>Now you can connect to the server using built-in <em>Screen Sharing</em> or <em>Apple Remote Desktop</em>.</p>
-
-
-
-
-<p><img src="http://sumomoshinqi.github.io/images/posts/2015-02-12-Screen-Sharing.png" alt="Screen Sharing" /></p>
-
-
-
-
-<p><img src="http://sumomoshinqi.github.io/images/posts/2015-02-12-ARD.png" alt="Apple Remote Desktop" /></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git, fatal: The remote end hung up unexpectedly]]></title>
-    <link href="http://sumomoshinqi.github.io/blog/2015/02/03/git/"/>
-    <updated>2015-02-03T16:38:18+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/02/03/git</id>
-    <content type="html"><![CDATA[<p>Didn&rsquo;t expect that this would be my first post except the one for testing.😉</p>
-
-
-
-
-<p>So there was a problem when I had changed the blog theme and tried to <code>rake deploy</code>.</p>
-
-
-
-
-<!--more-->
-
-
-
-
-<p><img src="http://sumomoshinqi.github.io/images/posts/2015-02-03-git.png" alt="problem" /></p>
-
-
-
-
-<p>Then I looked up stackoverflow and found it was due to git/https buffer settings, which means the size of my <strong>push</strong> was larger than the buffer size. In order to solve it, simply <code>git config http.postBuffer 524288000</code> and it just worked.</p>
-
+<pre><code class="C compareVersion">int compareVersion(char * version1, char * version2){
+    int v1 = 0, v2 = 0;
+    int p1 = 0, p2 = 0;
+
+    while (p1 &lt; strlen(version1) || p2 &lt; strlen(version2)) {
+        v1 = 0;
+        while (p1 &lt; strlen(version1)) {
+            if (version1[p1] == '.') {
+                ++p1;
+                break;
+            }
+            v1 = 10 * v1 + (int)(version1[p1] - '0');
+            ++p1;
+        }
+
+        v2 = 0;
+        while (p2 &lt; strlen(version2)) {
+            if (version2[p2] == '.') {
+                ++p2;
+                break;
+            }
+            v2 = 10 * v2 + (int)(version2[p2] - '0');
+            ++p2;
+        }
+
+        if (v1 &lt; v2) {
+            return -1;
+        }
+        else if (v1 &gt; v2) {
+            return 1;
+        }
+    }
+
+    return 0;
+}  
+</code></pre>
 ]]></content>
   </entry>
   

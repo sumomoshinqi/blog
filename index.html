@@ -9,7 +9,7 @@
   <meta name="author" content="sumomoshinqi">
 
   
-  <meta name="description" content="Compare two version numbers version1 and version2. If version1 > version2 return 1, if version1 &lt; version2 return -1, otherwise return 0. You may &hellip;&#8221;>
+  <meta name="description" content="Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times. You may assume that &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/20/leetcode-majority-element/">[LeetCode]Majority Element</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-20T19:57:22+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:57 pm</span></time>
+        
+         | <a href="/blog/2015/03/20/leetcode-majority-element/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Given an array of size n, find the majority element. The majority element is the element that appears more than <em>⌊ n/2 ⌋</em> times.</p>
+
+<p>You may assume that the array is non-empty and the majority element always exist in the array.</p>
+
+<figure class='code'><figcaption><span>Majority Element</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='C'><span class='line'><span class="n">intcomp</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span><span class="n">b</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">a</span><span class="o">-*</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">b</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">majorityElement</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">qsort</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">),</span> <span class="n">intcomp</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">num</span><span class="p">[</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -329,9 +381,9 @@ The original icon appears really big when standing on dock. I even resized it to
 </section><section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/english-posts/'>english posts (3)</a></li>
+    <li class='category'><a href='/blog/categories/english-posts/'>english posts (1)</a></li>
 <li class='category'><a href='/blog/categories/git/'>git (1)</a></li>
-<li class='category'><a href='/blog/categories/leetcode/'>leetcode (1)</a></li>
+<li class='category'><a href='/blog/categories/leetcode/'>leetcode (2)</a></li>
 <li class='category'><a href='/blog/categories/os-x/'>os x (1)</a></li>
 <li class='category'><a href='/blog/categories/testing/'>testing (1)</a></li>
 <li class='category'><a href='/blog/categories/tips/'>tips (2)</a></li>
@@ -341,6 +393,10 @@ The original icon appears really big when standing on dock. I even resized it to
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/20/leetcode-majority-element/">[LeetCode]Majority Element</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/03/20/leetcode-compare-version-numbers/">[LeetCode]Compare Version Numbers</a>

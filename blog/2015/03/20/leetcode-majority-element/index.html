@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Fixed: ARD cannot connect to Ubuntu 14.04 - sumomoshinqi</title>
+  <title>[LeetCode]Majority Element - sumomoshinqi</title>
   <meta name="author" content="sumomoshinqi">
 
   
-  <meta name="description" content="I&rsquo;ve been so far using RealVNC as VNC client. It&rsquo;s perfect except one thing - the icon.
-The original icon appears really big when &hellip;">
+  <meta name="description" content="Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times. You may assume that &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ The original icon appears really big when &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sumomoshinqi.github.io/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04/">
+  <link rel="canonical" href="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +80,7 @@ The original icon appears really big when &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Fixed: ARD Cannot Connect to Ubuntu 14.04</h1>
+      <h1 class="entry-title">[LeetCode]Majority Element</h1>
     
     
       <p class="meta">
@@ -90,7 +89,7 @@ The original icon appears really big when &hellip;">
 
 
 
-<time class='entry-date' datetime='2015-02-12T16:53:28+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:53 pm</span></time>
+<time class='entry-date' datetime='2015-03-20T19:57:22+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:57 pm</span></time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -99,46 +98,28 @@ The original icon appears really big when &hellip;">
   </header>
 
 
-<div class="entry-content"><p>I&rsquo;ve been so far using <a href="http://www.realvnc.com">RealVNC</a> as VNC client. It&rsquo;s perfect except one thing - the icon.<br/>
-The original icon appears really big when standing on dock. I even resized it to make the icon look <em>normal</em>.</p>
+<div class="entry-content"><p>Given an array of size n, find the majority element. The majority element is the element that appears more than <em>⌊ n/2 ⌋</em> times.</p>
 
-<p><img src="/images/posts/2015-02-12-dock.png" alt="dock" /></p>
+<p>You may assume that the array is non-empty and the majority element always exist in the array.</p>
 
-<!--more-->
+<figure class='code'><figcaption><span>Majority Element</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='C'><span class='line'><span class="n">intcomp</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span><span class="n">b</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">a</span><span class="o">-*</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">b</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">majorityElement</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">qsort</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">),</span> <span class="n">intcomp</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">num</span><span class="p">[</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-
-<p>But what about the OS X&rsquo;s built-in <em>Screen Sharing</em>? Well, here comes the problems.</p>
-
-<blockquote><p>Connection failed to “XXX&rsquo;s remote desktop on XXX”. The software on the remote computer appears to be incompatible with this version of Screen Sharing.</p></blockquote>
-
-<p>This message was showing up again and again when I tried to connect to a server running Ubuntu 14.04.<br/>
-I&rsquo;ve set up everything as usual (port, encryption, firewall &hellip;). Finally I made it work.</p>
-
-<p>In fact this issue was caused by a <a href="https://bugs.launchpad.net/ubuntu/+source/vino/+bug/1281250">BUG</a> introduced into <a href="https://wiki.gnome.org/Projects/Vino">Vino</a> (Default VNC server for GNOME).</p>
-
-<h4>Here&rsquo;s the solution:</h4>
-
-<ul>
-<li>Make sure <code>Desktop Sharing</code> has been set up properly.</li>
-<li>Install <code>gconf-tools</code>. e.g. &lsquo;sudo apt-get install dconf-tools&rsquo;</li>
-<li>Run <code>dconf-Editor</code>.</li>
-<li>Expand &lsquo;org&rsquo;</li>
-<li>Expand &lsquo;gnome&rsquo;</li>
-<li>Expand &lsquo;Desktop&rsquo;</li>
-<li>Select &lsquo;Remote Access&rsquo;</li>
-<li>Uncheck &lsquo;Require Encrption&rsquo;</li>
-</ul>
-
-
-<p><img src="/images/posts/2015-02-12-Ubuntu-setting.png" alt="Desktop-Sharing-setting" /></p>
-
-<p><img src="/images/posts/2015-02-12-gconf-Editor.png" alt="gconf-Editor" /></p>
-
-<p>Now you can connect to the server using built-in <em>Screen Sharing</em> or <em>Apple Remote Desktop</em>.</p>
-
-<p><img src="/images/posts/2015-02-12-Screen-Sharing.png" alt="Screen Sharing" /></p>
-
-<p><img src="/images/posts/2015-02-12-ARD.png" alt="Apple Remote Desktop" /></p>
 </div>
 
 
@@ -154,12 +135,12 @@ I&rsquo;ve set up everything as usual (port, encryption, firewall &hellip;). Fin
 
 
 
-<time class='entry-date' datetime='2015-02-12T16:53:28+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:53 pm</span></time>
+<time class='entry-date' datetime='2015-03-20T19:57:22+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:57 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/os-x/'>os x</a>, <a class='category' href='/blog/categories/tips/'>tips</a>, <a class='category' href='/blog/categories/vnc/'>vnc</a>
+    <a class='category' href='/blog/categories/leetcode/'>leetcode</a>
   
 </span>
 
@@ -168,7 +149,7 @@ I&rsquo;ve set up everything as usual (port, encryption, firewall &hellip;). Fin
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sumomoshinqi.github.io/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04/" data-via="sumomoshinqi" data-counturl="http://sumomoshinqi.github.io/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element/" data-via="sumomoshinqi" data-counturl="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -194,10 +175,8 @@ I&rsquo;ve set up everything as usual (port, encryption, firewall &hellip;). Fin
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/02/03/git/" title="Previous Post: Git, fatal: The remote end hung up unexpectedly">&laquo; Git, fatal: The remote end hung up unexpectedly</a>
+        <a class="basic-alignment left" href="/blog/2015/03/20/leetcode-compare-version-numbers/" title="Previous Post: [LeetCode]Compare Version Numbers">&laquo; [LeetCode]Compare Version Numbers</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/03/20/leetcode-compare-version-numbers/" title="Next Post: [LeetCode]Compare Version Numbers">[LeetCode]Compare Version Numbers &raquo;</a>
       
     </p>
   </footer>
@@ -281,8 +260,8 @@ I&rsquo;ve set up everything as usual (port, encryption, firewall &hellip;). Fin
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sumomoshinqi.github.io/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04/';
-        var disqus_url = 'http://sumomoshinqi.github.io/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04/';
+        var disqus_identifier = 'http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element/';
+        var disqus_url = 'http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element/';
         var disqus_script = 'embed.js';
       
     (function () {
