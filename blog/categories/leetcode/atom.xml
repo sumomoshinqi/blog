@@ -4,7 +4,7 @@
   <title><![CDATA[Category: leetcode | sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/blog/categories/leetcode/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-03-20T20:02:33+08:00</updated>
+  <updated>2015-03-20T20:05:42+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -49,9 +49,9 @@
 
 <p>You may assume that the array is non-empty and the majority element always exist in the array.</p>
 
-<pre><code class="C Majority Element">intcomp(const void*a,const void*b)
+<pre><code class="C Majority Element">intcomp(const void * a,const void * b)
 {
-    return *(int*)a-*(int*)b;
+    return * (int *)a - * (int *)b;
 }
 int majorityElement(int num[], int n) {
     qsort(num, n, sizeof(int), intcomp);
