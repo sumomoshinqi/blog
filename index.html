@@ -9,7 +9,7 @@
   <meta name="author" content="sumomoshinqi">
 
   
-  <meta name="description" content="Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times. You may assume that &hellip;">
+  <meta name="description" content="You are climbing a stair case. It takes n steps to reach to the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/20/leetcode-climbing-stairs/">[LeetCode]Climbing Stairs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-20T20:01:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:01 pm</span></time>
+        
+         | <a href="/blog/2015/03/20/leetcode-climbing-stairs/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>You are climbing a stair case. It takes n steps to reach to the top.</p>
+
+<p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
+
+<figure class='code'><figcaption><span>Climbing Stairs</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='C'><span class='line'><span class="kt">int</span> <span class="nf">climbStairs</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">stepOne</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">stepTwo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">ret</span> <span class="o">=</span> <span class="n">stepOne</span> <span class="o">+</span> <span class="n">stepTwo</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">stepTwo</span> <span class="o">=</span> <span class="n">stepOne</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">stepOne</span> <span class="o">=</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -381,9 +445,10 @@ The original icon appears really big when standing on dock. I even resized it to
 </section><section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/english-posts/'>english posts (1)</a></li>
+    <li class='category'><a href='/blog/categories/c/'>c (3)</a></li>
+<li class='category'><a href='/blog/categories/english-posts/'>english posts (1)</a></li>
 <li class='category'><a href='/blog/categories/git/'>git (1)</a></li>
-<li class='category'><a href='/blog/categories/leetcode/'>leetcode (2)</a></li>
+<li class='category'><a href='/blog/categories/leetcode/'>leetcode (3)</a></li>
 <li class='category'><a href='/blog/categories/os-x/'>os x (1)</a></li>
 <li class='category'><a href='/blog/categories/testing/'>testing (1)</a></li>
 <li class='category'><a href='/blog/categories/tips/'>tips (2)</a></li>
@@ -393,6 +458,10 @@ The original icon appears really big when standing on dock. I even resized it to
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/20/leetcode-climbing-stairs/">[LeetCode]Climbing Stairs</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/03/20/leetcode-majority-element/">[LeetCode]Majority Element</a>
@@ -408,10 +477,6 @@ The original icon appears really big when standing on dock. I even resized it to
     
       <li class="post">
         <a href="/blog/2015/02/03/git/">Git, fatal: The remote end hung up unexpectedly</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/02/03/test-post/">Test Post</a>
       </li>
     
   </ul>

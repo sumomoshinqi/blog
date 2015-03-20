@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: english posts | sumomoshinqi]]></title>
-  <link href="http://sumomoshinqi.github.io/blog/categories/english-posts/atom.xml" rel="self"/>
+  <title><![CDATA[Category: c | sumomoshinqi]]></title>
+  <link href="http://sumomoshinqi.github.io/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
   <updated>2015-03-20T20:02:33+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[LeetCode]Climbing Stairs]]></title>
+    <link href="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-climbing-stairs/"/>
+    <updated>2015-03-20T20:01:00+08:00</updated>
+    <id>http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-climbing-stairs</id>
+    <content type="html"><![CDATA[<p>You are climbing a stair case. It takes n steps to reach to the top.</p>
+
+<p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
+
+<pre><code class="C Climbing Stairs">int climbStairs(int n) {
+    int stepOne = 1;
+    int stepTwo = 0;
+    int ret = 0;
+    int i;
+
+    for (i = 0; i &lt; n; i++) {
+        ret = stepOne + stepTwo;
+        stepTwo = stepOne;
+        stepOne = ret;
+    }
+
+    return ret;
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[LeetCode]Majority Element]]></title>
+    <link href="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element/"/>
+    <updated>2015-03-20T19:57:22+08:00</updated>
+    <id>http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element</id>
+    <content type="html"><![CDATA[<p>Given an array of size n, find the majority element. The majority element is the element that appears more than <em>⌊ n/2 ⌋</em> times.</p>
+
+<p>You may assume that the array is non-empty and the majority element always exist in the array.</p>
+
+<pre><code class="C Majority Element">intcomp(const void*a,const void*b)
+{
+    return *(int*)a-*(int*)b;
+}
+int majorityElement(int num[], int n) {
+    qsort(num, n, sizeof(int), intcomp);
+    return num[n/2];
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[LeetCode]Compare Version Numbers]]></title>
