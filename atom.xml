@@ -4,7 +4,7 @@
   <title><![CDATA[sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-03-22T14:58:34+08:00</updated>
+  <updated>2015-03-22T15:01:39+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -21,6 +21,11 @@
     <content type="html"><![CDATA[<p>You are climbing a stair case. It takes n steps to reach to the top.</p>
 
 <p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
+
+<!--more-->
+
+
+
 
 <figure class='code'><figcaption><span>Climbing Stairs</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -64,6 +69,11 @@
 
 <p>You may assume that the array is non-empty and the majority element always exist in the array.</p>
 
+<!--more-->
+
+
+
+
 <figure class='code'><figcaption><span>Majority Element</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -99,6 +109,11 @@ For instance, <code>2.5</code> is not &ldquo;two and a half&rdquo; or &ldquo;hal
 
 <p>Here is an example of version numbers ordering: <br/>
 <code>0.1 &lt; 1.1 &lt; 1.2 &lt; 13.37</code></p>
+
+<!--more-->
+
+
+
 
 <figure class='code'><figcaption><span>compareVersion</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

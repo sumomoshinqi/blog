@@ -4,7 +4,7 @@
   <title><![CDATA[Category: c | sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/blog/categories/c/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-03-22T14:58:34+08:00</updated>
+  <updated>2015-03-22T15:01:39+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>You are climbing a stair case. It takes n steps to reach to the top.</p>
 
 <p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
+
+<!--more-->
+
 
 <pre><code class="C Climbing Stairs">int climbStairs(int n) {
     int stepOne = 1;
@@ -49,6 +52,9 @@
 
 <p>You may assume that the array is non-empty and the majority element always exist in the array.</p>
 
+<!--more-->
+
+
 <pre><code class="C Majority Element">intcomp(const void * a,const void * b)
 {
     return * (int *)a - * (int *)b;
@@ -75,6 +81,9 @@ For instance, <code>2.5</code> is not &ldquo;two and a half&rdquo; or &ldquo;hal
 
 <p>Here is an example of version numbers ordering: <br/>
 <code>0.1 &lt; 1.1 &lt; 1.2 &lt; 13.37</code></p>
+
+<!--more-->
+
 
 <pre><code class="C compareVersion">int compareVersion(char * version1, char * version2){
     int v1 = 0, v2 = 0;
