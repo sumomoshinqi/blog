@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: vhdl | sumomoshinqi]]></title>
+  <link href="http://sumomoshinqi.github.io/blog/categories/vhdl/atom.xml" rel="self"/>
+  <link href="http://sumomoshinqi.github.io/"/>
+  <updated>2015-03-31T00:28:23+08:00</updated>
+  <id>http://sumomoshinqi.github.io/</id>
+  <author>
+    <name><![CDATA[sumomoshinqi]]></name>
+    <email><![CDATA[edam.lqq@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[8bit CPU design]]></title>
+    <link href="http://sumomoshinqi.github.io/blog/2015/03/31/8bit-cpu-design/"/>
+    <updated>2015-03-31T00:26:39+08:00</updated>
+    <id>http://sumomoshinqi.github.io/blog/2015/03/31/8bit-cpu-design</id>
+    <content type="html"><![CDATA[<pre><code class="VHDL 8bit.vhdl">--时钟信号与复位信号
+
+---时钟信号
+pMCLK:
+process(MCLK, CLK, RESET, RUN)
+begin
+　　if((RUN = '0') or (RESET = '0')) then MCLK &lt;= '0';
+        elsif(CLK'event and CLK = '0') then MCLK &lt;= not MCLK;
+　　end if;
+end process pMCLK;
+
+MPCK    &lt;= not MCLK and CLK;
+MICK    &lt;= not MPCK;
+
+WRC     &lt;= MCLK;        --寄存器 Ri 时钟
+PCK     &lt;= MCLK;        --PC 时钟
+CA      &lt;= MCLK;        --A 时钟
+CT      &lt;= MCLK;        --TMP 时钟
+CC      &lt;= MCLK;        --ACT 时钟
+CCI     &lt;= MCLK;        --IR 时钟
+CA1     &lt;= MCLK;        --ADRH 时钟
+CA2     &lt;= MCLK;        --ADRL 时钟
+CCK     &lt;= MCLK;        --CY 时钟
+SCK     &lt;= MCLK;        --SP 时钟
+ZCK     &lt;= MCLK;        --ZY 时钟
+
+
+----复位信号
+PREST   &lt;= RESET; 
+
+pMCLR:
+process(MCLK, RESET)
+begin
+    if(RESET = '0') then MCLR &lt;= '0';
+        elsif(MCLK'event and MCLK = '1') then MCLR &lt;= RUN;
+    end if;
+end process pMCLR;
+
+CWR     &lt;= CWRX or not MCLK;
+CRD     &lt;= CRDX or not MCLK;
+
+MRD     &lt;= CRD or AB(15);
+MWR     &lt;= CWR or AB(15) or not CLK;
+IOW     &lt;= not AB(15) or not AB(1) or CWR or not CLK;
+IOR     &lt;= not AB(15) or not AB(0) or CRD;
+
+--功能部件
+
+----MPC的定义
+pMPC:
+process(MPLD, MPCK, MCLR)
+begin
+    if(MCLR = '0') then MPC &lt;= "0000000000";
+        elsif(MPCK'event and MPCK = '1') then
+            if(MPLD = '0') then MPC &lt;= MD;
+                else MPC &lt;= MPC + 1;
+            end if;
+    end if;
+end process pMPC;
+
+CI(9 downto 0) &lt;= MPC;
+
+----为程序计数器入口MD的定义
+MD(0)           &lt;= '1';
+MD(1)           &lt;= '1';
+MD(2)           &lt;= '1';
+MD(7 downto 3)  &lt;= IR(7 downto 3);
+MD(9 downto 8)  &lt;= "00";
+
+----MIR的定义
+pMIR:
+process(MICK)
+begin
+    if(MICK'event and MICK = '1') then 
+        MIR &lt;= CO;
+    end if;
+end process pMIR;
+
+CWRX    &lt;= MIR(29);
+CRDX    &lt;= MIR(28);
+MPLD    &lt;= MIR(27);
+MXC(1)  &lt;= MIR(26);
+MXC(0)  &lt;= MIR(25);
+SSP(1)  &lt;= MIR(24); 
+SSP(0)  &lt;= MIR(23);
+PINC    &lt;= MIR(22);
+PLD(2)  &lt;= MIR(21); 
+PLD(1)  &lt;= MIR(20); 
+PLD(0)  &lt;= MIR(19); 
+MXA     &lt;= MIR(18);
+S(2)    &lt;= MIR(17);
+S(1)    &lt;= MIR(16); 
+S(0)    &lt;= MIR(15);
+MXE     &lt;= MIR(14);
+CP      &lt;= MIR(13);
+ZP      &lt;= MIR(12);
+MXB(1)  &lt;= MIR(11); 
+MXB(0)  &lt;= MIR(10);
+OB      &lt;= MIR(9); 
+GA2     &lt;= MIR(8); 
+AHS     &lt;= MIR(7); 
+GA1     &lt;= MIR(6); 
+GI      &lt;= MIR(5);
+GT      &lt;= MIR(4); 
+GC      &lt;= MIR(3); 
+ASR     &lt;= MIR(2); 
+GA      &lt;= MIR(1); 
+WRE     &lt;= MIR(0);
+
+----寄存器Ri的定义
+pRi:
+process(WRC, WRE, RS)
+begin
+    if (WRC'event and WRC ='0') then 
+        if (WRE = '0') then 
+            case RS is
+                when "000" =&gt; R0 &lt;= DBL;
+                when "001" =&gt; R1 &lt;= DBL;
+                when "010" =&gt; R2 &lt;= DBL;
+                when "011" =&gt; R3 &lt;= DBL;
+                when "100" =&gt; R4 &lt;= DBL;
+                when "101" =&gt; R5 &lt;= DBL;
+                when "110" =&gt; R6 &lt;= DBL;
+                when "111" =&gt; R7 &lt;= DBL;
+            end case;
+        end if;
+    end if;
+end process pRi;
+
+----寄存器输出ROUT的定义
+case RS is
+    when "000" =&gt; ROUT &lt;= R0;
+    when "001" =&gt; ROUT &lt;= R1;
+    when "010" =&gt; ROUT &lt;= R2;
+    when "011" =&gt; ROUT &lt;= R3;
+    when "100" =&gt; ROUT &lt;= R4;
+    when "101" =&gt; ROUT &lt;= R5;
+    when "110" =&gt; ROUT &lt;= R6;
+    when "111" =&gt; ROUT &lt;= R7;
+end case;
+
+----MUXA的定义
+if(MXA = '0') then 
+    FB &lt;= ROUT;
+else
+    FB &lt;= TMP;
+end if;
+
+----MUXB的定义
+case MXB is
+    when "00" =&gt; DB &lt;= FF(7 downto 0);
+    when "01" =&gt; DB &lt;= PC(15 downto 8);
+    when "10" =&gt; DB &lt;= PC(7 downto 0);
+    when others =&gt; DB &lt;= ROUT;
+end case;
+
+----MUXC的定义
+case MXC is
+    when "00" =&gt; AB &lt;= PC;
+    when "01" =&gt; AB &lt;= ADRH&amp;ADRL;
+    when "10" =&gt; AB &lt;= SP;
+    when others =&gt; NULL;
+end case;
+
+----MUXD的定义
+case PLD is
+    when "000" =&gt; PCADD &lt;= '0';
+    when "001" =&gt; PCADD &lt;= CY;
+    when "010" =&gt; PCADD &lt;= not ZY;
+    when "011" =&gt; PCADD &lt;= not KRIX;
+    when "100" =&gt; PCADD &lt;= not PRIX;
+    when "101" =&gt; PCADD &lt;='1';
+    when "110" =&gt; PCADD &lt;= ZY;
+    when others =&gt; NULL;
+end case;
+
+----TMP的定义
+pTMP:
+process(CT, GT)
+begin
+    if(CT'event and CT = '0') then
+        if(GT = '0') then 
+            TMP &lt;= DB;
+        end if;
+    end if;
+end process pTMP;
+
+----A的定义
+pA1:
+process(CA, GA)
+begin
+    if(CA'event and CA = '0') then 
+        if(GA = '0') then 
+            A &lt;= DB;
+        end if;
+    end if;
+end process pA1;
+
+pA2:
+process(CA, ASR)
+variable POOPOO:std_logic_vector(7 downto 0);
+begin
+    if(CA'event and CA = '0') then
+        if(ASR = '0' and MXE = '0') then 
+            POOPOO := A;
+            CYA  &lt;= POOPOO(0);      --移出的末位
+            A   &lt;= POOPOO(7) &amp; POOPOO(7 downto 1);
+        end if;
+    end if;
+end pA2;
+
+----MUXE的定义
+if(MXE = '0') then 
+    CY &lt;= FF(8);
+else
+    CY &lt;= CYA;
+end if;
+
+
+----ACT的定义
+pACT:
+process(CC, GC)
+begin
+    if(CC'event and CC = '0') then
+        if(GC = '0') then 
+            ACT &lt;= DB;
+        end if;
+    end if;
+end process pACT;
+
+FA &lt;= '0'&amp;ACT; --扩展成九位
+FB &lt;= '0'&amp;TMP;
+
+----ALU的定义
+case S is
+    when "000" =&gt; FF &lt;= FA + FB;
+    when "001" =&gt; FF &lt;= FA - FB;
+    when "010" =&gt; FF &lt;= FA;
+    when "011" =&gt; FF &lt;= FB;
+    when "100" =&gt; FF &lt;= not FB;
+    when "101" =&gt; FF &lt;= "000000000";
+    when "110" =&gt; FF &lt;= "000000000";
+    when "111" =&gt; FF &lt;= A + '1';
+end case;
+
+COUT &lt;= FF(8);
+
+----CY的定义
+pCY:
+process(CCK, CP, FF)
+begin
+    if(CCK'event and CCK = '0') then 
+        if(CP = '0') then 
+            CY &lt;= FF(8);
+        end if;
+    end if;
+end process pCY;
+
+----ZY的定义
+pZY:
+process(ZCK, ZP, FF)
+begin
+    if(ZCK'event and ZCK = '0') then 
+        if(ZP = '0') then 
+            if(FF = "000000000") then 
+                ZY &lt;= '1';
+            else
+                ZY &lt;= '0';
+            end if;
+        end if;
+    end if;
+end process pZY;
+
+----PC的定义
+PLDR &lt;= '0' when PLD = "000" else
+        CY when PLD = "001" else
+        not ZY when PLD = "010" else
+        NVY when PLD = "011" else
+        '1' when PLD = "100" else
+        '0';
+TREL(7 downto 0) &lt;= TMP;
+TREL(15 downto 8) &lt;= "00000000" when TMP(7) = '0' else "11111111";
+
+pPC:
+process(PCK, PRST, PLDR)
+begin
+    if(PRST = '0') then 
+        PC &lt;= "0000000000000000";
+    elsif(PCK'event and PCK = '0') then
+        if(PLDR = '1') then PC &lt;= AB;
+        elsif(PINC = '0') then 
+            PC &lt;= PC + 1;
+        end if;
+    end if;
+end process pPC;
+
+----IR的定义
+pIR:
+process(CCI, GI, DB)
+begin
+    if(CCI'event and CCI = '0') then 
+        if(GI = '0') then 
+            IR &lt;= DB;
+        end if;
+    end if;
+end process pIR;
+
+----ADRH的定义
+pADRH:
+process(CA1, GA1, AHS, DB)
+begin
+    if(CA1'event and CA1 = '0') then 
+        if(AHS = '0') then ADRH &lt;= "01111111";
+            elsif(GA1 = '0') then 
+                ADRH &lt;= DB;
+        end if;
+    end if;
+end process pADRH;
+
+----ADRL的定义
+pADRL:
+process(CA2, GA2, DB)
+begin
+    if(CA2'event and CA2 = '0') then 
+        if(GA2 = '0') then 
+            ADRL &lt;= DB(7 downto 0);
+        end if;
+    end if;
+end process pADRL;
+
+----SP的定义
+pSP:
+process(SCK, SSP)
+begin
+    if(SCK'event and SCK = '0') then 
+        case SSP is
+            when "01" =&gt; SP &lt;= SP - 1;
+            when "10" =&gt; SP &lt;= SP + 1;
+            when "11" =&gt; SP &lt;= "0111111111111111";
+            when others =&gt; SP &lt;= "0000000000000000";
+        end case;
+    end if;
+end process pSP;
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
