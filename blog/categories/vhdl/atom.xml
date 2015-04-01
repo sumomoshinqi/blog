@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vhdl | sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/blog/categories/vhdl/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-04-01T16:19:17+08:00</updated>
+  <updated>2015-04-01T16:39:33+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -20,7 +20,7 @@
     <id>http://sumomoshinqi.github.io/blog/2015/03/31/8bit-cpu-design</id>
     <content type="html"><![CDATA[<p>Still in progress</p>
 
-<pre><code class="VHDL 8bit-MicroCPU.vhdl">library IEEE;
+<pre><code class="VHDL 8bit-MicroCPU.vhd">library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;

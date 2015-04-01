@@ -9,7 +9,7 @@
   <meta name="author" content="sumomoshinqi">
 
   
-  <meta name="description" content="Still in progress 8bit-MicroCPU.vhdl1
+  <meta name="description" content="Still in progress 8bit-MicroCPU.vhd1
 2
 3
 4
@@ -140,7 +140,7 @@
 
 <div class="entry-content"><p>Still in progress</p>
 
-<figure class='code'><figcaption><span>8bit-MicroCPU.vhdl</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>8bit-MicroCPU.vhd</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -604,20 +604,20 @@
 </span><span class='line'><span class="c1">-- ===================================================================================</span>
 </span><span class='line'><span class="c1">-- ===================================================================================</span>
 </span><span class='line'><span class="k">entity</span> <span class="nc">cpu_8</span> <span class="k">is</span>
-</span><span class='line'>  <span class="k">Port</span> <span class="p">(</span>
-</span><span class='line'>      <span class="n">DB</span><span class="o">:</span>     <span class="k">inout</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>    <span class="c1">--数据总线</span>
-</span><span class='line'>      <span class="n">AB</span><span class="o">:</span>     <span class="k">buffer</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>   <span class="c1">--地址总线</span>
-</span><span class='line'>      <span class="n">CI</span><span class="o">:</span>     <span class="k">buffer</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">31</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>   <span class="c1">--其中低10位是MPC的输出</span>
-</span><span class='line'>      <span class="n">CO</span><span class="o">:</span>     <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">31</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>       <span class="c1">--微指令输入到MIR</span>
-</span><span class='line'>      <span class="n">MUX</span><span class="o">:</span>    <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">0</span> <span class="k">to</span> <span class="mi">2</span><span class="p">);</span>            <span class="c1">--基本测量电路</span>
-</span><span class='line'>  
-</span><span class='line'>      <span class="c1">--控制总线</span>
-</span><span class='line'>      <span class="n">CLK</span><span class="p">,</span> <span class="n">RESET</span><span class="p">,</span> <span class="n">RUN</span><span class="o">:</span>              <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">MWR</span><span class="p">,</span> <span class="n">MRD</span><span class="p">,</span> <span class="n">IOR</span><span class="p">,</span> <span class="n">IOW</span><span class="p">,</span> <span class="n">MCLK</span><span class="o">:</span>     <span class="k">buffer</span> <span class="kt">std_logic</span><span class="p">;</span>
-</span><span class='line'>      <span class="c1">--外部观察</span>
-</span><span class='line'>      <span class="n">CTRL1</span><span class="p">,</span> <span class="n">CTRL2</span><span class="p">,</span> <span class="n">CTRL3</span><span class="p">,</span> <span class="n">CTRL4</span><span class="o">:</span>   <span class="k">buffer</span> <span class="kt">std_logic</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">PRIX</span><span class="p">,</span> <span class="n">KRIX</span><span class="o">:</span>                   <span class="k">in</span> <span class="kt">std_logic</span>
-</span><span class='line'>  <span class="p">);</span>
+</span><span class='line'>    <span class="k">Port</span> <span class="p">(</span>
+</span><span class='line'>        <span class="n">DB</span><span class="o">:</span>     <span class="k">inout</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>    <span class="c1">--数据总线</span>
+</span><span class='line'>        <span class="n">AB</span><span class="o">:</span>     <span class="k">buffer</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>   <span class="c1">--地址总线</span>
+</span><span class='line'>        <span class="n">CI</span><span class="o">:</span>     <span class="k">buffer</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">31</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>   <span class="c1">--其中低10位是MPC的输出</span>
+</span><span class='line'>        <span class="n">CO</span><span class="o">:</span>     <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">31</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>       <span class="c1">--微指令输入到MIR</span>
+</span><span class='line'>        <span class="n">MUX</span><span class="o">:</span>    <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">0</span> <span class="k">to</span> <span class="mi">2</span><span class="p">);</span>            <span class="c1">--基本测量电路</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">--控制总线</span>
+</span><span class='line'>        <span class="n">CLK</span><span class="p">,</span> <span class="n">RESET</span><span class="p">,</span> <span class="n">RUN</span><span class="o">:</span>              <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">MWR</span><span class="p">,</span> <span class="n">MRD</span><span class="p">,</span> <span class="n">IOR</span><span class="p">,</span> <span class="n">IOW</span><span class="p">,</span> <span class="n">MCLK</span><span class="o">:</span>     <span class="k">buffer</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>        <span class="c1">--外部观察</span>
+</span><span class='line'>        <span class="n">CTRL1</span><span class="p">,</span> <span class="n">CTRL2</span><span class="p">,</span> <span class="n">CTRL3</span><span class="p">,</span> <span class="n">CTRL4</span><span class="o">:</span>   <span class="k">buffer</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">PRIX</span><span class="p">,</span> <span class="n">KRIX</span><span class="o">:</span>                   <span class="k">in</span> <span class="kt">std_logic</span>
+</span><span class='line'>    <span class="p">);</span>
 </span><span class='line'><span class="k">end</span> <span class="nc">cpu_8</span><span class="p">;</span>
 </span><span class='line'><span class="c1">-- ===================================================================================</span>
 </span><span class='line'><span class="c1">-- ===================================================================================</span>
@@ -625,87 +625,87 @@
 </span><span class='line'><span class="c1">--内部信号定义部分</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in M 存储器</span>
-</span><span class='line'>  <span class="c1">--读写控制脉冲</span>
-</span><span class='line'>    <span class="k">signal</span> <span class="n">CWR</span><span class="p">,</span> <span class="n">CRD</span><span class="o">:</span>       <span class="kt">std_logic</span><span class="p">;</span>
-</span><span class='line'>  <span class="c1">--读写控制信号</span>
-</span><span class='line'>    <span class="k">signal</span> <span class="n">CWRX</span><span class="p">,</span> <span class="n">CRDX</span><span class="o">:</span>     <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">--读写控制脉冲</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">CWR</span><span class="p">,</span> <span class="n">CRD</span><span class="o">:</span>        <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">--读写控制信号</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">CWRX</span><span class="p">,</span> <span class="n">CRDX</span><span class="o">:</span>      <span class="kt">std_logic</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in A 累加器</span>
-</span><span class='line'>    <span class="k">signal</span> <span class="n">GA</span><span class="p">,</span> <span class="n">ASR</span><span class="o">:</span>            <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">GA</span><span class="p">,</span> <span class="n">ASR</span><span class="o">:</span>         <span class="kt">std_logic</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in ACT累加器暂存器</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">ACT</span><span class="o">:</span>                <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">GC</span><span class="p">,</span> <span class="n">CC</span><span class="o">:</span>           <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">ACT</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">GC</span><span class="p">,</span> <span class="n">CC</span><span class="o">:</span>          <span class="kt">std_logic</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in TMP 临时寄存器</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">TMP</span><span class="o">:</span>                <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">GT</span><span class="p">,</span> <span class="n">CT</span><span class="o">:</span>           <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">TMP</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">GT</span><span class="p">,</span> <span class="n">CT</span><span class="o">:</span>          <span class="kt">std_logic</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in Ri 寄存器</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">R7</span><span class="p">,</span> <span class="n">R6</span><span class="p">,</span> <span class="n">R5</span><span class="p">,</span> <span class="n">R4</span><span class="p">,</span> <span class="n">R3</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R0</span><span class="p">,</span> <span class="n">ROUT</span><span class="o">:</span>   <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">WRE</span><span class="p">,</span> <span class="n">WRC</span><span class="o">:</span>     <span class="kt">std_logic</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">RS</span><span class="o">:</span>             <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">R7</span><span class="p">,</span> <span class="n">R6</span><span class="p">,</span> <span class="n">R5</span><span class="p">,</span> <span class="n">R4</span><span class="p">,</span> <span class="n">R3</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R0</span><span class="p">,</span> <span class="n">ROUT</span><span class="o">:</span>    <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">WRE</span><span class="p">,</span> <span class="n">WRC</span><span class="o">:</span>        <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">RS</span><span class="o">:</span>              <span class="kt">std_logic</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">---多路选择器 MUXA, MUXB, MUXC, MUXD</span>
 </span><span class='line'><span class="c1">--signal in MUXA</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">MXA</span><span class="o">:</span>                <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MXA</span><span class="o">:</span>             <span class="kt">std_logic</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in MUXB</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">MXB</span><span class="o">:</span>                <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MXB</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in MUXC</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">MXC</span><span class="o">:</span>                <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>  
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MXC</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in MUXD</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">PLD</span><span class="o">:</span>                <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">2</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">PLD</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">2</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in ALU</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">FA</span><span class="p">,</span> <span class="n">FB</span><span class="p">,</span> <span class="n">FF</span><span class="o">:</span>     <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">8</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">S</span><span class="o">:</span>              <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">2</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">FA</span><span class="p">,</span> <span class="n">FB</span><span class="p">,</span> <span class="n">FF</span><span class="o">:</span>      <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">8</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">S</span><span class="o">:</span>               <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">2</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in CY</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">CY</span><span class="p">,</span> <span class="n">CP</span><span class="p">,</span> <span class="n">CCK</span><span class="o">:</span>        <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">CY</span><span class="p">,</span> <span class="n">CP</span><span class="p">,</span> <span class="n">CCK</span><span class="o">:</span>     <span class="kt">std_logic</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in Z</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">ZY</span><span class="o">:</span>             <span class="kt">std_logic</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">ZP</span><span class="o">:</span>             <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">ZY</span><span class="o">:</span>              <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">ZP</span><span class="o">:</span>              <span class="kt">std_logic</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in PC </span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">PC</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">PCK</span><span class="o">:</span>                <span class="kt">std_logic</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">PINC</span><span class="p">,</span> <span class="n">PRST</span><span class="o">:</span>       <span class="kt">std_logic</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">PLD</span><span class="o">:</span>                <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">2</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">PLDR</span><span class="o">:</span>           <span class="kt">std_logic</span><span class="p">;</span>                           <span class="c1">--转移信号</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">ADR</span><span class="o">:</span>                <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>     <span class="c1">--全地址</span>
-</span><span class='line'>  
+</span><span class='line'>    <span class="k">signal</span> <span class="n">PC</span><span class="o">:</span>              <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">PCK</span><span class="o">:</span>             <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">PINC</span><span class="p">,</span> <span class="n">PRST</span><span class="o">:</span>      <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">PLD</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">2</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">PLDR</span><span class="o">:</span>            <span class="kt">std_logic</span><span class="p">;</span>                          <span class="c1">--转移信号</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">ADR</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>      <span class="c1">--全地址</span>
+</span><span class='line'>
 </span><span class='line'><span class="c1">--signal in IR</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">IR</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">CCI</span><span class="p">,</span> <span class="n">GI</span><span class="o">:</span>          <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">IR</span><span class="o">:</span>              <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">CCI</span><span class="p">,</span> <span class="n">GI</span><span class="o">:</span>         <span class="kt">std_logic</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in ADRH</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">ADRH</span><span class="o">:</span>           <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">GA1</span><span class="p">,</span> <span class="n">CA1</span><span class="p">,</span> <span class="n">AHS</span><span class="o">:</span>  <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">ADRH</span><span class="o">:</span>            <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">GA1</span><span class="p">,</span> <span class="n">CA1</span><span class="p">,</span> <span class="n">AHS</span><span class="o">:</span>   <span class="kt">std_logic</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in ADRL</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">ADRL</span><span class="o">:</span>           <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">GA2</span><span class="p">,</span> <span class="n">CA2</span><span class="o">:</span>     <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">ADRL</span><span class="o">:</span>            <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">GA2</span><span class="p">,</span> <span class="n">CA2</span><span class="o">:</span>        <span class="kt">std_logic</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in MPC</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">MPC</span><span class="p">,</span> <span class="n">MD</span><span class="o">:</span>          <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">9</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">MCLR</span><span class="p">,</span> <span class="n">MPLD</span><span class="o">:</span>       <span class="kt">std_logic</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">MPCK</span><span class="o">:</span>           <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MPC</span><span class="p">,</span> <span class="n">MD</span><span class="o">:</span>         <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">9</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MCLR</span><span class="p">,</span> <span class="n">MPLD</span><span class="o">:</span>      <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MPCK</span><span class="o">:</span>            <span class="kt">std_logic</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in SP</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">SP</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">SSP</span><span class="o">:</span>                <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">SCK</span><span class="o">:</span>                <span class="kt">std_logic</span><span class="p">;</span>           
+</span><span class='line'>    <span class="k">signal</span> <span class="n">SP</span><span class="o">:</span>              <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">SSP</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">SCK</span><span class="o">:</span>             <span class="kt">std_logic</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">--signal in MIR</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">MIR</span><span class="o">:</span>                <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">31</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">MICK</span><span class="o">:</span>           <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MIR</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">31</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MICK</span><span class="o">:</span>            <span class="kt">std_logic</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">-- signal for Print and Key</span>
-</span><span class='line'>  <span class="k">signal</span> <span class="n">KOUT</span><span class="p">,</span><span class="n">POUT</span><span class="o">:</span>    <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">KOUT</span><span class="p">,</span><span class="n">POUT</span><span class="o">:</span>       <span class="kt">std_logic</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">-- ==================================================================================</span>
 </span><span class='line'><span class="c1">-- ==================================================================================</span>
@@ -720,7 +720,7 @@
 </span><span class='line'><span class="k">process</span><span class="p">(</span><span class="n">MCLK</span><span class="p">,</span> <span class="n">CLK</span><span class="p">,</span> <span class="n">RESET</span><span class="p">,</span> <span class="n">RUN</span><span class="p">)</span>
 </span><span class='line'><span class="k">begin</span>
 </span><span class='line'><span class="err">　　</span><span class="k">if</span><span class="p">((</span><span class="n">RUN</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">or</span> <span class="p">(</span><span class="n">RESET</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">))</span> <span class="k">then</span> <span class="n">MCLK</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">elsif</span><span class="p">(</span><span class="n">CLK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CLK</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">MCLK</span> <span class="o">&lt;=</span> <span class="k">not</span> <span class="n">MCLK</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">elsif</span><span class="p">(</span><span class="n">CLK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CLK</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">MCLK</span> <span class="o">&lt;=</span> <span class="k">not</span> <span class="n">MCLK</span><span class="p">;</span>
 </span><span class='line'><span class="err">　　</span><span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">process</span> <span class="nc">pMCLK</span><span class="p">;</span>
 </span><span class='line'>
@@ -746,9 +746,9 @@
 </span><span class='line'><span class="n">pMCLR</span><span class="o">:</span>
 </span><span class='line'><span class="k">process</span><span class="p">(</span><span class="n">MCLK</span><span class="p">,</span> <span class="n">RESET</span><span class="p">)</span>
 </span><span class='line'><span class="k">begin</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">RESET</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">MCLR</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">elsif</span><span class="p">(</span><span class="n">MCLK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">MCLK</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">MCLR</span> <span class="o">&lt;=</span> <span class="n">RUN</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">RESET</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">MCLR</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">elsif</span><span class="p">(</span><span class="n">MCLK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">MCLK</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">MCLR</span> <span class="o">&lt;=</span> <span class="n">RUN</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">process</span> <span class="nc">pMCLR</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">CWR</span>     <span class="o">&lt;=</span> <span class="n">CWRX</span> <span class="k">or</span> <span class="k">not</span> <span class="n">MCLK</span><span class="p">;</span>
@@ -765,12 +765,12 @@
 </span><span class='line'><span class="n">pMPC</span><span class="o">:</span>
 </span><span class='line'><span class="k">process</span><span class="p">(</span><span class="n">MPLD</span><span class="p">,</span> <span class="n">MPCK</span><span class="p">,</span> <span class="n">MCLR</span><span class="p">)</span>
 </span><span class='line'><span class="k">begin</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">MCLR</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">MPC</span> <span class="o">&lt;=</span> <span class="s">&quot;0000000000&quot;</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">elsif</span><span class="p">(</span><span class="n">MPCK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">MPCK</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>          <span class="k">if</span><span class="p">(</span><span class="n">MPLD</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">MPC</span> <span class="o">&lt;=</span> <span class="n">MD</span><span class="p">;</span>
-</span><span class='line'>              <span class="k">else</span> <span class="n">MPC</span> <span class="o">&lt;=</span> <span class="n">MPC</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">MCLR</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">MPC</span> <span class="o">&lt;=</span> <span class="s">&quot;0000000000&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">elsif</span><span class="p">(</span><span class="n">MPCK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">MPCK</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="k">if</span><span class="p">(</span><span class="n">MPLD</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">MPC</span> <span class="o">&lt;=</span> <span class="n">MD</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">else</span> <span class="n">MPC</span> <span class="o">&lt;=</span> <span class="n">MPC</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">process</span> <span class="nc">pMPC</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">CI</span><span class="p">(</span><span class="mi">9</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">MPC</span><span class="p">;</span>
@@ -786,9 +786,9 @@
 </span><span class='line'><span class="n">pMIR</span><span class="o">:</span>
 </span><span class='line'><span class="k">process</span><span class="p">(</span><span class="n">MICK</span><span class="p">)</span>
 </span><span class='line'><span class="k">begin</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">MICK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">MICK</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>      <span class="n">MIR</span> <span class="o">&lt;=</span> <span class="n">CO</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">MICK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">MICK</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>        <span class="n">MIR</span> <span class="o">&lt;=</span> <span class="n">CO</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">process</span> <span class="nc">pMIR</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">CWRX</span>    <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">29</span><span class="p">);</span>
@@ -826,109 +826,109 @@
 </span><span class='line'><span class="n">pRi</span><span class="o">:</span>
 </span><span class='line'><span class="k">process</span><span class="p">(</span><span class="n">WRC</span><span class="p">,</span> <span class="n">WRE</span><span class="p">,</span> <span class="n">RS</span><span class="p">)</span>
 </span><span class='line'><span class="k">begin</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">WRC</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">WRC</span> <span class="o">=</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">WRE</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>          <span class="k">case</span> <span class="n">RS</span> <span class="k">is</span>
-</span><span class='line'>              <span class="k">when</span> <span class="s">&quot;000&quot;</span> <span class="o">=&gt;</span> <span class="n">R0</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
-</span><span class='line'>              <span class="k">when</span> <span class="s">&quot;001&quot;</span> <span class="o">=&gt;</span> <span class="n">R1</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
-</span><span class='line'>              <span class="k">when</span> <span class="s">&quot;010&quot;</span> <span class="o">=&gt;</span> <span class="n">R2</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
-</span><span class='line'>              <span class="k">when</span> <span class="s">&quot;011&quot;</span> <span class="o">=&gt;</span> <span class="n">R3</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
-</span><span class='line'>              <span class="k">when</span> <span class="s">&quot;100&quot;</span> <span class="o">=&gt;</span> <span class="n">R4</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
-</span><span class='line'>              <span class="k">when</span> <span class="s">&quot;101&quot;</span> <span class="o">=&gt;</span> <span class="n">R5</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
-</span><span class='line'>              <span class="k">when</span> <span class="s">&quot;110&quot;</span> <span class="o">=&gt;</span> <span class="n">R6</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
-</span><span class='line'>              <span class="k">when</span> <span class="s">&quot;111&quot;</span> <span class="o">=&gt;</span> <span class="n">R7</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">end</span> <span class="k">case</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">WRC</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">WRC</span> <span class="o">=</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">WRE</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="k">case</span> <span class="n">RS</span> <span class="k">is</span>
+</span><span class='line'>                <span class="k">when</span> <span class="s">&quot;000&quot;</span> <span class="o">=&gt;</span> <span class="n">R0</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">when</span> <span class="s">&quot;001&quot;</span> <span class="o">=&gt;</span> <span class="n">R1</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">when</span> <span class="s">&quot;010&quot;</span> <span class="o">=&gt;</span> <span class="n">R2</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">when</span> <span class="s">&quot;011&quot;</span> <span class="o">=&gt;</span> <span class="n">R3</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">when</span> <span class="s">&quot;100&quot;</span> <span class="o">=&gt;</span> <span class="n">R4</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">when</span> <span class="s">&quot;101&quot;</span> <span class="o">=&gt;</span> <span class="n">R5</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">when</span> <span class="s">&quot;110&quot;</span> <span class="o">=&gt;</span> <span class="n">R6</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">when</span> <span class="s">&quot;111&quot;</span> <span class="o">=&gt;</span> <span class="n">R7</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">end</span> <span class="k">case</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">process</span> <span class="nc">pRi</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----寄存器输出ROUT的定义</span>
 </span><span class='line'><span class="k">case</span> <span class="n">RS</span> <span class="k">is</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;000&quot;</span> <span class="o">=&gt;</span> <span class="n">ROUT</span> <span class="o">&lt;=</span> <span class="n">R0</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;001&quot;</span> <span class="o">=&gt;</span> <span class="n">ROUT</span> <span class="o">&lt;=</span> <span class="n">R1</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;010&quot;</span> <span class="o">=&gt;</span> <span class="n">ROUT</span> <span class="o">&lt;=</span> <span class="n">R2</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;011&quot;</span> <span class="o">=&gt;</span> <span class="n">ROUT</span> <span class="o">&lt;=</span> <span class="n">R3</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;100&quot;</span> <span class="o">=&gt;</span> <span class="n">ROUT</span> <span class="o">&lt;=</span> <span class="n">R4</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;101&quot;</span> <span class="o">=&gt;</span> <span class="n">ROUT</span> <span class="o">&lt;=</span> <span class="n">R5</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;110&quot;</span> <span class="o">=&gt;</span> <span class="n">ROUT</span> <span class="o">&lt;=</span> <span class="n">R6</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;111&quot;</span> <span class="o">=&gt;</span> <span class="n">ROUT</span> <span class="o">&lt;=</span> <span class="n">R7</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;000&quot;</span> <span class="o">=&gt;</span> <span class="n">ROUT</span> <span class="o">&lt;=</span> <span class="n">R0</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;001&quot;</span> <span class="o">=&gt;</span> <span class="n">ROUT</span> <span class="o">&lt;=</span> <span class="n">R1</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;010&quot;</span> <span class="o">=&gt;</span> <span class="n">ROUT</span> <span class="o">&lt;=</span> <span class="n">R2</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;011&quot;</span> <span class="o">=&gt;</span> <span class="n">ROUT</span> <span class="o">&lt;=</span> <span class="n">R3</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;100&quot;</span> <span class="o">=&gt;</span> <span class="n">ROUT</span> <span class="o">&lt;=</span> <span class="n">R4</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;101&quot;</span> <span class="o">=&gt;</span> <span class="n">ROUT</span> <span class="o">&lt;=</span> <span class="n">R5</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;110&quot;</span> <span class="o">=&gt;</span> <span class="n">ROUT</span> <span class="o">&lt;=</span> <span class="n">R6</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;111&quot;</span> <span class="o">=&gt;</span> <span class="n">ROUT</span> <span class="o">&lt;=</span> <span class="n">R7</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">case</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----MUXA的定义</span>
 </span><span class='line'><span class="k">if</span><span class="p">(</span><span class="n">MXA</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>  <span class="n">FB</span> <span class="o">&lt;=</span> <span class="n">ROUT</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">FB</span> <span class="o">&lt;=</span> <span class="n">ROUT</span><span class="p">;</span>
 </span><span class='line'><span class="k">else</span>
-</span><span class='line'>  <span class="n">FB</span> <span class="o">&lt;=</span> <span class="n">TMP</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">FB</span> <span class="o">&lt;=</span> <span class="n">TMP</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----MUXB的定义</span>
 </span><span class='line'><span class="k">case</span> <span class="n">MXB</span> <span class="k">is</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;00&quot;</span> <span class="o">=&gt;</span> <span class="n">DB</span> <span class="o">&lt;=</span> <span class="n">FF</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;01&quot;</span> <span class="o">=&gt;</span> <span class="n">DB</span> <span class="o">&lt;=</span> <span class="n">PC</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">8</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;10&quot;</span> <span class="o">=&gt;</span> <span class="n">DB</span> <span class="o">&lt;=</span> <span class="n">PC</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="k">when</span> <span class="k">others</span> <span class="o">=&gt;</span> <span class="n">DB</span> <span class="o">&lt;=</span> <span class="n">ROUT</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;00&quot;</span> <span class="o">=&gt;</span> <span class="n">DB</span> <span class="o">&lt;=</span> <span class="n">FF</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;01&quot;</span> <span class="o">=&gt;</span> <span class="n">DB</span> <span class="o">&lt;=</span> <span class="n">PC</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">8</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;10&quot;</span> <span class="o">=&gt;</span> <span class="n">DB</span> <span class="o">&lt;=</span> <span class="n">PC</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">when</span> <span class="k">others</span> <span class="o">=&gt;</span> <span class="n">DB</span> <span class="o">&lt;=</span> <span class="n">ROUT</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">case</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----MUXC的定义</span>
 </span><span class='line'><span class="k">case</span> <span class="n">MXC</span> <span class="k">is</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;00&quot;</span> <span class="o">=&gt;</span> <span class="n">AB</span> <span class="o">&lt;=</span> <span class="n">PC</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;01&quot;</span> <span class="o">=&gt;</span> <span class="n">AB</span> <span class="o">&lt;=</span> <span class="n">ADRH</span><span class="o">&amp;</span><span class="n">ADRL</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;10&quot;</span> <span class="o">=&gt;</span> <span class="n">AB</span> <span class="o">&lt;=</span> <span class="n">SP</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="k">others</span> <span class="o">=&gt;</span> <span class="k">NULL</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;00&quot;</span> <span class="o">=&gt;</span> <span class="n">AB</span> <span class="o">&lt;=</span> <span class="n">PC</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;01&quot;</span> <span class="o">=&gt;</span> <span class="n">AB</span> <span class="o">&lt;=</span> <span class="n">ADRH</span><span class="o">&amp;</span><span class="n">ADRL</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;10&quot;</span> <span class="o">=&gt;</span> <span class="n">AB</span> <span class="o">&lt;=</span> <span class="n">SP</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="k">others</span> <span class="o">=&gt;</span> <span class="k">NULL</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">case</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----MUXD的定义</span>
 </span><span class='line'><span class="k">case</span> <span class="n">PLD</span> <span class="k">is</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;000&quot;</span> <span class="o">=&gt;</span> <span class="n">PCADD</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;001&quot;</span> <span class="o">=&gt;</span> <span class="n">PCADD</span> <span class="o">&lt;=</span> <span class="n">CY</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;010&quot;</span> <span class="o">=&gt;</span> <span class="n">PCADD</span> <span class="o">&lt;=</span> <span class="k">not</span> <span class="n">ZY</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;011&quot;</span> <span class="o">=&gt;</span> <span class="n">PCADD</span> <span class="o">&lt;=</span> <span class="k">not</span> <span class="n">KRIX</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;100&quot;</span> <span class="o">=&gt;</span> <span class="n">PCADD</span> <span class="o">&lt;=</span> <span class="k">not</span> <span class="n">PRIX</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;101&quot;</span> <span class="o">=&gt;</span> <span class="n">PCADD</span> <span class="o">&lt;=</span><span class="sc">&#39;1&#39;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;110&quot;</span> <span class="o">=&gt;</span> <span class="n">PCADD</span> <span class="o">&lt;=</span> <span class="n">ZY</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="k">others</span> <span class="o">=&gt;</span> <span class="k">NULL</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;000&quot;</span> <span class="o">=&gt;</span> <span class="n">PCADD</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;001&quot;</span> <span class="o">=&gt;</span> <span class="n">PCADD</span> <span class="o">&lt;=</span> <span class="n">CY</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;010&quot;</span> <span class="o">=&gt;</span> <span class="n">PCADD</span> <span class="o">&lt;=</span> <span class="k">not</span> <span class="n">ZY</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;011&quot;</span> <span class="o">=&gt;</span> <span class="n">PCADD</span> <span class="o">&lt;=</span> <span class="k">not</span> <span class="n">KRIX</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;100&quot;</span> <span class="o">=&gt;</span> <span class="n">PCADD</span> <span class="o">&lt;=</span> <span class="k">not</span> <span class="n">PRIX</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;101&quot;</span> <span class="o">=&gt;</span> <span class="n">PCADD</span> <span class="o">&lt;=</span><span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;110&quot;</span> <span class="o">=&gt;</span> <span class="n">PCADD</span> <span class="o">&lt;=</span> <span class="n">ZY</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="k">others</span> <span class="o">=&gt;</span> <span class="k">NULL</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">case</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----TMP的定义</span>
 </span><span class='line'><span class="n">pTMP</span><span class="o">:</span>
 </span><span class='line'><span class="k">process</span><span class="p">(</span><span class="n">CT</span><span class="p">,</span> <span class="n">GT</span><span class="p">)</span>
 </span><span class='line'><span class="k">begin</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">CT</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CT</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="n">GT</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>          <span class="n">TMP</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">CT</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CT</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">GT</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="n">TMP</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">process</span> <span class="nc">pTMP</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----A的定义</span>
 </span><span class='line'><span class="n">pA1</span><span class="o">:</span>
 </span><span class='line'><span class="k">process</span><span class="p">(</span><span class="n">CA</span><span class="p">,</span> <span class="n">GA</span><span class="p">)</span>
 </span><span class='line'><span class="k">begin</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">CA</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CA</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="n">GA</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>          <span class="n">A</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">CA</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CA</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">GA</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="n">A</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">process</span> <span class="nc">pA1</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">pA2</span><span class="o">:</span>
 </span><span class='line'><span class="k">process</span><span class="p">(</span><span class="n">CA</span><span class="p">,</span> <span class="n">ASR</span><span class="p">)</span>
 </span><span class='line'><span class="k">variable</span> <span class="n">POOPOO</span><span class="o">:</span><span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
 </span><span class='line'><span class="k">begin</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">CA</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CA</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="n">ASR</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">and</span> <span class="n">MXE</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>          <span class="n">POOPOO</span> <span class="o">:=</span> <span class="n">A</span><span class="p">;</span>
-</span><span class='line'>          <span class="n">CYA</span>  <span class="o">&lt;=</span> <span class="n">POOPOO</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>      <span class="c1">--移出的末位</span>
-</span><span class='line'>          <span class="n">A</span>     <span class="o">&lt;=</span> <span class="n">POOPOO</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">POOPOO</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">1</span><span class="p">);</span>
-</span><span class='line'>      <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">CA</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CA</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">ASR</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">and</span> <span class="n">MXE</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="n">POOPOO</span> <span class="o">:=</span> <span class="n">A</span><span class="p">;</span>
+</span><span class='line'>            <span class="n">CYA</span>  <span class="o">&lt;=</span> <span class="n">POOPOO</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>      <span class="c1">--移出的末位</span>
+</span><span class='line'>            <span class="n">A</span>    <span class="o">&lt;=</span> <span class="n">POOPOO</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">POOPOO</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="nc">pA2</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----MUXE的定义</span>
 </span><span class='line'><span class="k">if</span><span class="p">(</span><span class="n">MXE</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>  <span class="n">CY</span> <span class="o">&lt;=</span> <span class="n">FF</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">CY</span> <span class="o">&lt;=</span> <span class="n">FF</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
 </span><span class='line'><span class="k">else</span>
-</span><span class='line'>  <span class="n">CY</span> <span class="o">&lt;=</span> <span class="n">CYA</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">CY</span> <span class="o">&lt;=</span> <span class="n">CYA</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'>
@@ -936,11 +936,11 @@
 </span><span class='line'><span class="n">pACT</span><span class="o">:</span>
 </span><span class='line'><span class="k">process</span><span class="p">(</span><span class="n">CC</span><span class="p">,</span> <span class="n">GC</span><span class="p">)</span>
 </span><span class='line'><span class="k">begin</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">CC</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CC</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="n">GC</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>          <span class="n">ACT</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">CC</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CC</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">GC</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="n">ACT</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">process</span> <span class="nc">pACT</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">FA</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="o">&amp;</span><span class="n">ACT</span><span class="p">;</span> <span class="c1">--扩展成九位</span>
@@ -948,14 +948,14 @@
 </span><span class='line'>
 </span><span class='line'><span class="c1">----ALU的定义</span>
 </span><span class='line'><span class="k">case</span> <span class="n">S</span> <span class="k">is</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;000&quot;</span> <span class="o">=&gt;</span> <span class="n">FF</span> <span class="o">&lt;=</span> <span class="n">FA</span> <span class="o">+</span> <span class="n">FB</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;001&quot;</span> <span class="o">=&gt;</span> <span class="n">FF</span> <span class="o">&lt;=</span> <span class="n">FA</span> <span class="o">-</span> <span class="n">FB</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;010&quot;</span> <span class="o">=&gt;</span> <span class="n">FF</span> <span class="o">&lt;=</span> <span class="n">FA</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;011&quot;</span> <span class="o">=&gt;</span> <span class="n">FF</span> <span class="o">&lt;=</span> <span class="n">FB</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;100&quot;</span> <span class="o">=&gt;</span> <span class="n">FF</span> <span class="o">&lt;=</span> <span class="k">not</span> <span class="n">FB</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;101&quot; =&gt; FF &lt;= &quot;000000000&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;110&quot; =&gt; FF &lt;= &quot;000000000&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">when</span> <span class="s">&quot;111&quot;</span> <span class="o">=&gt;</span> <span class="n">FF</span> <span class="o">&lt;=</span> <span class="n">A</span> <span class="o">+</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;000&quot;</span> <span class="o">=&gt;</span> <span class="n">FF</span> <span class="o">&lt;=</span> <span class="n">FA</span> <span class="o">+</span> <span class="n">FB</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;001&quot;</span> <span class="o">=&gt;</span> <span class="n">FF</span> <span class="o">&lt;=</span> <span class="n">FA</span> <span class="o">-</span> <span class="n">FB</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;010&quot;</span> <span class="o">=&gt;</span> <span class="n">FF</span> <span class="o">&lt;=</span> <span class="n">FA</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;011&quot;</span> <span class="o">=&gt;</span> <span class="n">FF</span> <span class="o">&lt;=</span> <span class="n">FB</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;100&quot;</span> <span class="o">=&gt;</span> <span class="n">FF</span> <span class="o">&lt;=</span> <span class="k">not</span> <span class="n">FB</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;101&quot; =&gt; FF &lt;= &quot;000000000&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;110&quot; =&gt; FF &lt;= &quot;000000000&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">when</span> <span class="s">&quot;111&quot;</span> <span class="o">=&gt;</span> <span class="n">FF</span> <span class="o">&lt;=</span> <span class="n">A</span> <span class="o">+</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">case</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">COUT</span> <span class="o">&lt;=</span> <span class="n">FF</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
@@ -964,26 +964,26 @@
 </span><span class='line'><span class="n">pCY</span><span class="o">:</span>
 </span><span class='line'><span class="k">process</span><span class="p">(</span><span class="n">CCK</span><span class="p">,</span> <span class="n">CP</span><span class="p">,</span> <span class="n">FF</span><span class="p">)</span>
 </span><span class='line'><span class="k">begin</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">CCK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CCK</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="n">CP</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>          <span class="n">CY</span> <span class="o">&lt;=</span> <span class="n">FF</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
-</span><span class='line'>      <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">CCK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CCK</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">CP</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="n">CY</span> <span class="o">&lt;=</span> <span class="n">FF</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">process</span> <span class="nc">pCY</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----ZY的定义</span>
 </span><span class='line'><span class="n">pZY</span><span class="o">:</span>
 </span><span class='line'><span class="k">process</span><span class="p">(</span><span class="n">ZCK</span><span class="p">,</span> <span class="n">ZP</span><span class="p">,</span> <span class="n">FF</span><span class="p">)</span>
 </span><span class='line'><span class="k">begin</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">ZCK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">ZCK</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="n">ZP</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>          <span class="k">if</span><span class="p">(</span><span class="n">FF</span> <span class="o">=</span> <span class="s">&quot;000000000&quot;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>              <span class="n">ZY</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">else</span>
-</span><span class='line'>              <span class="n">ZY</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">ZCK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">ZCK</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">ZP</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="k">if</span><span class="p">(</span><span class="n">FF</span> <span class="o">=</span> <span class="s">&quot;000000000&quot;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>                <span class="n">ZY</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">else</span>
+</span><span class='line'>                <span class="n">ZY</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">process</span> <span class="nc">pZY</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----PC的定义</span>
@@ -993,62 +993,62 @@
 </span><span class='line'><span class="n">pPC</span><span class="o">:</span>
 </span><span class='line'><span class="k">process</span><span class="p">(</span><span class="n">PCK</span><span class="p">,</span> <span class="n">PRST</span><span class="p">,</span> <span class="n">PCADD</span><span class="p">)</span>
 </span><span class='line'><span class="k">begin</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">PRST</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>      <span class="n">PC</span> <span class="o">&lt;=</span> <span class="s">&quot;0000000000000000&quot;</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">elsif</span><span class="p">(</span><span class="n">PCK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">PCK</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="n">PLDR</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">PC</span> <span class="o">&lt;=</span> <span class="n">AB</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">elsif</span><span class="p">(</span><span class="n">PINC</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>          <span class="n">PC</span> <span class="o">&lt;=</span> <span class="n">PC</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">PRST</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>        <span class="n">PC</span> <span class="o">&lt;=</span> <span class="s">&quot;0000000000000000&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">elsif</span><span class="p">(</span><span class="n">PCK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">PCK</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">PLDR</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">PC</span> <span class="o">&lt;=</span> <span class="n">AB</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">elsif</span><span class="p">(</span><span class="n">PINC</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="n">PC</span> <span class="o">&lt;=</span> <span class="n">PC</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">process</span> <span class="nc">pPC</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----IR的定义</span>
 </span><span class='line'><span class="n">pIR</span><span class="o">:</span>
 </span><span class='line'><span class="k">process</span><span class="p">(</span><span class="n">CCI</span><span class="p">,</span> <span class="n">GI</span><span class="p">,</span> <span class="n">DB</span><span class="p">)</span>
 </span><span class='line'><span class="k">begin</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">CCI</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CCI</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="n">GI</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>          <span class="n">IR</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">CCI</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CCI</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">GI</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="n">IR</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">process</span> <span class="nc">pIR</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----ADRH的定义</span>
 </span><span class='line'><span class="n">pADRH</span><span class="o">:</span>
 </span><span class='line'><span class="k">process</span><span class="p">(</span><span class="n">CA1</span><span class="p">,</span> <span class="n">GA1</span><span class="p">,</span> <span class="n">AHS</span><span class="p">,</span> <span class="n">DB</span><span class="p">)</span>
 </span><span class='line'><span class="k">begin</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">CA1</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CA1</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="n">AHS</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">ADRH</span> <span class="o">&lt;=</span> <span class="s">&quot;01111110&quot;</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">elsif</span><span class="p">(</span><span class="n">GA1</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>              <span class="n">ADRH</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">CA1</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CA1</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">AHS</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">ADRH</span> <span class="o">&lt;=</span> <span class="s">&quot;01111110&quot;</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">elsif</span><span class="p">(</span><span class="n">GA1</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>                <span class="n">ADRH</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">process</span> <span class="nc">pADRH</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----ADRL的定义</span>
 </span><span class='line'><span class="n">pADRL</span><span class="o">:</span>
 </span><span class='line'><span class="k">process</span><span class="p">(</span><span class="n">CA2</span><span class="p">,</span> <span class="n">GA2</span><span class="p">,</span> <span class="n">DB</span><span class="p">)</span>
 </span><span class='line'><span class="k">begin</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">CA2</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CA2</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="n">GA2</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>          <span class="n">ADRL</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">CA2</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CA2</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">GA2</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="n">ADRL</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">process</span> <span class="nc">pADRL</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----SP的定义</span>
 </span><span class='line'><span class="n">pSP</span><span class="o">:</span>
 </span><span class='line'><span class="k">process</span><span class="p">(</span><span class="n">SCK</span><span class="p">,</span> <span class="n">SSP</span><span class="p">)</span>
 </span><span class='line'><span class="k">begin</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">SCK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">SCK</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
-</span><span class='line'>      <span class="k">case</span> <span class="n">SSP</span> <span class="k">is</span>
-</span><span class='line'>          <span class="k">when</span> <span class="s">&quot;01&quot;</span> <span class="o">=&gt;</span> <span class="n">SP</span> <span class="o">&lt;=</span> <span class="n">SP</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">when</span> <span class="s">&quot;10&quot;</span> <span class="o">=&gt;</span> <span class="n">SP</span> <span class="o">&lt;=</span> <span class="n">SP</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">when</span> <span class="s">&quot;11&quot; =&gt; SP &lt;= &quot;0111111111111111&quot;</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">when</span> <span class="k">others</span> <span class="o">=&gt;</span> <span class="n">SP</span> <span class="o">&lt;=</span> <span class="s">&quot;0000000000000000&quot;</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">end</span> <span class="k">case</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">SCK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">SCK</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>        <span class="k">case</span> <span class="n">SSP</span> <span class="k">is</span>
+</span><span class='line'>            <span class="k">when</span> <span class="s">&quot;01&quot;</span> <span class="o">=&gt;</span> <span class="n">SP</span> <span class="o">&lt;=</span> <span class="n">SP</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">when</span> <span class="s">&quot;10&quot;</span> <span class="o">=&gt;</span> <span class="n">SP</span> <span class="o">&lt;=</span> <span class="n">SP</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">when</span> <span class="s">&quot;11&quot; =&gt; SP &lt;= &quot;0111111111111111&quot;</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">when</span> <span class="k">others</span> <span class="o">=&gt;</span> <span class="n">SP</span> <span class="o">&lt;=</span> <span class="s">&quot;0000000000000000&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">case</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
 </span><span class='line'><span class="k">end</span> <span class="k">process</span> <span class="nc">pSP</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="k">end</span> <span class="nc">cpu_8_behave</span> <span class="p">;</span>
