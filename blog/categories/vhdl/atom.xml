@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: vhdl | sumomoshinqi]]></title>
+  <title><![CDATA[Category: vhdl | sumomoshinqi's]]></title>
   <link href="http://sumomoshinqi.github.io/blog/categories/vhdl/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-03-31T00:28:23+08:00</updated>
+  <updated>2015-04-01T16:13:42+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -18,7 +18,126 @@
     <link href="http://sumomoshinqi.github.io/blog/2015/03/31/8bit-cpu-design/"/>
     <updated>2015-03-31T00:26:39+08:00</updated>
     <id>http://sumomoshinqi.github.io/blog/2015/03/31/8bit-cpu-design</id>
-    <content type="html"><![CDATA[<pre><code class="VHDL 8bit.vhdl">--时钟信号与复位信号
+    <content type="html"><![CDATA[<p>Still in progress</p>
+
+<pre><code class="VHDL 8bit-MicroCPU.vhdl">library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+-- ===================================================================================
+-- ===================================================================================
+entity cpu_8 is
+    Port (
+        DB:     inout std_logic_vector(7 downto 0);    --数据总线
+        AB:     buffer std_logic_vector(15 downto 0);   --地址总线
+        CI:     buffer std_logic_vector(31 downto 0);   --其中低10位是MPC的输出
+        CO:     in std_logic_vector(31 downto 0);       --微指令输入到MIR
+        MUX:    in std_logic_vector(0 to 2);            --基本测量电路
+
+        --控制总线
+        CLK, RESET, RUN:              in std_logic;   
+        MWR, MRD, IOR, IOW, MCLK:     buffer std_logic;
+        --外部观察
+        CTRL1, CTRL2, CTRL3, CTRL4:   buffer std_logic; 
+        PRIX, KRIX:                   in std_logic
+    );
+end cpu_8;
+-- ===================================================================================
+-- ===================================================================================
+architecture cpu_8_behave of cpu_8 is
+--内部信号定义部分
+
+--signal in M 存储器
+    --读写控制脉冲
+    signal CWR, CRD:        std_logic;
+    --读写控制信号
+    signal CWRX, CRDX:      std_logic;
+
+--signal in A 累加器
+    signal GA, ASR:         std_logic;
+
+--signal in ACT累加器暂存器
+    signal ACT:             std_logic_vector(7 downto 0);
+    signal GC, CC:          std_logic;
+
+--signal in TMP 临时寄存器
+    signal TMP:             std_logic_vector(7 downto 0);
+    signal GT, CT:          std_logic;
+
+--signal in Ri 寄存器
+    signal R7, R6, R5, R4, R3, R2, R1, R0, ROUT:    std_logic_vector(7 downto 0);
+    signal WRE, WRC:        std_logic;
+    signal RS:              std_logic;
+
+---多路选择器 MUXA, MUXB, MUXC, MUXD
+--signal in MUXA
+    signal MXA:             std_logic;
+
+--signal in MUXB
+    signal MXB:             std_logic_vector(1 downto 0);
+
+--signal in MUXC
+    signal MXC:             std_logic_vector(1 downto 0);   
+
+--signal in MUXD
+    signal PLD:             std_logic_vector(2 downto 0);
+
+--signal in ALU
+    signal FA, FB, FF:      std_logic_vector(8 downto 0);
+    signal S:               std_logic_vector(2 downto 0);
+
+--signal in CY
+    signal CY, CP, CCK:     std_logic;
+
+--signal in Z
+    signal ZY:              std_logic;
+    signal ZP:              std_logic;
+
+--signal in PC 
+    signal PC:              std_logic_vector(15 downto 0);
+    signal PCK:             std_logic;
+    signal PINC, PRST:      std_logic;
+    signal PLD:             std_logic_vector(2 downto 0);
+    signal PLDR:            std_logic;                          --转移信号
+    signal ADR:             std_logic_vector(15 downto 0);      --全地址
+
+--signal in IR
+    signal IR:              std_logic_vector(7 downto 0);
+    signal CCI, GI:         std_logic;
+
+--signal in ADRH
+    signal ADRH:            std_logic_vector(7 downto 0);
+    signal GA1, CA1, AHS:   std_logic;
+
+--signal in ADRL
+    signal ADRL:            std_logic_vector(7 downto 0);
+    signal GA2, CA2:        std_logic;
+
+--signal in MPC
+    signal MPC, MD:         std_logic_vector(9 downto 0);
+    signal MCLR, MPLD:      std_logic;
+    signal MPCK:            std_logic;
+
+--signal in SP
+    signal SP:              std_logic_vector(15 downto 0);
+    signal SSP:             std_logic_vector(1 downto 0);
+    signal SCK:             std_logic;          
+
+--signal in MIR
+    signal MIR:             std_logic_vector(31 downto 0);
+    signal MICK:            std_logic;
+
+-- signal for Print and Key
+    signal KOUT,POUT:       std_logic;
+
+-- ==================================================================================
+-- ==================================================================================
+
+begin
+
+
+--时钟信号与复位信号
 
 ---时钟信号
 pMCLK:
@@ -134,14 +253,14 @@ begin
     if (WRC'event and WRC ='0') then 
         if (WRE = '0') then 
             case RS is
-                when "000" =&gt; R0 &lt;= DBL;
-                when "001" =&gt; R1 &lt;= DBL;
-                when "010" =&gt; R2 &lt;= DBL;
-                when "011" =&gt; R3 &lt;= DBL;
-                when "100" =&gt; R4 &lt;= DBL;
-                when "101" =&gt; R5 &lt;= DBL;
-                when "110" =&gt; R6 &lt;= DBL;
-                when "111" =&gt; R7 &lt;= DBL;
+                when "000" =&gt; R0 &lt;= DB;
+                when "001" =&gt; R1 &lt;= DB;
+                when "010" =&gt; R2 &lt;= DB;
+                when "011" =&gt; R3 &lt;= DB;
+                when "100" =&gt; R4 &lt;= DB;
+                when "101" =&gt; R5 &lt;= DB;
+                when "110" =&gt; R6 &lt;= DB;
+                when "111" =&gt; R7 &lt;= DB;
             end case;
         end if;
     end if;
@@ -224,7 +343,7 @@ begin
         if(ASR = '0' and MXE = '0') then 
             POOPOO := A;
             CYA  &lt;= POOPOO(0);      --移出的末位
-            A   &lt;= POOPOO(7) &amp; POOPOO(7 downto 1);
+            A    &lt;= POOPOO(7) &amp; POOPOO(7 downto 1);
         end if;
     end if;
 end pA2;
@@ -292,17 +411,11 @@ begin
 end process pZY;
 
 ----PC的定义
-PLDR &lt;= '0' when PLD = "000" else
-        CY when PLD = "001" else
-        not ZY when PLD = "010" else
-        NVY when PLD = "011" else
-        '1' when PLD = "100" else
-        '0';
 TREL(7 downto 0) &lt;= TMP;
 TREL(15 downto 8) &lt;= "00000000" when TMP(7) = '0' else "11111111";
 
 pPC:
-process(PCK, PRST, PLDR)
+process(PCK, PRST, PCADD)
 begin
     if(PRST = '0') then 
         PC &lt;= "0000000000000000";
@@ -330,7 +443,7 @@ pADRH:
 process(CA1, GA1, AHS, DB)
 begin
     if(CA1'event and CA1 = '0') then 
-        if(AHS = '0') then ADRH &lt;= "01111111";
+        if(AHS = '0') then ADRH &lt;= "01111110";
             elsif(GA1 = '0') then 
                 ADRH &lt;= DB;
         end if;
@@ -343,7 +456,7 @@ process(CA2, GA2, DB)
 begin
     if(CA2'event and CA2 = '0') then 
         if(GA2 = '0') then 
-            ADRL &lt;= DB(7 downto 0);
+            ADRL &lt;= DB;
         end if;
     end if;
 end process pADRL;
@@ -361,6 +474,8 @@ begin
         end case;
     end if;
 end process pSP;
+
+end cpu_8_behave ;
 </code></pre>
 ]]></content>
   </entry>
