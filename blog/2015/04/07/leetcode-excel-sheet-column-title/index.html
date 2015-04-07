@@ -5,11 +5,20 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[LeetCode]Climbing Stairs - sumomoshinqi</title>
+  <title>[LeetCode]Excel Sheet Column Title - sumomoshinqi</title>
   <meta name="author" content="sumomoshinqi">
 
   
-  <meta name="description" content="You are climbing a stair case. It takes n steps to reach to the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you &hellip;">
+  <meta name="description" content="Given a positive integer, return its corresponding column title as appear in an Excel sheet. For example: 1
+2
+3
+4
+5
+6
+7
+1 -&gt; A
+2 -&gt; B
+3 -&gt; C &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +27,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-climbing-stairs/">
+  <link rel="canonical" href="http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -80,7 +89,7 @@
   
   <header>
     
-      <h1 class="entry-title">[LeetCode]Climbing Stairs</h1>
+      <h1 class="entry-title">[LeetCode]Excel Sheet Column Title</h1>
     
     
       <p class="meta">
@@ -89,7 +98,7 @@
 
 
 
-<time class='entry-date' datetime='2015-03-20T20:01:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:01 pm</span></time>
+<time class='entry-date' datetime='2015-04-07T21:13:20+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:13 pm</span></time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,16 +107,50 @@
   </header>
 
 
-<div class="entry-content"><p>You are climbing a stair case. It takes n steps to reach to the top.</p>
-
-<p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
+<div class="entry-content"><p>Given a positive integer, return its corresponding column title as appear in an Excel sheet.</p>
 
 <!--more-->
 
 
+<p>For example:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>1 -&gt; A
+</span><span class='line'>2 -&gt; B
+</span><span class='line'>3 -&gt; C
+</span><span class='line'>...
+</span><span class='line'>26 -&gt; Z
+</span><span class='line'>27 -&gt; AA
+</span><span class='line'>28 -&gt; AB </span></code></pre></td></tr></table></div></figure>
 
 
-<figure class='code'><figcaption><span>Climbing Stairs</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Here is a very short C++ solution using charactor lookup array.</p>
+
+<p>The idea behind this algorithm is coming from the following numeric representation mapping to charactors:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   A       B             Z  
+</span><span class='line'>1+26*0, 2+26*0, ..., 26+26*0  
+</span><span class='line'>  AA      AB            AZ    
+</span><span class='line'>1+26*1, 2+26*1, ..., 26+26*1   
+</span><span class='line'>  BA      BB            BZ     
+</span><span class='line'>1+26*2, 2+26*2, ..., 26+26*2   </span></code></pre></td></tr></table></div></figure>
+
+
+<p>And we use a <em>tricky</em> charactor map which starts from &lsquo;Z&rsquo;.</p>
+
+<figure class='code'><figcaption><span>Excel Sheet Column Title</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -121,21 +164,23 @@
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='C'><span class='line'><span class="kt">int</span> <span class="nf">climbStairs</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">stepOne</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">stepTwo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+</pre></td><td class='code'><pre><code class='Cpp'><span class='line'><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span><span class='line'><span class="k">public</span><span class="o">:</span>
+</span><span class='line'>    <span class="n">string</span> <span class="n">convertToTitle</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">string</span> <span class="n">map</span> <span class="o">=</span> <span class="s">&quot;ZABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">string</span> <span class="n">result</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">ret</span> <span class="o">=</span> <span class="n">stepOne</span> <span class="o">+</span> <span class="n">stepTwo</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">stepTwo</span> <span class="o">=</span> <span class="n">stepOne</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">stepOne</span> <span class="o">=</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">while</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="n">result</span> <span class="o">=</span> <span class="n">map</span><span class="p">[</span><span class="n">n</span><span class="o">--</span> <span class="o">%</span> <span class="mi">26</span><span class="p">]</span> <span class="o">+</span> <span class="n">result</span><span class="p">;</span>
+</span><span class='line'>          <span class="n">n</span> <span class="o">/=</span> <span class="mi">26</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 </span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
 
 </div>
 
@@ -152,12 +197,12 @@
 
 
 
-<time class='entry-date' datetime='2015-03-20T20:01:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:01 pm</span></time>
+<time class='entry-date' datetime='2015-04-07T21:13:20+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:13 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/c/'>c</a>, <a class='category' href='/blog/categories/leetcode/'>leetcode</a>
+    <a class='category' href='/blog/categories/cpp/'>cpp</a>, <a class='category' href='/blog/categories/leetcode/'>leetcode</a>
   
 </span>
 
@@ -166,7 +211,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-climbing-stairs/" data-via="sumomoshinqi" data-counturl="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-climbing-stairs/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title/" data-via="sumomoshinqi" data-counturl="http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -192,10 +237,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/03/20/leetcode-majority-element/" title="Previous Post: [LeetCode]Majority Element">&laquo; [LeetCode]Majority Element</a>
+        <a class="basic-alignment left" href="/blog/2015/03/31/8bit-cpu-design/" title="Previous Post: 8bit CPU design">&laquo; 8bit CPU design</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/03/23/csapp-data-lab/" title="Next Post: [CSAPP] Data Lab">[CSAPP] Data Lab &raquo;</a>
       
     </p>
   </footer>
@@ -281,8 +324,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-climbing-stairs/';
-        var disqus_url = 'http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-climbing-stairs/';
+        var disqus_identifier = 'http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title/';
+        var disqus_url = 'http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title/';
         var disqus_script = 'embed.js';
       
     (function () {

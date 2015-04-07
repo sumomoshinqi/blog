@@ -4,7 +4,7 @@
   <title><![CDATA[sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-04-01T16:56:46+08:00</updated>
+  <updated>2015-04-07T21:28:25+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -12,6 +12,89 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[LeetCode]Excel Sheet Column Title]]></title>
+    <link href="http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title/"/>
+    <updated>2015-04-07T21:13:20+08:00</updated>
+    <id>http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title</id>
+    <content type="html"><![CDATA[<p>Given a positive integer, return its corresponding column title as appear in an Excel sheet.</p>
+
+<!--more-->
+
+
+<p>For example:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>1 -&gt; A
+</span><span class='line'>2 -&gt; B
+</span><span class='line'>3 -&gt; C
+</span><span class='line'>...
+</span><span class='line'>26 -&gt; Z
+</span><span class='line'>27 -&gt; AA
+</span><span class='line'>28 -&gt; AB </span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is a very short C++ solution using charactor lookup array.</p>
+
+<p>The idea behind this algorithm is coming from the following numeric representation mapping to charactors:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   A       B             Z  
+</span><span class='line'>1+26*0, 2+26*0, ..., 26+26*0  
+</span><span class='line'>  AA      AB            AZ    
+</span><span class='line'>1+26*1, 2+26*1, ..., 26+26*1   
+</span><span class='line'>  BA      BB            BZ     
+</span><span class='line'>1+26*2, 2+26*2, ..., 26+26*2   </span></code></pre></td></tr></table></div></figure>
+
+
+<p>And we use a <em>tricky</em> charactor map which starts from &lsquo;Z&rsquo;.</p>
+
+<figure class='code'><figcaption><span>Excel Sheet Column Title</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='Cpp'><span class='line'><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span><span class='line'><span class="k">public</span><span class="o">:</span>
+</span><span class='line'>    <span class="n">string</span> <span class="n">convertToTitle</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">string</span> <span class="n">map</span> <span class="o">=</span> <span class="s">&quot;ZABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">string</span> <span class="n">result</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">while</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="n">result</span> <span class="o">=</span> <span class="n">map</span><span class="p">[</span><span class="n">n</span><span class="o">--</span> <span class="o">%</span> <span class="mi">26</span><span class="p">]</span> <span class="o">+</span> <span class="n">result</span><span class="p">;</span>
+</span><span class='line'>          <span class="n">n</span> <span class="o">/=</span> <span class="mi">26</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[8bit CPU design]]></title>
