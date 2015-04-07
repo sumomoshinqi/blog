@@ -4,7 +4,7 @@
   <title><![CDATA[Category: leetcode | sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/blog/categories/leetcode/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-04-07T21:28:25+08:00</updated>
+  <updated>2015-04-07T21:49:33+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -51,7 +51,7 @@
 <pre><code class="Cpp Excel Sheet Column Title">class Solution {
 public:
     string convertToTitle(int n) {
-        string map = "ZABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        string map = "ZABCDEFGHIJKLMNOPQRSTUVWXY";
         string result;
 
         while (n) {
