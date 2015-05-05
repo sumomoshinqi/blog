@@ -4,7 +4,7 @@
   <title><![CDATA[sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-05-05T14:24:11+08:00</updated>
+  <updated>2015-05-05T14:25:23+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -529,7 +529,7 @@
 </span><span class='line'>        <span class="n">MWR</span><span class="p">,</span> <span class="n">MRD</span><span class="p">,</span> <span class="n">IOR</span><span class="p">,</span> <span class="n">IOW</span><span class="p">,</span> <span class="n">MCLK</span><span class="o">:</span>     <span class="k">buffer</span> <span class="kt">std_logic</span><span class="p">;</span>
 </span><span class='line'>        <span class="c1">--外部观察</span>
 </span><span class='line'>        <span class="n">CTRL1</span><span class="p">,</span> <span class="n">CTRL2</span><span class="p">,</span> <span class="n">CTRL3</span><span class="p">,</span> <span class="n">CTRL4</span><span class="o">:</span>   <span class="k">buffer</span> <span class="kt">std_logic</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">MUX</span><span class="o">:</span>                                    <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">2</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">MUX</span><span class="o">:</span>                          <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">2</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
 </span><span class='line'>        <span class="n">PRIX</span><span class="p">,</span> <span class="n">KRIX</span><span class="o">:</span>                   <span class="k">in</span> <span class="kt">std_logic</span>
 </span><span class='line'>    <span class="p">);</span>
 </span><span class='line'><span class="k">end</span> <span class="nc">cpu_8</span><span class="p">;</span>
