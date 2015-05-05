@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vhdl | sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/blog/categories/vhdl/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-05-05T14:20:32+08:00</updated>
+  <updated>2015-05-05T14:24:11+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -288,7 +288,7 @@ begin
     end process pRi;
 
 ----寄存器输出ROUT的定义
-    ROUT    &lt;= R0 when RS = "000" else
+    ROUT    &lt;=  R0 when RS = "000" else
                 R1 when RS = "001" else
                 R2 when RS = "010" else
                 R3 when RS = "011" else
@@ -314,12 +314,12 @@ begin
     end process pMUXB;
 
 ----MUXC的定义
-    AB &lt;= PC            when MXC = "00" else
-          ADRH&amp;ADRL     when MXC = "01" else
-         SP             when MXC = "10";
+    AB &lt;= PC                when MXC = "00" else
+          ADRH&amp;ADRL         when MXC = "01" else
+         SP                 when MXC = "10";
 
 ----MUXD的定义
-    PCADD   &lt;=   '0'        when PLD = "000" else
+    PCADD   &lt;=  '0'         when PLD = "000" else
                 CY          when PLD = "001" else
                 not ZY      when PLD = "010" else
                 not KRIX    when PLD = "011" else
@@ -375,7 +375,7 @@ begin
 
 ----ALU的定义
     FF  &lt;=  FA + FB         when S = "000" else
-          FA - FB           when S = "001" else
+            FA - FB         when S = "001" else
             FA              when S = "010" else
             FB              when S = "011" else
             not FB          when S = "100" else

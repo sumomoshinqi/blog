@@ -863,7 +863,7 @@
 </span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pRi</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----寄存器输出ROUT的定义</span>
-</span><span class='line'>    <span class="n">ROUT</span>    <span class="o">&lt;=</span> <span class="n">R0</span> <span class="k">when</span> <span class="n">RS</span> <span class="o">=</span> <span class="s">&quot;000&quot;</span> <span class="k">else</span>
+</span><span class='line'>    <span class="n">ROUT</span>    <span class="o">&lt;=</span>  <span class="n">R0</span> <span class="k">when</span> <span class="n">RS</span> <span class="o">=</span> <span class="s">&quot;000&quot;</span> <span class="k">else</span>
 </span><span class='line'>                <span class="n">R1</span> <span class="k">when</span> <span class="n">RS</span> <span class="o">=</span> <span class="s">&quot;001&quot;</span> <span class="k">else</span>
 </span><span class='line'>                <span class="n">R2</span> <span class="k">when</span> <span class="n">RS</span> <span class="o">=</span> <span class="s">&quot;010&quot;</span> <span class="k">else</span>
 </span><span class='line'>                <span class="n">R3</span> <span class="k">when</span> <span class="n">RS</span> <span class="o">=</span> <span class="s">&quot;011&quot;</span> <span class="k">else</span>
@@ -889,12 +889,12 @@
 </span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pMUXB</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----MUXC的定义</span>
-</span><span class='line'>    <span class="n">AB</span> <span class="o">&lt;=</span> <span class="n">PC</span>            <span class="k">when</span> <span class="n">MXC</span> <span class="o">=</span> <span class="s">&quot;00&quot;</span> <span class="k">else</span>
-</span><span class='line'>          <span class="n">ADRH</span><span class="o">&amp;</span><span class="n">ADRL</span>     <span class="k">when</span> <span class="n">MXC</span> <span class="o">=</span> <span class="s">&quot;01&quot;</span> <span class="k">else</span>
-</span><span class='line'>         <span class="n">SP</span>             <span class="k">when</span> <span class="n">MXC</span> <span class="o">=</span> <span class="s">&quot;10&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">AB</span> <span class="o">&lt;=</span> <span class="n">PC</span>                <span class="k">when</span> <span class="n">MXC</span> <span class="o">=</span> <span class="s">&quot;00&quot;</span> <span class="k">else</span>
+</span><span class='line'>          <span class="n">ADRH</span><span class="o">&amp;</span><span class="n">ADRL</span>         <span class="k">when</span> <span class="n">MXC</span> <span class="o">=</span> <span class="s">&quot;01&quot;</span> <span class="k">else</span>
+</span><span class='line'>         <span class="n">SP</span>                 <span class="k">when</span> <span class="n">MXC</span> <span class="o">=</span> <span class="s">&quot;10&quot;</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">----MUXD的定义</span>
-</span><span class='line'>    <span class="n">PCADD</span>   <span class="o">&lt;=</span>   <span class="sc">&#39;0&#39;</span>        <span class="k">when</span> <span class="n">PLD</span> <span class="o">=</span> <span class="s">&quot;000&quot;</span> <span class="k">else</span>
+</span><span class='line'>    <span class="n">PCADD</span>   <span class="o">&lt;=</span>  <span class="sc">&#39;0&#39;</span>         <span class="k">when</span> <span class="n">PLD</span> <span class="o">=</span> <span class="s">&quot;000&quot;</span> <span class="k">else</span>
 </span><span class='line'>                <span class="n">CY</span>          <span class="k">when</span> <span class="n">PLD</span> <span class="o">=</span> <span class="s">&quot;001&quot;</span> <span class="k">else</span>
 </span><span class='line'>                <span class="k">not</span> <span class="n">ZY</span>      <span class="k">when</span> <span class="n">PLD</span> <span class="o">=</span> <span class="s">&quot;010&quot;</span> <span class="k">else</span>
 </span><span class='line'>                <span class="k">not</span> <span class="n">KRIX</span>    <span class="k">when</span> <span class="n">PLD</span> <span class="o">=</span> <span class="s">&quot;011&quot;</span> <span class="k">else</span>
@@ -950,7 +950,7 @@
 </span><span class='line'>
 </span><span class='line'><span class="c1">----ALU的定义</span>
 </span><span class='line'>    <span class="n">FF</span>  <span class="o">&lt;=</span>  <span class="n">FA</span> <span class="o">+</span> <span class="n">FB</span>         <span class="k">when</span> <span class="n">S</span> <span class="o">=</span> <span class="s">&quot;000&quot;</span> <span class="k">else</span>
-</span><span class='line'>          <span class="n">FA</span> <span class="o">-</span> <span class="n">FB</span>           <span class="k">when</span> <span class="n">S</span> <span class="o">=</span> <span class="s">&quot;001&quot;</span> <span class="k">else</span>
+</span><span class='line'>            <span class="n">FA</span> <span class="o">-</span> <span class="n">FB</span>         <span class="k">when</span> <span class="n">S</span> <span class="o">=</span> <span class="s">&quot;001&quot;</span> <span class="k">else</span>
 </span><span class='line'>            <span class="n">FA</span>              <span class="k">when</span> <span class="n">S</span> <span class="o">=</span> <span class="s">&quot;010&quot;</span> <span class="k">else</span>
 </span><span class='line'>            <span class="n">FB</span>              <span class="k">when</span> <span class="n">S</span> <span class="o">=</span> <span class="s">&quot;011&quot;</span> <span class="k">else</span>
 </span><span class='line'>            <span class="k">not</span> <span class="n">FB</span>          <span class="k">when</span> <span class="n">S</span> <span class="o">=</span> <span class="s">&quot;100&quot;</span> <span class="k">else</span>
