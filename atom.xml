@@ -4,7 +4,7 @@
   <title><![CDATA[sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-05-05T14:17:27+08:00</updated>
+  <updated>2015-05-05T14:20:32+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -22,6 +22,9 @@
 
 <!--more-->
 
+
+<p>Design pattern<br/>
+<img src="http://sumomoshinqi.github.io/images/posts/8bitcpu_design.png" alt="design pattern" /></p>
 
 <p>Source code of my CPU VHDL implementation on a Xilinx XC2S150 FPGA.</p>
 
