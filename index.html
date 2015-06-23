@@ -9,7 +9,9 @@
   <meta name="author" content="sumomoshinqi">
 
   
-  <meta name="description" content="Finally it works! 😂 ">
+  <meta name="description" content="iPhone has a special notification sound when plugged in.
+In fact, Mac can do that too! Here&rsquo;s how to enable it. Open terminal.app
+Enter the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +79,67 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/23/add-a-plugged-notification-sound-for-mac/">Add a &#8220;Plugged in&#8221; Notification Sound for Mac</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-23T19:37:02+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>7:37 pm</span></time>
+        
+         | <a href="/blog/2015/06/23/add-a-plugged-notification-sound-for-mac/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>iPhone has a special notification sound when plugged in.<br/>
+In fact, Mac can do that too!</p>
+
+<p>Here&rsquo;s how to enable it.</p>
+
+<ul>
+<li>Open terminal.app</li>
+<li>Enter the following commands</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>defaults write com.apple.PowerChime ChimeOnAllHardware -bool <span class="nb">true</span><span class="p">;</span>
+</span><span class='line'>open /System/Library/CoreServices/PowerChime.app <span class="p">&amp;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There you go. :)</p>
+
+<p>Well, if you no longer want it. <br/>
+Enter</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>defaults write com.apple.PowerChime ChimeOnAllHardware -bool <span class="nb">false</span><span class="p">;</span>
+</span><span class='line'>killall PowerChime
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Enjoy!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -423,47 +486,9 @@ The original icon appears really big when standing on dock. I even resized it to
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/03/test-post/">Test Post</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-03T16:36:18+08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>4:36 pm</span></time>
-        
-         | <a href="/blog/2015/02/03/test-post/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Testing post</p>
-
-<p>中文显示测试</p>
-
-<p>😄😂 Emoji testing</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/02/03/test-post/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="2">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -492,7 +517,7 @@ The original icon appears really big when standing on dock. I even resized it to
 <li class='category'><a href='/blog/categories/leetcode/'>leetcode (4)</a></li>
 <li class='category'><a href='/blog/categories/os-x/'>os x (1)</a></li>
 <li class='category'><a href='/blog/categories/testing/'>testing (1)</a></li>
-<li class='category'><a href='/blog/categories/tips/'>tips (2)</a></li>
+<li class='category'><a href='/blog/categories/tips/'>tips (3)</a></li>
 <li class='category'><a href='/blog/categories/vhdl/'>vhdl (1)</a></li>
 <li class='category'><a href='/blog/categories/vnc/'>vnc (1)</a></li>
 
@@ -500,6 +525,10 @@ The original icon appears really big when standing on dock. I even resized it to
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/06/23/add-a-plugged-notification-sound-for-mac/">Add a &#8220;Plugged In&#8221; notification sound for Mac</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/05/05/8-bit-cpu-design/">8 bit CPU design</a>
@@ -515,10 +544,6 @@ The original icon appears really big when standing on dock. I even resized it to
     
       <li class="post">
         <a href="/blog/2015/03/23/csapp-data-lab/">[CSAPP] Data Lab</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/03/20/leetcode-climbing-stairs/">[LeetCode]Climbing Stairs</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tips | sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/blog/categories/tips/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-05-05T14:35:05+08:00</updated>
+  <updated>2015-06-23T19:47:13+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Add a "Plugged In" notification sound for Mac]]></title>
+    <link href="http://sumomoshinqi.github.io/blog/2015/06/23/add-a-plugged-notification-sound-for-mac/"/>
+    <updated>2015-06-23T19:37:02+08:00</updated>
+    <id>http://sumomoshinqi.github.io/blog/2015/06/23/add-a-plugged-notification-sound-for-mac</id>
+    <content type="html"><![CDATA[<p>iPhone has a special notification sound when plugged in.<br/>
+In fact, Mac can do that too!</p>
+
+<p>Here&rsquo;s how to enable it.</p>
+
+<ul>
+<li>Open terminal.app</li>
+<li>Enter the following commands</li>
+</ul>
+
+
+<pre><code class="bash">defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; 
+open /System/Library/CoreServices/PowerChime.app &amp;
+</code></pre>
+
+<p>There you go. :)</p>
+
+<p>Well, if you no longer want it. <br/>
+Enter</p>
+
+<pre><code class="bash">defaults write com.apple.PowerChime ChimeOnAllHardware -bool false;
+killall PowerChime
+</code></pre>
+
+<p>Enjoy!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Fixed: ARD cannot connect to Ubuntu 14.04]]></title>

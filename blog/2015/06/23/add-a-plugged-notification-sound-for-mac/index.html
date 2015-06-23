@@ -5,20 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[LeetCode]Excel Sheet Column Title - sumomoshinqi</title>
+  <title>Add a &#8220;Plugged In&#8221; notification sound for Mac - sumomoshinqi</title>
   <meta name="author" content="sumomoshinqi">
 
   
-  <meta name="description" content="Given a positive integer, return its corresponding column title as appear in an Excel sheet. For example: 1
-2
-3
-4
-5
-6
-7
-1 -&gt; A
-2 -&gt; B
-3 -&gt; C &hellip;">
+  <meta name="description" content="iPhone has a special notification sound when plugged in.
+In fact, Mac can do that too! Here&rsquo;s how to enable it. Open terminal.app
+Enter the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -27,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title/">
+  <link rel="canonical" href="http://sumomoshinqi.github.io/blog/2015/06/23/add-a-plugged-notification-sound-for-mac/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -89,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">[LeetCode]Excel Sheet Column Title</h1>
+      <h1 class="entry-title">Add a &#8220;Plugged in&#8221; Notification Sound for Mac</h1>
     
     
       <p class="meta">
@@ -98,7 +91,7 @@
 
 
 
-<time class='entry-date' datetime='2015-04-07T21:13:20+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:13 pm</span></time>
+<time class='entry-date' datetime='2015-06-23T19:37:02+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>7:37 pm</span></time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,81 +100,37 @@
   </header>
 
 
-<div class="entry-content"><p>Given a positive integer, return its corresponding column title as appear in an Excel sheet.</p>
+<div class="entry-content"><p>iPhone has a special notification sound when plugged in.<br/>
+In fact, Mac can do that too!</p>
 
-<!--more-->
+<p>Here&rsquo;s how to enable it.</p>
+
+<ul>
+<li>Open terminal.app</li>
+<li>Enter the following commands</li>
+</ul>
 
 
-<p>For example:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>1 -&gt; A
-</span><span class='line'>2 -&gt; B
-</span><span class='line'>3 -&gt; C
-</span><span class='line'>...
-</span><span class='line'>26 -&gt; Z
-</span><span class='line'>27 -&gt; AA
-</span><span class='line'>28 -&gt; AB </span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here is a very short C++ solution using charactor lookup array.</p>
-
-<p>The idea behind this algorithm is coming from the following numeric representation mapping to charactors:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>   A       B             Z  
-</span><span class='line'>1+26*0, 2+26*0, ..., 26+26*0  
-</span><span class='line'>  AA      AB            AZ    
-</span><span class='line'>1+26*1, 2+26*1, ..., 26+26*1   
-</span><span class='line'>  BA      BB            BZ     
-</span><span class='line'>1+26*2, 2+26*2, ..., 26+26*2   </span></code></pre></td></tr></table></div></figure>
-
-
-<p>And we use a <em>tricky</em> charactor map which starts from &lsquo;Z&rsquo;.</p>
-
-<figure class='code'><figcaption><span>Excel Sheet Column Title</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='Cpp'><span class='line'><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span><span class='line'><span class="k">public</span><span class="o">:</span>
-</span><span class='line'>    <span class="n">string</span> <span class="n">convertToTitle</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">string</span> <span class="n">map</span> <span class="o">=</span> <span class="s">&quot;ZABCDEFGHIJKLMNOPQRSTUVWXY&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="n">string</span> <span class="n">result</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">while</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="n">result</span> <span class="o">=</span> <span class="n">map</span><span class="p">[</span><span class="n">n</span><span class="o">--</span> <span class="o">%</span> <span class="mi">26</span><span class="p">]</span> <span class="o">+</span> <span class="n">result</span><span class="p">;</span>
-</span><span class='line'>          <span class="n">n</span> <span class="o">/=</span> <span class="mi">26</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">};</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>defaults write com.apple.PowerChime ChimeOnAllHardware -bool <span class="nb">true</span><span class="p">;</span>
+</span><span class='line'>open /System/Library/CoreServices/PowerChime.app <span class="p">&amp;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p>There you go. :)</p>
 
+<p>Well, if you no longer want it. <br/>
+Enter</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>defaults write com.apple.PowerChime ChimeOnAllHardware -bool <span class="nb">false</span><span class="p">;</span>
+</span><span class='line'>killall PowerChime
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Enjoy!</p>
 </div>
 
 
@@ -197,12 +146,12 @@
 
 
 
-<time class='entry-date' datetime='2015-04-07T21:13:20+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:13 pm</span></time>
+<time class='entry-date' datetime='2015-06-23T19:37:02+08:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>7:37 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/cpp/'>cpp</a>, <a class='category' href='/blog/categories/leetcode/'>leetcode</a>
+    <a class='category' href='/blog/categories/tips/'>tips</a>
   
 </span>
 
@@ -211,7 +160,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title/" data-via="sumomoshinqi" data-counturl="http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sumomoshinqi.github.io/blog/2015/06/23/add-a-plugged-notification-sound-for-mac/" data-via="sumomoshinqi" data-counturl="http://sumomoshinqi.github.io/blog/2015/06/23/add-a-plugged-notification-sound-for-mac/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -237,10 +186,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/03/23/csapp-data-lab/" title="Previous Post: [CSAPP] Data Lab">&laquo; [CSAPP] Data Lab</a>
+        <a class="basic-alignment left" href="/blog/2015/05/05/8-bit-cpu-design/" title="Previous Post: 8 bit CPU design">&laquo; 8 bit CPU design</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/04/12/code-jam-qualification-round-2015/" title="Next Post: Code Jam Qualification Round 2015">Code Jam Qualification Round 2015 &raquo;</a>
       
     </p>
   </footer>
@@ -327,8 +274,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title/';
-        var disqus_url = 'http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title/';
+        var disqus_identifier = 'http://sumomoshinqi.github.io/blog/2015/06/23/add-a-plugged-notification-sound-for-mac/';
+        var disqus_url = 'http://sumomoshinqi.github.io/blog/2015/06/23/add-a-plugged-notification-sound-for-mac/';
         var disqus_script = 'embed.js';
       
     (function () {
