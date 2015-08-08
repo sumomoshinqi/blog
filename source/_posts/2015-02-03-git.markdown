@@ -1,0 +1,15 @@
+---
+layout: post
+title: "Git, fatal: The remote end hung up unexpectedly"
+date: 2015-02-03 16:38:18 +0800
+comments: true
+categories: ['Git', 'tips']
+---
+Didn't expect that this would be my first post except the one for testing.😉
+
+So there was a problem when I had changed the blog theme and tried to `rake deploy`.
+<!--more-->
+
+![problem](/images/posts/2015-02-03-git.png)
+
+Then I looked up stackoverflow and found it was due to git/https buffer settings, which means the size of my **push** was larger than the buffer size. In order to solve it, simply `git config http.postBuffer 524288000` and it just worked.
