@@ -4,7 +4,7 @@
   <title><![CDATA[sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-08-09T00:02:07+08:00</updated>
+  <updated>2015-08-09T00:13:51+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -23,99 +23,141 @@
 <!--more-->
 
 
-<ul>
-<li>Kill current mongod processes(es)</li>
-</ul>
-
+<h3>1. Kill current mongod processes(es)</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>ps ax <span class="p">|</span> grep mongod     <span class="c"># Find current mongod processes</span>
-</span><span class='line'><span class="nb">kill</span> -9 PID           <span class="c"># Kill them</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ps ax <span class="p">|</span> grep mongod    <span class="c"># Find current mongod processes</span>
+</span><span class='line'><span class="nb">kill</span> -9 PID            <span class="c"># Kill them</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>2. Unlock MongoDB max connection restriction</h3>
+
+<p>Edit system configuration file <strong>limits.conf</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo vim /etc/security/limits.conf  <span class="c"># Configuration file for the pam_limits module</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>For more information see <a href="http://linux.die.net/man/5/limits.conf">limits.conf</a></p></blockquote>
+
+<p>Add following lines to change system resource limits
+Here <strong>*</strong> means for all users, <strong>noproc</strong> means max user processes, <strong>nofile</strong> means max open files</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>root - core unlimited
+</span><span class='line'>*    - core unlimited
+</span><span class='line'>* soft noproc <span class="m">65535</span>
+</span><span class='line'>* hard noproc <span class="m">65535</span>
+</span><span class='line'>* soft nofile <span class="m">409600</span>
+</span><span class='line'>* hard nofile 409600
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p></p>
 
-<ul>
-<li><p>Unlock MongoDB max connection restriction</p>
-
-<p>  Edit system configuration file <strong>limits.conf</strong></p>
-
-<pre><code class="``sh">  sudo vim /etc/security/limits.conf  # Configuration file for the pam_limits module
-</code></pre>
-
-<blockquote><p>For more information see <a href="http://linux.die.net/man/5/limits.conf">limits.conf</a></p></blockquote>
-
-<p>  Add following lines to change system resource limits
-  Here <strong>*</strong> means for all users, <strong>noproc</strong> means max user processes, <strong>nofile</strong> means max open files</p>
-
-<pre><code class="``sh">  root - core unlimited
-  *    - core unlimited
-  * soft noproc 65535 
-  * hard noproc 65535 
-  * soft nofile 409600 
-  * hard nofile 409600
-</code></pre>
-
-<p>  Reboot to apply all these changes</p>
+<p>Reboot to apply all these changes</p>
 
 <blockquote><p>Actually reboot <a href="http://unix.stackexchange.com/questions/108603/do-changes-in-etc-security-limits-conf-require-a-reboot">is not a must</a>, yet it&rsquo;s the easiest way to apply all changes.</p></blockquote>
 
-<pre><code class="``sh">  sudo reboot
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo reboot
+</span></code></pre></td></tr></table></div></figure>
 
-<p>  Now check ulimit settings</p>
 
-<pre><code class="``sh">  ulimit -a
-</code></pre>
+<p>Now check ulimit settings</p>
 
-<p>  You shall see your changes here</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">ulimit</span> -a
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code class="``">  core file size          (blocks, -c) unlimited
-  data seg size           (kbytes, -d) unlimited
-  scheduling priority             (-e) 0
-  file size               (blocks, -f) unlimited
-  pending signals                 (-i) 31420
-  max locked memory       (kbytes, -l) 64
-  max memory size         (kbytes, -m) unlimited
-  open files                      (-n) 409600
-  pipe size            (512 bytes, -p) 8
-  POSIX message queues     (bytes, -q) 819200
-  real-time priority              (-r) 0
-  stack size              (kbytes, -s) 8192
-  cpu time               (seconds, -t) unlimited
-  max user processes              (-u) 31420
-  virtual memory          (kbytes, -v) unlimited
-  file locks                      (-x) unlimited
-</code></pre></li>
-<li><p>Restart <strong>mongod</strong> with your own <strong>maxConns</strong></p>
 
-<pre><code class="``sh">  sudo mongod --maxConns=20000
-</code></pre>
+<p>You shall see your changes here</p>
 
-<p>  Probably you&rsquo;ll see this error</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>core file size          <span class="o">(</span>blocks, -c<span class="o">)</span> unlimited
+</span><span class='line'>data seg size           <span class="o">(</span>kbytes, -d<span class="o">)</span> unlimited
+</span><span class='line'>scheduling priority             <span class="o">(</span>-e<span class="o">)</span> 0
+</span><span class='line'>file size               <span class="o">(</span>blocks, -f<span class="o">)</span> unlimited
+</span><span class='line'>pending signals                 <span class="o">(</span>-i<span class="o">)</span> 31420
+</span><span class='line'>max locked memory       <span class="o">(</span>kbytes, -l<span class="o">)</span> 64
+</span><span class='line'>max memory size         <span class="o">(</span>kbytes, -m<span class="o">)</span> unlimited
+</span><span class='line'>open files                      <span class="o">(</span>-n<span class="o">)</span> 409600
+</span><span class='line'>pipe size            <span class="o">(</span><span class="m">512</span> bytes, -p<span class="o">)</span> 8
+</span><span class='line'>POSIX message queues     <span class="o">(</span>bytes, -q<span class="o">)</span> 819200
+</span><span class='line'>real-time priority              <span class="o">(</span>-r<span class="o">)</span> 0
+</span><span class='line'>stack size              <span class="o">(</span>kbytes, -s<span class="o">)</span> 8192
+</span><span class='line'>cpu <span class="nb">time</span>               <span class="o">(</span>seconds, -t<span class="o">)</span> unlimited
+</span><span class='line'>max user processes              <span class="o">(</span>-u<span class="o">)</span> 31420
+</span><span class='line'>virtual memory          <span class="o">(</span>kbytes, -v<span class="o">)</span> unlimited
+</span><span class='line'>file locks                      <span class="o">(</span>-x<span class="o">)</span> unlimited
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code class="``">  exception in initAndListen std::exception: locale::facet::_S_create_c_locale name not valid, terminating
-</code></pre>
 
-<p>  To fix it, set <strong>LC_ALL</strong>
-  <code>sh
-  export LC_ALL="en_US.UTF-8"
- </code></p>
+<h3>3. Restart <strong>mongod</strong> with your own <strong>maxConns</strong></h3>
 
-<p>  Restart mongod in background</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo mongod --maxConns<span class="o">=</span>20000
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code class="``sh">  sudo mongod --maxConns=20000 &amp;
-</code></pre>
 
-<p>  Enter mongo shell and check current maxConns</p>
+<p>Probably you&rsquo;ll see this error</p>
 
-<pre><code class="``sh">  mongo
-  &gt; db.serverStatus().connections
-  { "current" : 1, "available" : 19999, "totalCreated" : NumberLong(1) }
-</code></pre></li>
-</ul>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>exception in initAndListen std::exception: locale::facet::_S_create_c_locale name not valid, terminating
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To fix it, set <strong>LC_ALL</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">export </span><span class="nv">LC_ALL</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Restart mongod in background</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo mongod --maxConns<span class="o">=</span><span class="m">20000</span> <span class="p">&amp;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Enter mongo shell</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>mongd
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and check current <strong>maxConns</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>&gt; db.serverStatus<span class="o">()</span>.connections
+</span><span class='line'><span class="o">{</span> <span class="s2">&quot;current&quot;</span> : 1, <span class="s2">&quot;available&quot;</span> : 19999, <span class="s2">&quot;totalCreated&quot;</span> : NumberLong<span class="o">(</span>1<span class="o">)</span> <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <hr />
