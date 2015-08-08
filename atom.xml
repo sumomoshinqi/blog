@@ -4,7 +4,7 @@
   <title><![CDATA[sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-08-09T00:17:05+08:00</updated>
+  <updated>2015-08-09T00:24:31+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -52,11 +52,11 @@ Here <strong>*</strong> means for all users, <strong>noproc</strong> means max u
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>root - core unlimited
+</pre></td><td class='code'><pre><code class='text'><span class='line'>root - core unlimited
 </span><span class='line'>*    - core unlimited
-</span><span class='line'>* soft noproc <span class="m">65535</span>
-</span><span class='line'>* hard noproc <span class="m">65535</span>
-</span><span class='line'>* soft nofile <span class="m">409600</span>
+</span><span class='line'>* soft noproc 65535
+</span><span class='line'>* hard noproc 65535
+</span><span class='line'>* soft nofile 409600
 </span><span class='line'>* hard nofile 409600
 </span></code></pre></td></tr></table></div></figure>
 
