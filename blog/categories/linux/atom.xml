@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-08-09T00:13:51+08:00</updated>
+  <updated>2015-08-09T00:17:05+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -41,7 +41,7 @@
 <p>Add following lines to change system resource limits
 Here <strong>*</strong> means for all users, <strong>noproc</strong> means max user processes, <strong>nofile</strong> means max open files</p>
 
-<pre><code class="sh">    root - core unlimited
+<pre><code>    root - core unlimited
     *    - core unlimited
     * soft noproc 65535 
     * hard noproc 65535 
