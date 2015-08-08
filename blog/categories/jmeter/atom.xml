@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: jmeter | sumomoshinqi]]></title>
+  <link href="http://sumomoshinqi.github.io/blog/categories/jmeter/atom.xml" rel="self"/>
+  <link href="http://sumomoshinqi.github.io/"/>
+  <updated>2015-08-09T00:02:07+08:00</updated>
+  <id>http://sumomoshinqi.github.io/</id>
+  <author>
+    <name><![CDATA[sumomoshinqi]]></name>
+    <email><![CDATA[edam.lqq@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Customize MongoDB maxConn]]></title>
+    <link href="http://sumomoshinqi.github.io/blog/2015/08/08/customize-mongodb-maxconn/"/>
+    <updated>2015-08-08T23:29:05+08:00</updated>
+    <id>http://sumomoshinqi.github.io/blog/2015/08/08/customize-mongodb-maxconn</id>
+    <content type="html"><![CDATA[<p>Sometimes we need MongoDB support very large number of concurrent connections. To do that, following configurations should be modified.</p>
+
+
+
+
+<!--more-->
+
+
+
+
+<ul>
+<li>Kill current mongod processes(es)</li>
+</ul>
+
+
+
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ps ax <span class="p">|</span> grep mongod     <span class="c"># Find current mongod processes</span>
+</span><span class='line'><span class="nb">kill</span> -9 PID           <span class="c"># Kill them</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+
+
+<p></p>
+
+
+
+
+<ul>
+<li><p>Unlock MongoDB max connection restriction</p>
+
+<p>  Edit system configuration file <strong>limits.conf</strong></p>
+
+<pre><code class="``sh">  sudo vim /etc/security/limits.conf  # Configuration file for the pam_limits module
+</code></pre>
+
+<blockquote><p>For more information see <a href="http://linux.die.net/man/5/limits.conf">limits.conf</a></p></blockquote>
+
+<p>  Add following lines to change system resource limits
+  Here <strong>*</strong> means for all users, <strong>noproc</strong> means max user processes, <strong>nofile</strong> means max open files</p>
+
+<pre><code class="``sh">  root - core unlimited
+  *    - core unlimited
+  * soft noproc 65535 
+  * hard noproc 65535 
+  * soft nofile 409600 
+  * hard nofile 409600
+</code></pre>
+
+<p>  Reboot to apply all these changes</p>
+
+<blockquote><p>Actually reboot <a href="http://unix.stackexchange.com/questions/108603/do-changes-in-etc-security-limits-conf-require-a-reboot">is not a must</a>, yet it&rsquo;s the easiest way to apply all changes.</p></blockquote>
+
+<pre><code class="``sh">  sudo reboot
+</code></pre>
+
+<p>  Now check ulimit settings</p>
+
+<pre><code class="``sh">  ulimit -a
+</code></pre>
+
+<p>  You shall see your changes here</p>
+
+<pre><code class="``">  core file size          (blocks, -c) unlimited
+  data seg size           (kbytes, -d) unlimited
+  scheduling priority             (-e) 0
+  file size               (blocks, -f) unlimited
+  pending signals                 (-i) 31420
+  max locked memory       (kbytes, -l) 64
+  max memory size         (kbytes, -m) unlimited
+  open files                      (-n) 409600
+  pipe size            (512 bytes, -p) 8
+  POSIX message queues     (bytes, -q) 819200
+  real-time priority              (-r) 0
+  stack size              (kbytes, -s) 8192
+  cpu time               (seconds, -t) unlimited
+  max user processes              (-u) 31420
+  virtual memory          (kbytes, -v) unlimited
+  file locks                      (-x) unlimited
+</code></pre></li>
+<li><p>Restart <strong>mongod</strong> with your own <strong>maxConns</strong></p>
+
+<pre><code class="``sh">  sudo mongod --maxConns=20000
+</code></pre>
+
+<p>  Probably you&rsquo;ll see this error</p>
+
+<pre><code class="``">  exception in initAndListen std::exception: locale::facet::_S_create_c_locale name not valid, terminating
+</code></pre>
+
+<p>  To fix it, set <strong>LC_ALL</strong>
+  <code>sh
+  export LC_ALL="en_US.UTF-8"
+ </code></p>
+
+<p>  Restart mongod in background</p>
+
+<pre><code class="``sh">  sudo mongod --maxConns=20000 &amp;
+</code></pre>
+
+<p>  Enter mongo shell and check current maxConns</p>
+
+<pre><code class="``sh">  mongo
+  &gt; db.serverStatus().connections
+  { "current" : 1, "available" : 19999, "totalCreated" : NumberLong(1) }
+</code></pre></li>
+</ul>
+
+
+
+
+<hr />
+
+
+
+
+<p>For Jmeter users.
+1. Run <em>Jmeter PerfMon agent</em> on the server to monitor server system status
+You need first upload <strong>ServerAgent-X.X.X.zip</strong> to the server e.g. using <strong>sftp</strong>
+Then unzip it anywhere you like :-)
+It now looks something like</p>
+
+
+
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>CMDRunner.jar  lib/  LICENSE  ServerAgent-2.2.1.zip  ServerAgent.jar  startAgent.bat  startAgent.sh
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+
+
+<p>Run following command to keep the agent running in background</p>
+
+
+
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>./startAgent.sh --udp-port <span class="m">0</span> --tcp-port <span class="m">4444</span> <span class="p">&amp;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+
+
+<p>Now add listeners like <strong>jp@gc-PrfMon Metrics Colletor</strong> to your thread groups, configure the port your&rsquo;ll listen to and run your tests.</p>
+
+]]></content>
+  </entry>
+  
+</feed>

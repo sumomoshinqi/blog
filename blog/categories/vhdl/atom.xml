@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vhdl | sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/blog/categories/vhdl/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-06-23T19:47:13+08:00</updated>
+  <updated>2015-08-09T00:02:07+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -20,736 +20,1476 @@
     <id>http://sumomoshinqi.github.io/blog/2015/05/05/8-bit-cpu-design</id>
     <content type="html"><![CDATA[<p>Finally it works! 😂</p>
 
+
+
+
 <!--more-->
 
 
+
+
 <p>Design pattern<br/>
-<img src="/images/posts/8bitcpu_design.png" alt="design pattern" /></p>
+<img src="http://sumomoshinqi.github.io/images/posts/8bitcpu_design.png" alt="design pattern" /></p>
+
+
+
 
 <p>Source code of my CPU VHDL implementation on a Xilinx XC2S150 FPGA.</p>
 
-<pre><code class="VHDL 8bit_cpu.vhd">library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
--- ===================================================================================
--- ===================================================================================
-entity cpu_8 is
-    Port (
-        DB:     inout std_logic_vector(7 downto 0);     --数据总线
-        AB:     buffer std_logic_vector(15 downto 0);   --地址总线
-        CI:     buffer std_logic_vector(31 downto 0);   --其中低10位是MPC的输出
-        CO:     in std_logic_vector(31 downto 0);       --微指令输入到MIR
 
-        --控制总线
-        CLK, RESET, RUN:              in std_logic; 
-        MWR, MRD, IOR, IOW, MCLK:     buffer std_logic;
-        --外部观察
-        CTRL1, CTRL2, CTRL3, CTRL4:   buffer std_logic;
-        MUX:                          in std_logic_vector(2 downto 0);
-        PRIX, KRIX:                   in std_logic
-    );
-end cpu_8;
--- ===================================================================================
--- ===================================================================================
-architecture cpu_8_behave of cpu_8 is
---内部信号定义部分
 
---signal in M 存储器
-    --读写控制脉冲
-    signal CWR, CRD:        std_logic;
-    --读写控制信号
-    signal CWRX, CRDX:      std_logic;
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>8bit_cpu.vhd</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+<span class='line-number'>158</span>
+<span class='line-number'>159</span>
+<span class='line-number'>160</span>
+<span class='line-number'>161</span>
+<span class='line-number'>162</span>
+<span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+<span class='line-number'>168</span>
+<span class='line-number'>169</span>
+<span class='line-number'>170</span>
+<span class='line-number'>171</span>
+<span class='line-number'>172</span>
+<span class='line-number'>173</span>
+<span class='line-number'>174</span>
+<span class='line-number'>175</span>
+<span class='line-number'>176</span>
+<span class='line-number'>177</span>
+<span class='line-number'>178</span>
+<span class='line-number'>179</span>
+<span class='line-number'>180</span>
+<span class='line-number'>181</span>
+<span class='line-number'>182</span>
+<span class='line-number'>183</span>
+<span class='line-number'>184</span>
+<span class='line-number'>185</span>
+<span class='line-number'>186</span>
+<span class='line-number'>187</span>
+<span class='line-number'>188</span>
+<span class='line-number'>189</span>
+<span class='line-number'>190</span>
+<span class='line-number'>191</span>
+<span class='line-number'>192</span>
+<span class='line-number'>193</span>
+<span class='line-number'>194</span>
+<span class='line-number'>195</span>
+<span class='line-number'>196</span>
+<span class='line-number'>197</span>
+<span class='line-number'>198</span>
+<span class='line-number'>199</span>
+<span class='line-number'>200</span>
+<span class='line-number'>201</span>
+<span class='line-number'>202</span>
+<span class='line-number'>203</span>
+<span class='line-number'>204</span>
+<span class='line-number'>205</span>
+<span class='line-number'>206</span>
+<span class='line-number'>207</span>
+<span class='line-number'>208</span>
+<span class='line-number'>209</span>
+<span class='line-number'>210</span>
+<span class='line-number'>211</span>
+<span class='line-number'>212</span>
+<span class='line-number'>213</span>
+<span class='line-number'>214</span>
+<span class='line-number'>215</span>
+<span class='line-number'>216</span>
+<span class='line-number'>217</span>
+<span class='line-number'>218</span>
+<span class='line-number'>219</span>
+<span class='line-number'>220</span>
+<span class='line-number'>221</span>
+<span class='line-number'>222</span>
+<span class='line-number'>223</span>
+<span class='line-number'>224</span>
+<span class='line-number'>225</span>
+<span class='line-number'>226</span>
+<span class='line-number'>227</span>
+<span class='line-number'>228</span>
+<span class='line-number'>229</span>
+<span class='line-number'>230</span>
+<span class='line-number'>231</span>
+<span class='line-number'>232</span>
+<span class='line-number'>233</span>
+<span class='line-number'>234</span>
+<span class='line-number'>235</span>
+<span class='line-number'>236</span>
+<span class='line-number'>237</span>
+<span class='line-number'>238</span>
+<span class='line-number'>239</span>
+<span class='line-number'>240</span>
+<span class='line-number'>241</span>
+<span class='line-number'>242</span>
+<span class='line-number'>243</span>
+<span class='line-number'>244</span>
+<span class='line-number'>245</span>
+<span class='line-number'>246</span>
+<span class='line-number'>247</span>
+<span class='line-number'>248</span>
+<span class='line-number'>249</span>
+<span class='line-number'>250</span>
+<span class='line-number'>251</span>
+<span class='line-number'>252</span>
+<span class='line-number'>253</span>
+<span class='line-number'>254</span>
+<span class='line-number'>255</span>
+<span class='line-number'>256</span>
+<span class='line-number'>257</span>
+<span class='line-number'>258</span>
+<span class='line-number'>259</span>
+<span class='line-number'>260</span>
+<span class='line-number'>261</span>
+<span class='line-number'>262</span>
+<span class='line-number'>263</span>
+<span class='line-number'>264</span>
+<span class='line-number'>265</span>
+<span class='line-number'>266</span>
+<span class='line-number'>267</span>
+<span class='line-number'>268</span>
+<span class='line-number'>269</span>
+<span class='line-number'>270</span>
+<span class='line-number'>271</span>
+<span class='line-number'>272</span>
+<span class='line-number'>273</span>
+<span class='line-number'>274</span>
+<span class='line-number'>275</span>
+<span class='line-number'>276</span>
+<span class='line-number'>277</span>
+<span class='line-number'>278</span>
+<span class='line-number'>279</span>
+<span class='line-number'>280</span>
+<span class='line-number'>281</span>
+<span class='line-number'>282</span>
+<span class='line-number'>283</span>
+<span class='line-number'>284</span>
+<span class='line-number'>285</span>
+<span class='line-number'>286</span>
+<span class='line-number'>287</span>
+<span class='line-number'>288</span>
+<span class='line-number'>289</span>
+<span class='line-number'>290</span>
+<span class='line-number'>291</span>
+<span class='line-number'>292</span>
+<span class='line-number'>293</span>
+<span class='line-number'>294</span>
+<span class='line-number'>295</span>
+<span class='line-number'>296</span>
+<span class='line-number'>297</span>
+<span class='line-number'>298</span>
+<span class='line-number'>299</span>
+<span class='line-number'>300</span>
+<span class='line-number'>301</span>
+<span class='line-number'>302</span>
+<span class='line-number'>303</span>
+<span class='line-number'>304</span>
+<span class='line-number'>305</span>
+<span class='line-number'>306</span>
+<span class='line-number'>307</span>
+<span class='line-number'>308</span>
+<span class='line-number'>309</span>
+<span class='line-number'>310</span>
+<span class='line-number'>311</span>
+<span class='line-number'>312</span>
+<span class='line-number'>313</span>
+<span class='line-number'>314</span>
+<span class='line-number'>315</span>
+<span class='line-number'>316</span>
+<span class='line-number'>317</span>
+<span class='line-number'>318</span>
+<span class='line-number'>319</span>
+<span class='line-number'>320</span>
+<span class='line-number'>321</span>
+<span class='line-number'>322</span>
+<span class='line-number'>323</span>
+<span class='line-number'>324</span>
+<span class='line-number'>325</span>
+<span class='line-number'>326</span>
+<span class='line-number'>327</span>
+<span class='line-number'>328</span>
+<span class='line-number'>329</span>
+<span class='line-number'>330</span>
+<span class='line-number'>331</span>
+<span class='line-number'>332</span>
+<span class='line-number'>333</span>
+<span class='line-number'>334</span>
+<span class='line-number'>335</span>
+<span class='line-number'>336</span>
+<span class='line-number'>337</span>
+<span class='line-number'>338</span>
+<span class='line-number'>339</span>
+<span class='line-number'>340</span>
+<span class='line-number'>341</span>
+<span class='line-number'>342</span>
+<span class='line-number'>343</span>
+<span class='line-number'>344</span>
+<span class='line-number'>345</span>
+<span class='line-number'>346</span>
+<span class='line-number'>347</span>
+<span class='line-number'>348</span>
+<span class='line-number'>349</span>
+<span class='line-number'>350</span>
+<span class='line-number'>351</span>
+<span class='line-number'>352</span>
+<span class='line-number'>353</span>
+<span class='line-number'>354</span>
+<span class='line-number'>355</span>
+<span class='line-number'>356</span>
+<span class='line-number'>357</span>
+<span class='line-number'>358</span>
+<span class='line-number'>359</span>
+<span class='line-number'>360</span>
+<span class='line-number'>361</span>
+<span class='line-number'>362</span>
+<span class='line-number'>363</span>
+<span class='line-number'>364</span>
+<span class='line-number'>365</span>
+<span class='line-number'>366</span>
+<span class='line-number'>367</span>
+<span class='line-number'>368</span>
+<span class='line-number'>369</span>
+<span class='line-number'>370</span>
+<span class='line-number'>371</span>
+<span class='line-number'>372</span>
+<span class='line-number'>373</span>
+<span class='line-number'>374</span>
+<span class='line-number'>375</span>
+<span class='line-number'>376</span>
+<span class='line-number'>377</span>
+<span class='line-number'>378</span>
+<span class='line-number'>379</span>
+<span class='line-number'>380</span>
+<span class='line-number'>381</span>
+<span class='line-number'>382</span>
+<span class='line-number'>383</span>
+<span class='line-number'>384</span>
+<span class='line-number'>385</span>
+<span class='line-number'>386</span>
+<span class='line-number'>387</span>
+<span class='line-number'>388</span>
+<span class='line-number'>389</span>
+<span class='line-number'>390</span>
+<span class='line-number'>391</span>
+<span class='line-number'>392</span>
+<span class='line-number'>393</span>
+<span class='line-number'>394</span>
+<span class='line-number'>395</span>
+<span class='line-number'>396</span>
+<span class='line-number'>397</span>
+<span class='line-number'>398</span>
+<span class='line-number'>399</span>
+<span class='line-number'>400</span>
+<span class='line-number'>401</span>
+<span class='line-number'>402</span>
+<span class='line-number'>403</span>
+<span class='line-number'>404</span>
+<span class='line-number'>405</span>
+<span class='line-number'>406</span>
+<span class='line-number'>407</span>
+<span class='line-number'>408</span>
+<span class='line-number'>409</span>
+<span class='line-number'>410</span>
+<span class='line-number'>411</span>
+<span class='line-number'>412</span>
+<span class='line-number'>413</span>
+<span class='line-number'>414</span>
+<span class='line-number'>415</span>
+<span class='line-number'>416</span>
+<span class='line-number'>417</span>
+<span class='line-number'>418</span>
+<span class='line-number'>419</span>
+<span class='line-number'>420</span>
+<span class='line-number'>421</span>
+<span class='line-number'>422</span>
+<span class='line-number'>423</span>
+<span class='line-number'>424</span>
+<span class='line-number'>425</span>
+<span class='line-number'>426</span>
+<span class='line-number'>427</span>
+<span class='line-number'>428</span>
+<span class='line-number'>429</span>
+<span class='line-number'>430</span>
+<span class='line-number'>431</span>
+<span class='line-number'>432</span>
+<span class='line-number'>433</span>
+<span class='line-number'>434</span>
+<span class='line-number'>435</span>
+<span class='line-number'>436</span>
+<span class='line-number'>437</span>
+<span class='line-number'>438</span>
+<span class='line-number'>439</span>
+<span class='line-number'>440</span>
+<span class='line-number'>441</span>
+<span class='line-number'>442</span>
+<span class='line-number'>443</span>
+<span class='line-number'>444</span>
+<span class='line-number'>445</span>
+<span class='line-number'>446</span>
+<span class='line-number'>447</span>
+<span class='line-number'>448</span>
+<span class='line-number'>449</span>
+<span class='line-number'>450</span>
+<span class='line-number'>451</span>
+<span class='line-number'>452</span>
+<span class='line-number'>453</span>
+<span class='line-number'>454</span>
+<span class='line-number'>455</span>
+<span class='line-number'>456</span>
+<span class='line-number'>457</span>
+<span class='line-number'>458</span>
+<span class='line-number'>459</span>
+<span class='line-number'>460</span>
+<span class='line-number'>461</span>
+<span class='line-number'>462</span>
+<span class='line-number'>463</span>
+<span class='line-number'>464</span>
+<span class='line-number'>465</span>
+<span class='line-number'>466</span>
+<span class='line-number'>467</span>
+<span class='line-number'>468</span>
+<span class='line-number'>469</span>
+<span class='line-number'>470</span>
+<span class='line-number'>471</span>
+<span class='line-number'>472</span>
+<span class='line-number'>473</span>
+<span class='line-number'>474</span>
+<span class='line-number'>475</span>
+<span class='line-number'>476</span>
+<span class='line-number'>477</span>
+<span class='line-number'>478</span>
+<span class='line-number'>479</span>
+<span class='line-number'>480</span>
+<span class='line-number'>481</span>
+<span class='line-number'>482</span>
+</pre></td><td class='code'><pre><code class='VHDL'><span class='line'><span class="k">library</span> <span class="nn">IEEE</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">IEEE.STD_LOGIC_1164.ALL</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">IEEE.STD_LOGIC_ARITH.ALL</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">IEEE.STD_LOGIC_UNSIGNED.ALL</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">-- ===================================================================================</span>
+</span><span class='line'><span class="c1">-- ===================================================================================</span>
+</span><span class='line'><span class="k">entity</span> <span class="nc">cpu_8</span> <span class="k">is</span>
+</span><span class='line'>    <span class="k">Port</span> <span class="p">(</span>
+</span><span class='line'>        <span class="n">DB</span><span class="o">:</span>     <span class="k">inout</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>     <span class="c1">--数据总线</span>
+</span><span class='line'>        <span class="n">AB</span><span class="o">:</span>     <span class="k">buffer</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>   <span class="c1">--地址总线</span>
+</span><span class='line'>        <span class="n">CI</span><span class="o">:</span>     <span class="k">buffer</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">31</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>   <span class="c1">--其中低10位是MPC的输出</span>
+</span><span class='line'>        <span class="n">CO</span><span class="o">:</span>     <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">31</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>       <span class="c1">--微指令输入到MIR</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">--控制总线</span>
+</span><span class='line'>        <span class="n">CLK</span><span class="p">,</span> <span class="n">RESET</span><span class="p">,</span> <span class="n">RUN</span><span class="o">:</span>              <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">MWR</span><span class="p">,</span> <span class="n">MRD</span><span class="p">,</span> <span class="n">IOR</span><span class="p">,</span> <span class="n">IOW</span><span class="p">,</span> <span class="n">MCLK</span><span class="o">:</span>     <span class="k">buffer</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>        <span class="c1">--外部观察</span>
+</span><span class='line'>        <span class="n">CTRL1</span><span class="p">,</span> <span class="n">CTRL2</span><span class="p">,</span> <span class="n">CTRL3</span><span class="p">,</span> <span class="n">CTRL4</span><span class="o">:</span>   <span class="k">buffer</span> <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">MUX</span><span class="o">:</span>                          <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">2</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">PRIX</span><span class="p">,</span> <span class="n">KRIX</span><span class="o">:</span>                   <span class="k">in</span> <span class="kt">std_logic</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'><span class="k">end</span> <span class="nc">cpu_8</span><span class="p">;</span>
+</span><span class='line'><span class="c1">-- ===================================================================================</span>
+</span><span class='line'><span class="c1">-- ===================================================================================</span>
+</span><span class='line'><span class="k">architecture</span> <span class="nc">cpu_8_behave</span> <span class="k">of</span> <span class="nc">cpu_8</span> <span class="k">is</span>
+</span><span class='line'><span class="c1">--内部信号定义部分</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in M 存储器</span>
+</span><span class='line'>    <span class="c1">--读写控制脉冲</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">CWR</span><span class="p">,</span> <span class="n">CRD</span><span class="o">:</span>        <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">--读写控制信号</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">CWRX</span><span class="p">,</span> <span class="n">CRDX</span><span class="o">:</span>      <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in A 累加器</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">GA</span><span class="p">,</span> <span class="n">ASR</span><span class="p">,</span> <span class="n">CA</span><span class="o">:</span>     <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">A</span><span class="o">:</span>               <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in ACT累加器暂存器</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">ACT</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">GC</span><span class="p">,</span> <span class="n">CC</span><span class="o">:</span>          <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in TMP 临时寄存器</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">TMP</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">GT</span><span class="p">,</span> <span class="n">CT</span><span class="o">:</span>          <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in Ri 寄存器</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">R7</span><span class="p">,</span> <span class="n">R6</span><span class="p">,</span> <span class="n">R5</span><span class="p">,</span> <span class="n">R4</span><span class="p">,</span> <span class="n">R3</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R0</span><span class="p">,</span> <span class="n">ROUT</span><span class="o">:</span>    <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">WRE</span><span class="p">,</span> <span class="n">WRC</span><span class="o">:</span>        <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">RS</span><span class="o">:</span>              <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">2</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">---多路选择器 MUXA, MUXB, MUXC, MUXD</span>
+</span><span class='line'><span class="c1">--signal in MUXA</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MXA</span><span class="o">:</span>             <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in MUXB</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">OB</span><span class="o">:</span>              <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MXB</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in MUXC</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MXC</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in MUXD</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">PLD</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">2</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">PCADD</span><span class="o">:</span>           <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in MUXE</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MXE</span><span class="o">:</span>             <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">CYA</span><span class="o">:</span>             <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">CYD</span><span class="o">:</span>             <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in ALU</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">FA</span><span class="p">,</span> <span class="n">FB</span><span class="p">,</span> <span class="n">FF</span><span class="o">:</span>      <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">8</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">S</span><span class="o">:</span>               <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">2</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in CY</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">CY</span><span class="p">,</span> <span class="n">CP</span><span class="p">,</span> <span class="n">CCK</span><span class="o">:</span>     <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in Z</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">ZY</span><span class="o">:</span>              <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">ZP</span><span class="o">:</span>              <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">ZCK</span><span class="o">:</span>             <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in PC </span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">PC</span><span class="o">:</span>              <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">PCK</span><span class="o">:</span>             <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">PINC</span><span class="p">,</span> <span class="n">PRST</span><span class="o">:</span>      <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">ADR</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>      <span class="c1">--全地址</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in IR</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">IR</span><span class="o">:</span>              <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">CCI</span><span class="p">,</span> <span class="n">GI</span><span class="o">:</span>         <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in ADRH</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">ADRH</span><span class="o">:</span>            <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">GA1</span><span class="p">,</span> <span class="n">CA1</span><span class="p">,</span> <span class="n">AHS</span><span class="o">:</span>   <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in ADRL</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">ADRL</span><span class="o">:</span>            <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">GA2</span><span class="p">,</span> <span class="n">CA2</span><span class="o">:</span>        <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in MPC</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MPC</span><span class="p">,</span> <span class="n">MD</span><span class="o">:</span>         <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">9</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MCLR</span><span class="p">,</span> <span class="n">MPLD</span><span class="o">:</span>      <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MPCK</span><span class="o">:</span>            <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in SP</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">SP</span><span class="o">:</span>              <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">SSP</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">SCK</span><span class="o">:</span>             <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--signal in MIR</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MIR</span><span class="o">:</span>             <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">31</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">MICK</span><span class="o">:</span>            <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">-- signal for Print and Key</span>
+</span><span class='line'>    <span class="k">signal</span> <span class="n">KOUT</span><span class="p">,</span><span class="n">POUT</span><span class="o">:</span>       <span class="kt">std_logic</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">-- ==================================================================================</span>
+</span><span class='line'><span class="c1">-- ==================================================================================</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">begin</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">--时钟信号与复位信号</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">---时钟信号</span>
+</span><span class='line'>    <span class="n">pMCLK</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">process</span><span class="p">(</span><span class="n">MCLK</span><span class="p">,</span> <span class="n">CLK</span><span class="p">,</span> <span class="n">RESET</span><span class="p">,</span> <span class="n">RUN</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">((</span><span class="n">RUN</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">or</span> <span class="p">(</span><span class="n">RESET</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">))</span> <span class="k">then</span> <span class="n">MCLK</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">elsif</span><span class="p">(</span><span class="n">CLK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CLK</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">MCLK</span> <span class="o">&lt;=</span> <span class="k">not</span> <span class="n">MCLK</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pMCLK</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">MPCK</span>    <span class="o">&lt;=</span> <span class="k">not</span> <span class="n">MCLK</span> <span class="k">and</span> <span class="n">CLK</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">MICK</span>    <span class="o">&lt;=</span> <span class="k">not</span> <span class="n">MPCK</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">WRC</span>     <span class="o">&lt;=</span> <span class="n">MCLK</span><span class="p">;</span>        <span class="c1">--寄存器 Ri 时钟</span>
+</span><span class='line'>    <span class="n">PCK</span>     <span class="o">&lt;=</span> <span class="n">MCLK</span><span class="p">;</span>        <span class="c1">--PC 时钟</span>
+</span><span class='line'>    <span class="n">CA</span>      <span class="o">&lt;=</span> <span class="n">MCLK</span><span class="p">;</span>        <span class="c1">--A 时钟</span>
+</span><span class='line'>    <span class="n">CT</span>      <span class="o">&lt;=</span> <span class="n">MCLK</span><span class="p">;</span>        <span class="c1">--TMP 时钟</span>
+</span><span class='line'>    <span class="n">CC</span>      <span class="o">&lt;=</span> <span class="n">MCLK</span><span class="p">;</span>        <span class="c1">--ACT 时钟</span>
+</span><span class='line'>    <span class="n">CCI</span>     <span class="o">&lt;=</span> <span class="n">MCLK</span><span class="p">;</span>        <span class="c1">--IR 时钟</span>
+</span><span class='line'>    <span class="n">CA1</span>     <span class="o">&lt;=</span> <span class="n">MCLK</span><span class="p">;</span>        <span class="c1">--ADRH 时钟</span>
+</span><span class='line'>    <span class="n">CA2</span>     <span class="o">&lt;=</span> <span class="n">MCLK</span><span class="p">;</span>        <span class="c1">--ADRL 时钟</span>
+</span><span class='line'>    <span class="n">CCK</span>     <span class="o">&lt;=</span> <span class="n">MCLK</span><span class="p">;</span>        <span class="c1">--CY 时钟</span>
+</span><span class='line'>    <span class="n">SCK</span>     <span class="o">&lt;=</span> <span class="n">MCLK</span><span class="p">;</span>        <span class="c1">--SP 时钟</span>
+</span><span class='line'>    <span class="n">ZCK</span>     <span class="o">&lt;=</span> <span class="n">MCLK</span><span class="p">;</span>        <span class="c1">--ZY 时钟</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----复位信号</span>
+</span><span class='line'>    <span class="n">PRST</span>   <span class="o">&lt;=</span> <span class="n">RESET</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">pMCLR</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">process</span><span class="p">(</span><span class="n">MCLK</span><span class="p">,</span> <span class="n">RESET</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">RESET</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">MCLR</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">elsif</span><span class="p">(</span><span class="n">MCLK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">MCLK</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">MCLR</span> <span class="o">&lt;=</span> <span class="n">RUN</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pMCLR</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">CWR</span>     <span class="o">&lt;=</span> <span class="n">CWRX</span> <span class="k">or</span> <span class="k">not</span> <span class="n">MCLK</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">CRD</span>     <span class="o">&lt;=</span> <span class="n">CRDX</span> <span class="k">or</span> <span class="k">not</span> <span class="n">MCLK</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">MRD</span>     <span class="o">&lt;=</span> <span class="n">CRD</span> <span class="k">or</span> <span class="n">AB</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">MWR</span>     <span class="o">&lt;=</span> <span class="n">CWR</span> <span class="k">or</span> <span class="n">AB</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span> <span class="k">or</span> <span class="k">not</span> <span class="n">CLK</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">IOW</span>     <span class="o">&lt;=</span> <span class="k">not</span> <span class="n">AB</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span> <span class="k">or</span> <span class="k">not</span> <span class="n">AB</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">or</span> <span class="n">CWR</span> <span class="k">or</span> <span class="k">not</span> <span class="n">CLK</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">IOR</span>     <span class="o">&lt;=</span> <span class="k">not</span> <span class="n">AB</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span> <span class="k">or</span> <span class="k">not</span> <span class="n">AB</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">or</span> <span class="n">CRD</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">--功能部件</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----MPC的定义</span>
+</span><span class='line'>    <span class="n">pMPC</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">process</span><span class="p">(</span><span class="n">MPLD</span><span class="p">,</span> <span class="n">MPCK</span><span class="p">,</span> <span class="n">MCLR</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">MCLR</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="n">MPC</span> <span class="o">&lt;=</span> <span class="s">&quot;0000000000&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">elsif</span><span class="p">(</span><span class="n">MPCK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">MPCK</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="k">if</span><span class="p">(</span><span class="n">MPLD</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>                <span class="n">MPC</span> <span class="o">&lt;=</span> <span class="n">MD</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">else</span> <span class="n">MPC</span> <span class="o">&lt;=</span> <span class="n">MPC</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pMPC</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">CI</span><span class="p">(</span><span class="mi">9</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">MPC</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----为程序计数器入口MD的定义</span>
+</span><span class='line'>    <span class="n">MD</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>           <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">MD</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>           <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">MD</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>           <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">MD</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">3</span><span class="p">)</span>  <span class="o">&lt;=</span> <span class="n">IR</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">3</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">MD</span><span class="p">(</span><span class="mi">9</span> <span class="k">downto</span> <span class="mi">8</span><span class="p">)</span>  <span class="o">&lt;=</span> <span class="s">&quot;00&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----MIR的定义</span>
+</span><span class='line'>    <span class="n">pMIR</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">process</span><span class="p">(</span><span class="n">MICK</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">MICK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">MICK</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="n">MIR</span> <span class="o">&lt;=</span> <span class="n">CO</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pMIR</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----微程序控制信号</span>
+</span><span class='line'>    <span class="n">CWRX</span>    <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">29</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">CRDX</span>    <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">28</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">MPLD</span>    <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">27</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">MXC</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">26</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">MXC</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">25</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">SSP</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">24</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">SSP</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">23</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">PINC</span>    <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">22</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">PLD</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">21</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">PLD</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">PLD</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">19</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">MXA</span>     <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">18</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">S</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>    <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">17</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>    <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">S</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>    <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">MXE</span>     <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">14</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">CP</span>      <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">13</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">ZP</span>      <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">MXB</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">11</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">MXB</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">OB</span>      <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">9</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">GA2</span>     <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">AHS</span>     <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">GA1</span>     <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">GI</span>      <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">GT</span>      <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">GC</span>      <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">ASR</span>     <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">GA</span>      <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">WRE</span>     <span class="o">&lt;=</span> <span class="n">MIR</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----寄存器Ri的定义</span>
+</span><span class='line'>    <span class="n">RS</span><span class="p">(</span><span class="mi">2</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">IR</span><span class="p">(</span><span class="mi">2</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">pRi</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">process</span><span class="p">(</span><span class="n">WRC</span><span class="p">,</span> <span class="n">WRE</span><span class="p">,</span> <span class="n">RS</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">WRC</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">WRC</span> <span class="o">=</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="n">WRE</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>                <span class="k">case</span> <span class="n">RS</span> <span class="k">is</span>
+</span><span class='line'>                    <span class="k">when</span> <span class="s">&quot;000&quot;</span> <span class="o">=&gt;</span> <span class="n">R0</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>                    <span class="k">when</span> <span class="s">&quot;001&quot;</span> <span class="o">=&gt;</span> <span class="n">R1</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>                    <span class="k">when</span> <span class="s">&quot;010&quot;</span> <span class="o">=&gt;</span> <span class="n">R2</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>                    <span class="k">when</span> <span class="s">&quot;011&quot;</span> <span class="o">=&gt;</span> <span class="n">R3</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>                    <span class="k">when</span> <span class="s">&quot;100&quot;</span> <span class="o">=&gt;</span> <span class="n">R4</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>                    <span class="k">when</span> <span class="s">&quot;101&quot;</span> <span class="o">=&gt;</span> <span class="n">R5</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>                    <span class="k">when</span> <span class="s">&quot;110&quot;</span> <span class="o">=&gt;</span> <span class="n">R6</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>                    <span class="k">when</span> <span class="s">&quot;111&quot;</span> <span class="o">=&gt;</span> <span class="n">R7</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>                    <span class="k">when</span> <span class="k">others</span> <span class="o">=&gt;</span> <span class="k">NULL</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">end</span> <span class="k">case</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pRi</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----寄存器输出ROUT的定义</span>
+</span><span class='line'>    <span class="n">ROUT</span>    <span class="o">&lt;=</span>  <span class="n">R0</span> <span class="k">when</span> <span class="n">RS</span> <span class="o">=</span> <span class="s">&quot;000&quot;</span> <span class="k">else</span>
+</span><span class='line'>                <span class="n">R1</span> <span class="k">when</span> <span class="n">RS</span> <span class="o">=</span> <span class="s">&quot;001&quot;</span> <span class="k">else</span>
+</span><span class='line'>                <span class="n">R2</span> <span class="k">when</span> <span class="n">RS</span> <span class="o">=</span> <span class="s">&quot;010&quot;</span> <span class="k">else</span>
+</span><span class='line'>                <span class="n">R3</span> <span class="k">when</span> <span class="n">RS</span> <span class="o">=</span> <span class="s">&quot;011&quot;</span> <span class="k">else</span>
+</span><span class='line'>                <span class="n">R4</span> <span class="k">when</span> <span class="n">RS</span> <span class="o">=</span> <span class="s">&quot;100&quot;</span> <span class="k">else</span>
+</span><span class='line'>                <span class="n">R5</span> <span class="k">when</span> <span class="n">RS</span> <span class="o">=</span> <span class="s">&quot;101&quot;</span> <span class="k">else</span>
+</span><span class='line'>                <span class="n">R6</span> <span class="k">when</span> <span class="n">RS</span> <span class="o">=</span> <span class="s">&quot;110&quot;</span> <span class="k">else</span>
+</span><span class='line'>                <span class="n">R7</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----MUXB的定义</span>
+</span><span class='line'>    <span class="n">pMUXB</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">process</span><span class="p">(</span><span class="n">OB</span><span class="p">,</span> <span class="n">MXB</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">OB</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="k">case</span> <span class="n">MXB</span> <span class="k">is</span>
+</span><span class='line'>                <span class="k">when</span> <span class="s">&quot;00&quot;</span> <span class="o">=&gt;</span> <span class="n">DB</span> <span class="o">&lt;=</span> <span class="n">FF</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>                <span class="k">when</span> <span class="s">&quot;01&quot;</span> <span class="o">=&gt;</span> <span class="n">DB</span> <span class="o">&lt;=</span> <span class="n">PC</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">8</span><span class="p">);</span>
+</span><span class='line'>                <span class="k">when</span> <span class="s">&quot;10&quot;</span> <span class="o">=&gt;</span> <span class="n">DB</span> <span class="o">&lt;=</span> <span class="n">PC</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>                <span class="k">when</span> <span class="k">others</span> <span class="o">=&gt;</span> <span class="n">DB</span> <span class="o">&lt;=</span> <span class="n">ROUT</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">end</span> <span class="k">case</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'>            <span class="n">DB</span> <span class="o">&lt;=</span><span class="s">&quot;ZZZZZZZZ&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pMUXB</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----MUXC的定义</span>
+</span><span class='line'>    <span class="n">AB</span> <span class="o">&lt;=</span> <span class="n">PC</span>                <span class="k">when</span> <span class="n">MXC</span> <span class="o">=</span> <span class="s">&quot;00&quot;</span> <span class="k">else</span>
+</span><span class='line'>          <span class="n">ADRH</span><span class="o">&amp;</span><span class="n">ADRL</span>         <span class="k">when</span> <span class="n">MXC</span> <span class="o">=</span> <span class="s">&quot;01&quot;</span> <span class="k">else</span>
+</span><span class='line'>         <span class="n">SP</span>                 <span class="k">when</span> <span class="n">MXC</span> <span class="o">=</span> <span class="s">&quot;10&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----MUXD的定义</span>
+</span><span class='line'>    <span class="n">PCADD</span>   <span class="o">&lt;=</span>  <span class="sc">&#39;0&#39;</span>         <span class="k">when</span> <span class="n">PLD</span> <span class="o">=</span> <span class="s">&quot;000&quot;</span> <span class="k">else</span>
+</span><span class='line'>                <span class="n">CY</span>          <span class="k">when</span> <span class="n">PLD</span> <span class="o">=</span> <span class="s">&quot;001&quot;</span> <span class="k">else</span>
+</span><span class='line'>                <span class="k">not</span> <span class="n">ZY</span>      <span class="k">when</span> <span class="n">PLD</span> <span class="o">=</span> <span class="s">&quot;010&quot;</span> <span class="k">else</span>
+</span><span class='line'>                <span class="k">not</span> <span class="n">KRIX</span>    <span class="k">when</span> <span class="n">PLD</span> <span class="o">=</span> <span class="s">&quot;011&quot;</span> <span class="k">else</span>
+</span><span class='line'>                <span class="k">not</span> <span class="n">PRIX</span>    <span class="k">when</span> <span class="n">PLD</span> <span class="o">=</span> <span class="s">&quot;100&quot;</span> <span class="k">else</span>
+</span><span class='line'>                <span class="sc">&#39;1&#39;</span>         <span class="k">when</span> <span class="n">PLD</span> <span class="o">=</span> <span class="s">&quot;101&quot;</span> <span class="k">else</span>
+</span><span class='line'>                <span class="n">ZY</span>          <span class="k">when</span> <span class="n">PLD</span> <span class="o">=</span> <span class="s">&quot;110&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----TMP的定义</span>
+</span><span class='line'>    <span class="n">pTMP</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">process</span><span class="p">(</span><span class="n">CT</span><span class="p">,</span> <span class="n">GT</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">CT</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CT</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="k">if</span><span class="p">(</span><span class="n">GT</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>                <span class="n">TMP</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pTMP</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----A的定义    </span>
+</span><span class='line'>    <span class="n">pA</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">process</span><span class="p">(</span><span class="n">CA</span><span class="p">,</span> <span class="n">ASR</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">variable</span> <span class="n">POOPOO</span><span class="o">:</span><span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">CA</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CA</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="k">if</span><span class="p">(</span><span class="n">ASR</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>                <span class="n">POOPOO</span> <span class="o">:=</span> <span class="n">A</span><span class="p">;</span>
+</span><span class='line'>                <span class="n">CYA</span>  <span class="o">&lt;=</span> <span class="n">POOPOO</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>      <span class="c1">--移出的末位</span>
+</span><span class='line'>                <span class="n">A</span>    <span class="o">&lt;=</span> <span class="n">POOPOO</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">POOPOO</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>            <span class="k">elsif</span><span class="p">(</span><span class="n">GA</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>                <span class="n">A</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pA</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----MUXE的定义</span>
+</span><span class='line'>     <span class="n">CYD</span> <span class="o">&lt;=</span> <span class="n">FF</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="k">when</span> <span class="n">MXE</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">else</span>
+</span><span class='line'>                <span class="n">CYA</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----ACT的定义</span>
+</span><span class='line'>    <span class="n">pACT</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">process</span><span class="p">(</span><span class="n">CC</span><span class="p">,</span> <span class="n">GC</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">CC</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CC</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="k">if</span><span class="p">(</span><span class="n">GC</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>                <span class="n">ACT</span> <span class="o">&lt;=</span> <span class="n">A</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pACT</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">FA</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="o">&amp;</span><span class="n">ACT</span><span class="p">;</span> <span class="c1">--扩展成九位</span>
+</span><span class='line'>    <span class="n">FB</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="o">&amp;</span><span class="n">ROUT</span> <span class="k">when</span> <span class="n">MXA</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="k">else</span>
+</span><span class='line'>          <span class="sc">&#39;0&#39;</span><span class="o">&amp;</span><span class="n">TMP</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----ALU的定义</span>
+</span><span class='line'>    <span class="n">FF</span>  <span class="o">&lt;=</span>  <span class="n">FA</span> <span class="o">+</span> <span class="n">FB</span>         <span class="k">when</span> <span class="n">S</span> <span class="o">=</span> <span class="s">&quot;000&quot;</span> <span class="k">else</span>
+</span><span class='line'>            <span class="n">FA</span> <span class="o">-</span> <span class="n">FB</span>         <span class="k">when</span> <span class="n">S</span> <span class="o">=</span> <span class="s">&quot;001&quot;</span> <span class="k">else</span>
+</span><span class='line'>            <span class="n">FA</span>              <span class="k">when</span> <span class="n">S</span> <span class="o">=</span> <span class="s">&quot;010&quot;</span> <span class="k">else</span>
+</span><span class='line'>            <span class="n">FB</span>              <span class="k">when</span> <span class="n">S</span> <span class="o">=</span> <span class="s">&quot;011&quot;</span> <span class="k">else</span>
+</span><span class='line'>            <span class="k">not</span> <span class="n">FB</span>          <span class="k">when</span> <span class="n">S</span> <span class="o">=</span> <span class="s">&quot;100&quot;</span> <span class="k">else</span>
+</span><span class='line'>            <span class="s">&quot;000000000&quot;     when S = &quot;101&quot;</span> <span class="k">else</span>
+</span><span class='line'>            <span class="s">&quot;000000000&quot;     when S = &quot;110&quot;</span> <span class="k">else</span>
+</span><span class='line'>            <span class="n">FA</span> <span class="o">+</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----CY的定义</span>
+</span><span class='line'>    <span class="n">pCY</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">process</span><span class="p">(</span><span class="n">CCK</span><span class="p">,</span> <span class="n">CP</span><span class="p">,</span> <span class="n">FF</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">CCK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CCK</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="k">if</span><span class="p">(</span><span class="n">CP</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>                <span class="n">CY</span> <span class="o">&lt;=</span> <span class="n">CYD</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pCY</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----ZY的定义</span>
+</span><span class='line'>    <span class="n">pZY</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">process</span><span class="p">(</span><span class="n">ZCK</span><span class="p">,</span> <span class="n">ZP</span><span class="p">,</span> <span class="n">FF</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">ZCK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">ZCK</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="k">if</span><span class="p">(</span><span class="n">ZP</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>                <span class="k">if</span><span class="p">(</span><span class="n">FF</span> <span class="o">=</span> <span class="s">&quot;000000000&quot;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>                    <span class="n">ZY</span> <span class="o">&lt;=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">else</span>
+</span><span class='line'>                    <span class="n">ZY</span> <span class="o">&lt;=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pZY</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----PC的定义   </span>
+</span><span class='line'>    <span class="n">pPC</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">process</span><span class="p">(</span><span class="n">PCK</span><span class="p">,</span> <span class="n">PRST</span><span class="p">,</span> <span class="n">PCADD</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">PRST</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="n">PC</span> <span class="o">&lt;=</span> <span class="s">&quot;0000000000000000&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">elsif</span><span class="p">(</span><span class="n">PCK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">PCK</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="k">if</span><span class="p">(</span><span class="n">PCADD</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">PC</span> <span class="o">&lt;=</span> <span class="n">AB</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">elsif</span><span class="p">(</span><span class="n">PINC</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>                <span class="n">PC</span> <span class="o">&lt;=</span> <span class="n">PC</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pPC</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----IR的定义</span>
+</span><span class='line'>    <span class="n">pIR</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">process</span><span class="p">(</span><span class="n">CCI</span><span class="p">,</span> <span class="n">GI</span><span class="p">,</span> <span class="n">DB</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">CCI</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CCI</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="k">if</span><span class="p">(</span><span class="n">GI</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>                <span class="n">IR</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pIR</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----ADRH的定义</span>
+</span><span class='line'>    <span class="n">pADRH</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">process</span><span class="p">(</span><span class="n">CA1</span><span class="p">,</span> <span class="n">GA1</span><span class="p">,</span> <span class="n">AHS</span><span class="p">,</span> <span class="n">DB</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">CA1</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CA1</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="k">if</span><span class="p">(</span><span class="n">AHS</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="n">ADRH</span> <span class="o">&lt;=</span> <span class="s">&quot;01111110&quot;</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">elsif</span><span class="p">(</span><span class="n">GA1</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>                    <span class="n">ADRH</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pADRH</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----ADRL的定义</span>
+</span><span class='line'>    <span class="n">pADRL</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">process</span><span class="p">(</span><span class="n">CA2</span><span class="p">,</span> <span class="n">GA2</span><span class="p">,</span> <span class="n">DB</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">CA2</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">CA2</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="k">if</span><span class="p">(</span><span class="n">GA2</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>                <span class="n">ADRL</span> <span class="o">&lt;=</span> <span class="n">DB</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pADRL</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----SP的定义</span>
+</span><span class='line'>    <span class="n">pSP</span><span class="o">:</span>
+</span><span class='line'>    <span class="k">process</span><span class="p">(</span><span class="n">SCK</span><span class="p">,</span> <span class="n">SSP</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">SCK</span><span class="na">&#39;event</span> <span class="k">and</span> <span class="n">SCK</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">then</span>
+</span><span class='line'>            <span class="k">case</span> <span class="n">SSP</span> <span class="k">is</span>
+</span><span class='line'>                <span class="k">when</span> <span class="s">&quot;01&quot;</span> <span class="o">=&gt;</span> <span class="n">SP</span> <span class="o">&lt;=</span> <span class="n">SP</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">when</span> <span class="s">&quot;10&quot;</span> <span class="o">=&gt;</span> <span class="n">SP</span> <span class="o">&lt;=</span> <span class="n">SP</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">when</span> <span class="s">&quot;11&quot; =&gt; SP &lt;= &quot;0111111111111111&quot;</span><span class="p">;</span>
+</span><span class='line'>                <span class="k">when</span> <span class="k">others</span> <span class="o">=&gt;</span> <span class="k">NULL</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">end</span> <span class="k">case</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">end</span> <span class="k">if</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">end</span> <span class="k">process</span> <span class="nc">pSP</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">----</span>
+</span><span class='line'>    <span class="n">CI</span><span class="p">(</span><span class="mi">31</span> <span class="k">downto</span> <span class="mi">24</span><span class="p">)</span>    <span class="o">&lt;=</span>  <span class="n">A</span>                           <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;000&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">PC</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">8</span><span class="p">)</span>             <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;001&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">ADRH</span>                        <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;010&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">R0</span>                          <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;011&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">R2</span>                          <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;100&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">R4</span>                          <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;101&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">R6</span>                          <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;110&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">TMP</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">CI</span><span class="p">(</span><span class="mi">23</span> <span class="k">downto</span> <span class="mi">16</span><span class="p">)</span>    <span class="o">&lt;=</span>  <span class="n">IR</span>                          <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;000&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">PC</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>              <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;001&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">ADRL</span>                        <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;010&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">R1</span>                          <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;011&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">R3</span>                          <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;100&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">R5</span>                          <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;101&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">R7</span>                          <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;110&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">ACT</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">CI</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">12</span><span class="p">)</span>    <span class="o">&lt;=</span>  <span class="n">SP</span><span class="p">(</span><span class="mi">15</span> <span class="k">downto</span> <span class="mi">12</span><span class="p">)</span>            <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;000&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">SP</span><span class="p">(</span><span class="mi">11</span> <span class="k">downto</span> <span class="mi">8</span><span class="p">)</span>             <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;001&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">SP</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">4</span><span class="p">)</span>              <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;010&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">SP</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span>              <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;011&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">MIR</span><span class="p">(</span><span class="mi">17</span> <span class="k">downto</span> <span class="mi">14</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">CI</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>              <span class="o">&lt;=</span>  <span class="n">KRIX</span>                        <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;000&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">PRIX</span>                        <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;001&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">OB</span>                          <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;010&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">MPLD</span>                        <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;011&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">MIR</span><span class="p">(</span><span class="mi">22</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">CI</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>              <span class="o">&lt;=</span>  <span class="n">PRIX</span>                        <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;000&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">KRIX</span>                        <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;001&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">PINC</span>                        <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;010&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">GI</span>                          <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;011&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">CO</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>                       <span class="k">when</span> <span class="n">MUX</span> <span class="o">=</span> <span class="s">&quot;100&quot;</span> <span class="k">else</span>
+</span><span class='line'>                            <span class="n">CO</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span> <span class="nc">cpu_8_behave</span> <span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
---signal in A 累加器
-    signal GA, ASR, CA:     std_logic;
-    signal A:               std_logic_vector(7 downto 0);
 
---signal in ACT累加器暂存器
-    signal ACT:             std_logic_vector(7 downto 0);
-    signal GC, CC:          std_logic;
 
---signal in TMP 临时寄存器
-    signal TMP:             std_logic_vector(7 downto 0);
-    signal GT, CT:          std_logic;
-
---signal in Ri 寄存器
-    signal R7, R6, R5, R4, R3, R2, R1, R0, ROUT:    std_logic_vector(7 downto 0);
-    signal WRE, WRC:        std_logic;
-    signal RS:              std_logic_vector(2 downto 0);
-
----多路选择器 MUXA, MUXB, MUXC, MUXD
---signal in MUXA
-    signal MXA:             std_logic;
-
---signal in MUXB
-    signal OB:              std_logic;
-    signal MXB:             std_logic_vector(1 downto 0);
-
---signal in MUXC
-    signal MXC:             std_logic_vector(1 downto 0);
-
---signal in MUXD
-    signal PLD:             std_logic_vector(2 downto 0);
-    signal PCADD:           std_logic;
-
---signal in MUXE
-    signal MXE:             std_logic;
-    signal CYA:             std_logic;
-    signal CYD:             std_logic;
-
---signal in ALU
-    signal FA, FB, FF:      std_logic_vector(8 downto 0);
-    signal S:               std_logic_vector(2 downto 0);
-
---signal in CY
-    signal CY, CP, CCK:     std_logic;
-
---signal in Z
-    signal ZY:              std_logic;
-    signal ZP:              std_logic;
-    signal ZCK:             std_logic;
-
---signal in PC 
-    signal PC:              std_logic_vector(15 downto 0);
-    signal PCK:             std_logic;
-    signal PINC, PRST:      std_logic;
-    signal ADR:             std_logic_vector(15 downto 0);      --全地址
-
---signal in IR
-    signal IR:              std_logic_vector(7 downto 0);
-
-    signal CCI, GI:         std_logic;
-
---signal in ADRH
-    signal ADRH:            std_logic_vector(7 downto 0);
-    signal GA1, CA1, AHS:   std_logic;
-
---signal in ADRL
-    signal ADRL:            std_logic_vector(7 downto 0);
-    signal GA2, CA2:        std_logic;
-
---signal in MPC
-    signal MPC, MD:         std_logic_vector(9 downto 0);
-    signal MCLR, MPLD:      std_logic;
-    signal MPCK:            std_logic;
-
---signal in SP
-    signal SP:              std_logic_vector(15 downto 0);
-    signal SSP:             std_logic_vector(1 downto 0);
-    signal SCK:             std_logic;          
-
---signal in MIR
-    signal MIR:             std_logic_vector(31 downto 0);
-    signal MICK:            std_logic;
-
--- signal for Print and Key
-    signal KOUT,POUT:       std_logic;
-
--- ==================================================================================
--- ==================================================================================
-
-begin
-
---时钟信号与复位信号
-
----时钟信号
-    pMCLK:
-    process(MCLK, CLK, RESET, RUN)
-    begin
-    if((RUN = '0') or (RESET = '0')) then MCLK &lt;= '0';
-            elsif(CLK'event and CLK = '0') then MCLK &lt;= not MCLK;
-    end if;
-    end process pMCLK;
-
-    MPCK    &lt;= not MCLK and CLK;
-    MICK    &lt;= not MPCK;
-
-    WRC     &lt;= MCLK;        --寄存器 Ri 时钟
-    PCK     &lt;= MCLK;        --PC 时钟
-    CA      &lt;= MCLK;        --A 时钟
-    CT      &lt;= MCLK;        --TMP 时钟
-    CC      &lt;= MCLK;        --ACT 时钟
-    CCI     &lt;= MCLK;        --IR 时钟
-    CA1     &lt;= MCLK;        --ADRH 时钟
-    CA2     &lt;= MCLK;        --ADRL 时钟
-    CCK     &lt;= MCLK;        --CY 时钟
-    SCK     &lt;= MCLK;        --SP 时钟
-    ZCK     &lt;= MCLK;        --ZY 时钟
-
-
-----复位信号
-    PRST   &lt;= RESET; 
-
-    pMCLR:
-    process(MCLK, RESET)
-    begin
-        if(RESET = '0') then MCLR &lt;= '0';
-            elsif(MCLK'event and MCLK = '1') then MCLR &lt;= RUN;
-        end if;
-    end process pMCLR;
-
-    CWR     &lt;= CWRX or not MCLK;
-    CRD     &lt;= CRDX or not MCLK;
-
-    MRD     &lt;= CRD or AB(15);
-    MWR     &lt;= CWR or AB(15) or not CLK;
-    IOW     &lt;= not AB(15) or not AB(1) or CWR or not CLK;
-    IOR     &lt;= not AB(15) or not AB(0) or CRD;
-
-    --功能部件
-
-----MPC的定义
-    pMPC:
-    process(MPLD, MPCK, MCLR)
-    begin
-        if(MCLR = '0') then 
-            MPC &lt;= "0000000000";
-        elsif(MPCK'event and MPCK = '1') then
-            if(MPLD = '0') then 
-                MPC &lt;= MD;
-            else MPC &lt;= MPC + 1;
-            end if;
-        end if;
-    end process pMPC;
-
-    CI(9 downto 0) &lt;= MPC;
-
-----为程序计数器入口MD的定义
-    MD(0)           &lt;= '1';
-    MD(1)           &lt;= '1';
-    MD(2)           &lt;= '1';
-    MD(7 downto 3)  &lt;= IR(7 downto 3);
-    MD(9 downto 8)  &lt;= "00";
-
-----MIR的定义
-    pMIR:
-    process(MICK)
-    begin
-        if(MICK'event and MICK = '1') then 
-            MIR &lt;= CO;
-        end if;
-    end process pMIR;
-
-----微程序控制信号
-    CWRX    &lt;= MIR(29);
-    CRDX    &lt;= MIR(28);
-    MPLD    &lt;= MIR(27);
-    MXC(1)  &lt;= MIR(26);
-    MXC(0)  &lt;= MIR(25);
-    SSP(1)  &lt;= MIR(24); 
-    SSP(0)  &lt;= MIR(23);
-    PINC    &lt;= MIR(22);
-    PLD(2)  &lt;= MIR(21); 
-    PLD(1)  &lt;= MIR(20); 
-    PLD(0)  &lt;= MIR(19); 
-    MXA     &lt;= MIR(18);
-    S(2)    &lt;= MIR(17);
-    S(1)    &lt;= MIR(16); 
-    S(0)    &lt;= MIR(15);
-    MXE     &lt;= MIR(14);
-    CP      &lt;= MIR(13);
-    ZP      &lt;= MIR(12);
-    MXB(1)  &lt;= MIR(11); 
-    MXB(0)  &lt;= MIR(10);
-    OB      &lt;= MIR(9); 
-    GA2     &lt;= MIR(8); 
-    AHS     &lt;= MIR(7); 
-    GA1     &lt;= MIR(6); 
-    GI      &lt;= MIR(5);
-    GT      &lt;= MIR(4); 
-    GC      &lt;= MIR(3); 
-    ASR     &lt;= MIR(2); 
-    GA      &lt;= MIR(1); 
-    WRE     &lt;= MIR(0);
-
-----寄存器Ri的定义
-    RS(2 downto 0) &lt;= IR(2 downto 0);
-
-    pRi:
-    process(WRC, WRE, RS)
-    begin
-        if (WRC'event and WRC ='0') then 
-            if (WRE = '0') then 
-                case RS is
-                    when "000" =&gt; R0 &lt;= DB;
-                    when "001" =&gt; R1 &lt;= DB;
-                    when "010" =&gt; R2 &lt;= DB;
-                    when "011" =&gt; R3 &lt;= DB;
-                    when "100" =&gt; R4 &lt;= DB;
-                    when "101" =&gt; R5 &lt;= DB;
-                    when "110" =&gt; R6 &lt;= DB;
-                    when "111" =&gt; R7 &lt;= DB;
-                    when others =&gt; NULL;
-                end case;
-            end if;
-        end if;
-    end process pRi;
-
-----寄存器输出ROUT的定义
-    ROUT    &lt;=  R0 when RS = "000" else
-                R1 when RS = "001" else
-                R2 when RS = "010" else
-                R3 when RS = "011" else
-                R4 when RS = "100" else
-                R5 when RS = "101" else
-                R6 when RS = "110" else
-                R7;
-
-----MUXB的定义
-    pMUXB:
-    process(OB, MXB)
-    begin
-        if(OB = '0') then
-            case MXB is
-                when "00" =&gt; DB &lt;= FF(7 downto 0);
-                when "01" =&gt; DB &lt;= PC(15 downto 8);
-                when "10" =&gt; DB &lt;= PC(7 downto 0);
-                when others =&gt; DB &lt;= ROUT;
-            end case;
-        else
-            DB &lt;="ZZZZZZZZ";
-        end if;
-    end process pMUXB;
-
-----MUXC的定义
-    AB &lt;= PC                when MXC = "00" else
-          ADRH&amp;ADRL         when MXC = "01" else
-         SP                 when MXC = "10";
-
-----MUXD的定义
-    PCADD   &lt;=  '0'         when PLD = "000" else
-                CY          when PLD = "001" else
-                not ZY      when PLD = "010" else
-                not KRIX    when PLD = "011" else
-                not PRIX    when PLD = "100" else
-                '1'         when PLD = "101" else
-                ZY          when PLD = "110";
-
-----TMP的定义
-    pTMP:
-    process(CT, GT)
-    begin
-        if(CT'event and CT = '0') then
-            if(GT = '0') then 
-                TMP &lt;= DB;
-            end if;
-        end if;
-    end process pTMP;
-
-----A的定义    
-    pA:
-    process(CA, ASR)
-    variable POOPOO:std_logic_vector(7 downto 0);
-    begin
-        if(CA'event and CA = '0') then
-            if(ASR = '0') then 
-                POOPOO := A;
-                CYA  &lt;= POOPOO(0);      --移出的末位
-                A    &lt;= POOPOO(7) &amp; POOPOO(7 downto 1);
-            elsif(GA = '0') then
-                A &lt;= DB;
-            end if;
-        end if;
-    end process pA;
-
-----MUXE的定义
-     CYD &lt;= FF(8) when MXE = '0' else
-                CYA;
-
-----ACT的定义
-    pACT:
-    process(CC, GC)
-    begin
-        if(CC'event and CC = '0') then
-            if(GC = '0') then 
-                ACT &lt;= A;
-            end if;
-        end if;
-    end process pACT;
-
-    FA &lt;= '0'&amp;ACT; --扩展成九位
-    FB &lt;= '0'&amp;ROUT when MXA = '0' else
-          '0'&amp;TMP;
-
-----ALU的定义
-    FF  &lt;=  FA + FB         when S = "000" else
-            FA - FB         when S = "001" else
-            FA              when S = "010" else
-            FB              when S = "011" else
-            not FB          when S = "100" else
-            "000000000"     when S = "101" else
-            "000000000"     when S = "110" else
-            FA + '1';
-
-----CY的定义
-    pCY:
-    process(CCK, CP, FF)
-    begin
-        if(CCK'event and CCK = '0') then 
-            if(CP = '0') then 
-                CY &lt;= CYD;
-            end if;
-        end if;
-    end process pCY;
-
-----ZY的定义
-    pZY:
-    process(ZCK, ZP, FF)
-    begin
-        if(ZCK'event and ZCK = '0') then 
-            if(ZP = '0') then 
-                if(FF = "000000000") then 
-                    ZY &lt;= '1';
-                else
-                    ZY &lt;= '0';
-                end if;
-            end if;
-        end if;
-    end process pZY;
-
-----PC的定义   
-    pPC:
-    process(PCK, PRST, PCADD)
-    begin
-        if(PRST = '0') then 
-            PC &lt;= "0000000000000000";
-        elsif(PCK'event and PCK = '0') then
-            if(PCADD = '1') then PC &lt;= AB;
-            elsif(PINC = '0') then 
-                PC &lt;= PC + 1;
-            end if;
-        end if;
-    end process pPC;
-
-----IR的定义
-    pIR:
-    process(CCI, GI, DB)
-    begin
-        if(CCI'event and CCI = '0') then 
-            if(GI = '0') then 
-                IR &lt;= DB;
-            end if;
-        end if;
-    end process pIR;
-
-----ADRH的定义
-    pADRH:
-    process(CA1, GA1, AHS, DB)
-    begin
-        if(CA1'event and CA1 = '0') then 
-            if(AHS = '0') then ADRH &lt;= "01111110";
-                elsif(GA1 = '0') then 
-                    ADRH &lt;= DB;
-            end if;
-        end if;
-    end process pADRH;
-
-----ADRL的定义
-    pADRL:
-    process(CA2, GA2, DB)
-    begin
-        if(CA2'event and CA2 = '0') then 
-            if(GA2 = '0') then 
-                ADRL &lt;= DB;
-            end if;
-        end if;
-    end process pADRL;
-
-----SP的定义
-    pSP:
-    process(SCK, SSP)
-    begin
-        if(SCK'event and SCK = '0') then 
-            case SSP is
-                when "01" =&gt; SP &lt;= SP - 1;
-                when "10" =&gt; SP &lt;= SP + 1;
-                when "11" =&gt; SP &lt;= "0111111111111111";
-                when others =&gt; NULL;
-            end case;
-        end if;
-    end process pSP;
-
-----
-    CI(31 downto 24)    &lt;=  A                           when MUX = "000" else
-                            PC(15 downto 8)             when MUX = "001" else
-                            ADRH                        when MUX = "010" else
-                            R0                          when MUX = "011" else
-                            R2                          when MUX = "100" else
-                            R4                          when MUX = "101" else
-                            R6                          when MUX = "110" else
-                            TMP;
-
-    CI(23 downto 16)    &lt;=  IR                          when MUX = "000" else
-                            PC(7 downto 0)              when MUX = "001" else
-                            ADRL                        when MUX = "010" else
-                            R1                          when MUX = "011" else
-                            R3                          when MUX = "100" else
-                            R5                          when MUX = "101" else
-                            R7                          when MUX = "110" else
-                            ACT;
-
-    CI(15 downto 12)    &lt;=  SP(15 downto 12)            when MUX = "000" else
-                            SP(11 downto 8)             when MUX = "001" else
-                            SP(7 downto 4)              when MUX = "010" else
-                            SP(3 downto 0)              when MUX = "011" else
-                            MIR(17 downto 14);
-
-    CI(11)              &lt;=  KRIX                        when MUX = "000" else
-                            PRIX                        when MUX = "001" else
-                            OB                          when MUX = "010" else
-                            MPLD                        when MUX = "011" else
-                            MIR(22);
-
-    CI(10)              &lt;=  PRIX                        when MUX = "000" else
-                            KRIX                        when MUX = "001" else
-                            PINC                        when MUX = "010" else
-                            GI                          when MUX = "011" else
-                            CO(3)                       when MUX = "100" else
-                            CO(0);
-
-end cpu_8_behave ;
-</code></pre>
 
 <p>And here&rsquo;s my current instruction set.</p>
 
-<pre><code class="asm instructionSet.asm">-MOV
-A,Ri
-00000iii
 
--MOV
-Ri,A
-00001iii
 
--MOV
-A,@Ri
-00010iii
 
--MOV
-@Ri,A
-00011iii
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>instructionSet.asm</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+</pre></td><td class='code'><pre><code class='asm'><span class='line'><span class="err">-</span><span class="nf">MOV</span>
+</span><span class='line'><span class="nf">A</span><span class="p">,</span><span class="no">Ri</span>
+</span><span class='line'><span class="err">00000</span><span class="nf">iii</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">MOV</span>
+</span><span class='line'><span class="nf">Ri</span><span class="p">,</span><span class="no">A</span>
+</span><span class='line'><span class="err">00001</span><span class="nf">iii</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">MOV</span>
+</span><span class='line'><span class="nf">A</span><span class="p">,</span><span class="err">@</span><span class="no">Ri</span>
+</span><span class='line'><span class="err">00010</span><span class="nf">iii</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">MOV</span>
+</span><span class='line'><span class="err">@</span><span class="nf">Ri</span><span class="p">,</span><span class="no">A</span>
+</span><span class='line'><span class="err">00011</span><span class="nf">iii</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">ADD</span>
+</span><span class='line'><span class="nf">A</span><span class="p">,</span><span class="no">Ri</span>
+</span><span class='line'><span class="err">00100</span><span class="nf">iii</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">SUB</span>
+</span><span class='line'><span class="nf">A</span><span class="p">,</span><span class="no">Ri</span>
+</span><span class='line'><span class="err">00101</span><span class="nf">iii</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">MOV</span>
+</span><span class='line'><span class="nf">A</span><span class="p">,</span><span class="c">#data8</span>
+</span><span class='line'><span class="err">00110000</span>
+</span><span class='line'><span class="nf">dddddddd</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">MOV</span>
+</span><span class='line'><span class="nf">Ri</span><span class="p">,</span><span class="c">#data8</span>
+</span><span class='line'><span class="err">00111</span><span class="nf">iii</span>
+</span><span class='line'><span class="nf">dddddddd</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">LDA</span>
+</span><span class='line'><span class="nf">addr</span>
+</span><span class='line'><span class="err">01000000</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">STA</span>
+</span><span class='line'><span class="nf">addr</span>
+</span><span class='line'><span class="err">01001000</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">JC</span>
+</span><span class='line'><span class="nf">addr</span>
+</span><span class='line'><span class="err">01010000</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">JMP</span>
+</span><span class='line'><span class="nf">addr</span>
+</span><span class='line'><span class="err">01011000</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">JNKB</span>
+</span><span class='line'><span class="nf">addr</span>
+</span><span class='line'><span class="err">01100000</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">JNPB</span>
+</span><span class='line'><span class="nf">addr</span>
+</span><span class='line'><span class="err">01101000</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">CALL</span>
+</span><span class='line'><span class="nf">addr</span>
+</span><span class='line'><span class="err">01110000</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">RET</span>
+</span><span class='line'><span class="err">01111000</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">RSP</span>
+</span><span class='line'><span class="err">10000000</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">SUB</span>
+</span><span class='line'><span class="nf">A</span><span class="p">,</span><span class="err">@</span><span class="no">Ri</span>
+</span><span class='line'><span class="err">10001</span><span class="nf">iii</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">ASR</span>
+</span><span class='line'><span class="nf">A</span>
+</span><span class='line'><span class="err">10010000</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">CLR</span>
+</span><span class='line'><span class="nf">addr</span>
+</span><span class='line'><span class="err">10011000</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">PUSH</span>
+</span><span class='line'><span class="nf">Ri</span>
+</span><span class='line'><span class="err">10100</span><span class="nf">iii</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">POP</span>
+</span><span class='line'><span class="nf">Ri</span>
+</span><span class='line'><span class="err">10101</span><span class="nf">iii</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">JZ</span>
+</span><span class='line'><span class="nf">addr</span>
+</span><span class='line'><span class="err">10110000</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'><span class="nf">aaaaaaaa</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">ADC</span>
+</span><span class='line'><span class="nf">A</span><span class="p">,</span><span class="no">Ri</span>
+</span><span class='line'><span class="err">10111</span><span class="nf">iii</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">-</span><span class="nf">enddef</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
--ADD
-A,Ri
-00100iii
 
--SUB
-A,Ri
-00101iii
 
--MOV
-A,#data8
-00110000
-dddddddd
-
--MOV
-Ri,#data8
-00111iii
-dddddddd
-
--LDA
-addr
-01000000
-aaaaaaaa
-aaaaaaaa
-
--STA
-addr
-01001000
-aaaaaaaa
-aaaaaaaa
-
--JC
-addr
-01010000
-aaaaaaaa
-aaaaaaaa
-
--JMP
-addr
-01011000
-aaaaaaaa
-aaaaaaaa
-
--JNKB
-addr
-01100000
-aaaaaaaa
-aaaaaaaa
-
--JNPB
-addr
-01101000
-aaaaaaaa
-aaaaaaaa
-
--CALL
-addr
-01110000
-aaaaaaaa
-aaaaaaaa
-
--RET
-01111000
-
--RSP
-10000000
-
--SUB
-A,@Ri
-10001iii
-
--ASR
-A
-10010000
-
--CLR
-addr
-10011000
-aaaaaaaa
-aaaaaaaa
-
--PUSH
-Ri
-10100iii
-
--POP
-Ri
-10101iii
-
--JZ
-addr
-10110000
-aaaaaaaa
-aaaaaaaa
-
--ADC
-A,Ri
-10111iii
-
--enddef
-</code></pre>
 
 <p>Below is the assembly code for testing 2-digit addition.</p>
 
-<pre><code class="asm test.asm">MOV R7,#0H
 
-W1: 
- JNPB W1
- MOV A,#AH
- STA 8002H
-W2:
- JNPB W2
- STA 8002H
 
-L2:
- JNKB L2
- LDA 8001H
- MOV R2,A
-L1:
- JNKB L1
- LDA 8001H
- MOV R1,A
-WL1:
- JNPB WL1
- STA 8002H
-WL2:
- JNPB WL2
- MOV A,R2
- MOV R0,#10H
- ADD A,R0
- STA 8002H
-WADD:
- JNPB WADD
- MOV A,#10H
- STA 8002H
-WADD1:
- JNPB WADD1
- MOV A,#AH
- STA 8002H
-WADD2:
- JNPB WADD2
- STA 8002H
 
-L4:
- JNKB L4
- LDA 8001H
- MOV R4,A
-L3:
- JNKB L3
- LDA 8001H
- MOV R3,A
-W3:
- JNPB W3
- STA 8002H
-W4:
- JNPB W4
- MOV A,R4
- MOV R0,#10H
- ADD A,R0
- STA 8002H
-WEQ:
- JNPB WEQ
- MOV A,#19H
- STA 8002H
-WEQ1:
- JNPB WEQ1
- MOV A,#AH
- STA 8002H
-WEQ2:
- JNPB WEQ2
- STA 8002H
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>test.asm</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+</pre></td><td class='code'><pre><code class='asm'><span class='line'><span class="nf">MOV</span> <span class="no">R7</span><span class="p">,</span><span class="c">#0H</span>
+</span><span class='line'>
+</span><span class='line'><span class="nl">W1:</span>
+</span><span class='line'> <span class="nf">JNPB</span> <span class="no">W1</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">A</span><span class="p">,</span><span class="c">#AH</span>
+</span><span class='line'> <span class="nf">STA</span> <span class="mi">8002</span><span class="no">H</span>
+</span><span class='line'><span class="nl">W2:</span>
+</span><span class='line'> <span class="nf">JNPB</span> <span class="no">W2</span>
+</span><span class='line'> <span class="nf">STA</span> <span class="mi">8002</span><span class="no">H</span>
+</span><span class='line'>
+</span><span class='line'><span class="nl">L2:</span>
+</span><span class='line'> <span class="nf">JNKB</span> <span class="no">L2</span>
+</span><span class='line'> <span class="nf">LDA</span> <span class="mi">8001</span><span class="no">H</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">R2</span><span class="p">,</span><span class="no">A</span>
+</span><span class='line'><span class="nl">L1:</span>
+</span><span class='line'> <span class="nf">JNKB</span> <span class="no">L1</span>
+</span><span class='line'> <span class="nf">LDA</span> <span class="mi">8001</span><span class="no">H</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">R1</span><span class="p">,</span><span class="no">A</span>
+</span><span class='line'><span class="nl">WL1:</span>
+</span><span class='line'> <span class="nf">JNPB</span> <span class="no">WL1</span>
+</span><span class='line'> <span class="nf">STA</span> <span class="mi">8002</span><span class="no">H</span>
+</span><span class='line'><span class="nl">WL2:</span>
+</span><span class='line'> <span class="nf">JNPB</span> <span class="no">WL2</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">A</span><span class="p">,</span><span class="no">R2</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">R0</span><span class="p">,</span><span class="c">#10H</span>
+</span><span class='line'> <span class="nf">ADD</span> <span class="no">A</span><span class="p">,</span><span class="no">R0</span>
+</span><span class='line'> <span class="nf">STA</span> <span class="mi">8002</span><span class="no">H</span>
+</span><span class='line'><span class="nl">WADD:</span>
+</span><span class='line'> <span class="nf">JNPB</span> <span class="no">WADD</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">A</span><span class="p">,</span><span class="c">#10H</span>
+</span><span class='line'> <span class="nf">STA</span> <span class="mi">8002</span><span class="no">H</span>
+</span><span class='line'><span class="nl">WADD1:</span>
+</span><span class='line'> <span class="nf">JNPB</span> <span class="no">WADD1</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">A</span><span class="p">,</span><span class="c">#AH</span>
+</span><span class='line'> <span class="nf">STA</span> <span class="mi">8002</span><span class="no">H</span>
+</span><span class='line'><span class="nl">WADD2:</span>
+</span><span class='line'> <span class="nf">JNPB</span> <span class="no">WADD2</span>
+</span><span class='line'> <span class="nf">STA</span> <span class="mi">8002</span><span class="no">H</span>
+</span><span class='line'>
+</span><span class='line'><span class="nl">L4:</span>
+</span><span class='line'> <span class="nf">JNKB</span> <span class="no">L4</span>
+</span><span class='line'> <span class="nf">LDA</span> <span class="mi">8001</span><span class="no">H</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">R4</span><span class="p">,</span><span class="no">A</span>
+</span><span class='line'><span class="nl">L3:</span>
+</span><span class='line'> <span class="nf">JNKB</span> <span class="no">L3</span>
+</span><span class='line'> <span class="nf">LDA</span> <span class="mi">8001</span><span class="no">H</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">R3</span><span class="p">,</span><span class="no">A</span>
+</span><span class='line'><span class="nl">W3:</span>
+</span><span class='line'> <span class="nf">JNPB</span> <span class="no">W3</span>
+</span><span class='line'> <span class="nf">STA</span> <span class="mi">8002</span><span class="no">H</span>
+</span><span class='line'><span class="nl">W4:</span>
+</span><span class='line'> <span class="nf">JNPB</span> <span class="no">W4</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">A</span><span class="p">,</span><span class="no">R4</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">R0</span><span class="p">,</span><span class="c">#10H</span>
+</span><span class='line'> <span class="nf">ADD</span> <span class="no">A</span><span class="p">,</span><span class="no">R0</span>
+</span><span class='line'> <span class="nf">STA</span> <span class="mi">8002</span><span class="no">H</span>
+</span><span class='line'><span class="nl">WEQ:</span>
+</span><span class='line'> <span class="nf">JNPB</span> <span class="no">WEQ</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">A</span><span class="p">,</span><span class="c">#19H</span>
+</span><span class='line'> <span class="nf">STA</span> <span class="mi">8002</span><span class="no">H</span>
+</span><span class='line'><span class="nl">WEQ1:</span>
+</span><span class='line'> <span class="nf">JNPB</span> <span class="no">WEQ1</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">A</span><span class="p">,</span><span class="c">#AH</span>
+</span><span class='line'> <span class="nf">STA</span> <span class="mi">8002</span><span class="no">H</span>
+</span><span class='line'><span class="nl">WEQ2:</span>
+</span><span class='line'> <span class="nf">JNPB</span> <span class="no">WEQ2</span>
+</span><span class='line'> <span class="nf">STA</span> <span class="mi">8002</span><span class="no">H</span>
+</span><span class='line'>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">A</span><span class="p">,</span><span class="no">R4</span>
+</span><span class='line'> <span class="nf">ADD</span> <span class="no">A</span><span class="p">,</span><span class="no">R2</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">R6</span><span class="p">,</span><span class="no">A</span>
+</span><span class='line'>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">A</span><span class="p">,</span><span class="no">R1</span>
+</span><span class='line'> <span class="nf">ADD</span> <span class="no">A</span><span class="p">,</span><span class="no">R3</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">R5</span><span class="p">,</span><span class="no">A</span>
+</span><span class='line'>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">R0</span><span class="p">,</span> <span class="c">#AH</span>
+</span><span class='line'> <span class="nf">SUB</span> <span class="no">A</span><span class="p">,</span><span class="no">R0</span>
+</span><span class='line'> <span class="nf">JC</span> <span class="no">Z1</span>
+</span><span class='line'>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">R5</span><span class="p">,</span><span class="no">A</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">R0</span><span class="p">,</span><span class="c">#1H</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">A</span><span class="p">,</span><span class="no">R6</span>
+</span><span class='line'> <span class="nf">ADD</span> <span class="no">A</span><span class="p">,</span><span class="no">R0</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">R6</span><span class="p">,</span><span class="no">A</span>
+</span><span class='line'>
+</span><span class='line'><span class="nl">Z1:</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">R0</span><span class="p">,</span><span class="c">#AH</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">A</span><span class="p">,</span><span class="no">R6</span>
+</span><span class='line'> <span class="nf">SUB</span> <span class="no">A</span><span class="p">,</span><span class="no">R0</span>
+</span><span class='line'> <span class="nf">JC</span> <span class="no">Z2</span>
+</span><span class='line'>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">R6</span><span class="p">,</span><span class="no">A</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">R7</span><span class="p">,</span><span class="c">#1H</span>
+</span><span class='line'><span class="nl">Z2:</span>
+</span><span class='line'><span class="nl">W5:</span>
+</span><span class='line'> <span class="nf">JNPB</span> <span class="no">W5</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">A</span><span class="p">,</span><span class="no">R5</span>
+</span><span class='line'> <span class="nf">STA</span> <span class="mi">8003</span><span class="no">H</span>
+</span><span class='line'><span class="nl">W6:</span>
+</span><span class='line'> <span class="nf">JNPB</span> <span class="no">W6</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">A</span><span class="p">,</span><span class="no">R6</span>
+</span><span class='line'> <span class="nf">STA</span> <span class="mi">8003</span><span class="no">H</span>
+</span><span class='line'><span class="nl">W7:</span>
+</span><span class='line'> <span class="nf">JNPB</span> <span class="no">W7</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">A</span><span class="p">,</span><span class="no">R7</span>
+</span><span class='line'> <span class="nf">MOV</span> <span class="no">R0</span><span class="p">,</span><span class="c">#10H</span>
+</span><span class='line'> <span class="nf">ADD</span> <span class="no">A</span><span class="p">,</span><span class="no">R0</span>
+</span><span class='line'> <span class="nf">STA</span> <span class="mi">8003</span><span class="no">H</span>
+</span><span class='line'>
+</span><span class='line'><span class="nl">LOOP:</span>
+</span><span class='line'> <span class="nf">JMP</span> <span class="no">LOOP</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
- MOV A,R4
- ADD A,R2
- MOV R6,A
 
- MOV A,R1
- ADD A,R3
- MOV R5,A
 
- MOV R0, #AH
- SUB A,R0
- JC Z1
-
- MOV R5,A
- MOV R0,#1H
- MOV A,R6
- ADD A,R0
- MOV R6,A
-
-Z1:
- MOV R0,#AH
- MOV A,R6
- SUB A,R0
- JC Z2
-
- MOV R6,A
- MOV R7,#1H
-Z2: 
-W5:
- JNPB W5
- MOV A,R5
- STA 8003H
-W6:
- JNPB W6
- MOV A,R6
- STA 8003H
-W7:
- JNPB W7
- MOV A,R7
- MOV R0,#10H
- ADD A,R0
- STA 8003H
-
-LOOP:
- JMP LOOP
-</code></pre>
 
 <p>Demon of 2-digit addition</p>
 
+
+
+
 <iframe width="420" height="315" src="http://www.youtube.com/embed/dikTQ-9l2s0" frameborder="0" allowfullscreen></iframe>
+
+
 
 ]]></content>
   </entry>
