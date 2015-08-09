@@ -6,7 +6,7 @@ comments: true
 categories: ['Linux']
 ---
 This article demonstrates how to set up new disk partition and make it auto-mounted on boot via Linux CLI. Instance here is a Ubuntu 12.04 remote server which just has a new disk attached to. 
-<<!--more--> 
+<!--more--> 
 
 ###1. Find all disks on the computer
 
