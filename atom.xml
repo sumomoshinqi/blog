@@ -4,7 +4,7 @@
   <title><![CDATA[sumomoshinqi]]></title>
   <link href="http://sumomoshinqi.github.io/atom.xml" rel="self"/>
   <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-08-09T16:33:33+08:00</updated>
+  <updated>2015-08-09T16:43:24+08:00</updated>
   <id>http://sumomoshinqi.github.io/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -18,8 +18,12 @@
     <link href="http://sumomoshinqi.github.io/blog/2015/08/09/new-partition-set-up-on-linux/"/>
     <updated>2015-08-09T15:54:16+08:00</updated>
     <id>http://sumomoshinqi.github.io/blog/2015/08/09/new-partition-set-up-on-linux</id>
-    <content type="html"><![CDATA[<p>This article demonstrates how to set up new disk partition and make it auto-mounted on boot via Linux CLI. Instance here is a Ubuntu 12.04 remote server which just has a new disk attached to.
-&lt;<!--more--></p>
+    <content type="html"><![CDATA[<p>This article demonstrates how to set up new disk partition and make it auto-mounted on boot via Linux CLI. Instance here is a Ubuntu 12.04 remote server which just has a new disk attached to.</p>
+
+<!--more-->
+
+
+<p></p>
 
 <h3>1. Find all disks on the computer</h3>
 
