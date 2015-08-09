@@ -5,11 +5,26 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[LeetCode]Majority Element - sumomoshinqi</title>
+  <title>Fix annoying perl locale warnings - sumomoshinqi</title>
   <meta name="author" content="sumomoshinqi">
 
   
-  <meta name="description" content="Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times. You may assume that &hellip;">
+  <meta name="description" content="When I was setting up Postgres on a new Linux VM server last Friday, a perl warning was keeping showing up. 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +33,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element/">
+  <link rel="canonical" href="http://sumomoshinqi.github.io/blog/2015/08/09/fix-annoying-perl-locale-warnings/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -80,7 +95,7 @@
   
   <header>
     
-      <h1 class="entry-title">[LeetCode]Majority Element</h1>
+      <h1 class="entry-title">Fix Annoying Perl Locale Warnings</h1>
     
     
       <p class="meta">
@@ -89,7 +104,7 @@
 
 
 
-<time class='entry-date' datetime='2015-03-20T19:57:22+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:57 pm</span></time>
+<time class='entry-date' datetime='2015-08-09T22:22:07+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:22 pm</span></time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,16 +113,14 @@
   </header>
 
 
-<div class="entry-content"><p>Given an array of size n, find the majority element. The majority element is the element that appears more than <em>⌊ n/2 ⌋</em> times.</p>
-
-<p>You may assume that the array is non-empty and the majority element always exist in the array.</p>
+<div class="entry-content"><p>When I was setting up Postgres on a new Linux VM server last Friday, a perl warning was keeping showing up.</p>
 
 <!--more-->
 
 
 
 
-<figure class='code'><figcaption><span>Majority Element</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -115,16 +128,102 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='C'><span class='line'><span class="n">intcomp</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">a</span><span class="p">,</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="o">*</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">a</span> <span class="o">-</span> <span class="o">*</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">b</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="kt">int</span> <span class="n">majorityElement</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">qsort</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">),</span> <span class="n">intcomp</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">num</span><span class="p">[</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>perl: warning: Setting locale failed.
+</span><span class='line'>perl: warning: Please check that your locale settings:
+</span><span class='line'>  LANGUAGE = (unset),
+</span><span class='line'>  LC_ALL = (unset),
+</span><span class='line'>  LC_PAPER = &quot;zh_CN.UTF-8&quot;,
+</span><span class='line'>  LC_ADDRESS = &quot;zh_CN.UTF-8&quot;,
+</span><span class='line'>  LC_MONETARY = &quot;zh_CN.UTF-8&quot;,
+</span><span class='line'>  LC_NUMERIC = &quot;zh_CN.UTF-8&quot;,
+</span><span class='line'>  LC_TELEPHONE = &quot;zh_CN.UTF-8&quot;,
+</span><span class='line'>  LC_IDENTIFICATION = &quot;zh_CN.UTF-8&quot;,
+</span><span class='line'>  LC_MEASUREMENT = &quot;zh_CN.UTF-8&quot;,
+</span><span class='line'>  LC_TIME = &quot;zh_CN.UTF-8&quot;,
+</span><span class='line'>  LC_NAME = &quot;zh_CN.UTF-8&quot;,
+</span><span class='line'>  LANG = &quot;en_US.UTF-8&quot;
+</span><span class='line'>    are supported and installed on your system.
+</span><span class='line'>perl: warning: Falling back to the standard locale (&quot;C&quot;).
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>Well it&rsquo;s annoying. XD</p>
+
+<p>Alright let&rsquo;s fix this.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo locale-gen en_US en_US.UTF-8
+</span><span class='line'><span class="o">[</span>sudo<span class="o">]</span> password <span class="k">for</span> administrator:
+</span><span class='line'>Generating locales...
+</span><span class='line'>  en_US.ISO-8859-1... <span class="k">done</span>
+</span><span class='line'>  en_US.UTF-8... up-to-date
+</span><span class='line'>Generation complete.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo dpkg-reconfigure locales
+</span><span class='line'>Generating locales...
+</span><span class='line'>  en_AG.UTF-8... <span class="k">done</span>
+</span><span class='line'>  en_AU.UTF-8... <span class="k">done</span>
+</span><span class='line'>  en_BW.UTF-8... <span class="k">done</span>
+</span><span class='line'>  en_CA.UTF-8... <span class="k">done</span>
+</span><span class='line'>  en_DK.UTF-8... <span class="k">done</span>
+</span><span class='line'>  en_GB.UTF-8... <span class="k">done</span>
+</span><span class='line'>  en_HK.UTF-8... <span class="k">done</span>
+</span><span class='line'>  en_IE.UTF-8... <span class="k">done</span>
+</span><span class='line'>  en_IN.UTF-8... <span class="k">done</span>
+</span><span class='line'>  en_NG.UTF-8... <span class="k">done</span>
+</span><span class='line'>  en_NZ.UTF-8... <span class="k">done</span>
+</span><span class='line'>  en_PH.UTF-8... <span class="k">done</span>
+</span><span class='line'>  en_SG.UTF-8... <span class="k">done</span>
+</span><span class='line'>  en_US.ISO-8859-1... up-to-date
+</span><span class='line'>  en_US.UTF-8... up-to-date
+</span><span class='line'>  en_ZA.UTF-8... <span class="k">done</span>
+</span><span class='line'>  en_ZM.UTF-8... <span class="k">done</span>
+</span><span class='line'>  en_ZW.UTF-8... <span class="k">done</span>
+</span><span class='line'>  zh_CN.UTF-8... up-to-date
+</span><span class='line'>Generation complete.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>OK. Done. I guess there was a way to simply ignore these settings. Whatever.</p>
 </div>
 
 
@@ -140,12 +239,12 @@
 
 
 
-<time class='entry-date' datetime='2015-03-20T19:57:22+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:57 pm</span></time>
+<time class='entry-date' datetime='2015-08-09T22:22:07+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:22 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/c/'>c</a>, <a class='category' href='/blog/categories/leetcode/'>leetcode</a>
+    <a class='category' href='/blog/categories/linux/'>linux</a>
   
 </span>
 
@@ -154,7 +253,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element/" data-via="sumomoshinqi" data-counturl="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://sumomoshinqi.github.io/blog/2015/08/09/fix-annoying-perl-locale-warnings/" data-via="sumomoshinqi" data-counturl="http://sumomoshinqi.github.io/blog/2015/08/09/fix-annoying-perl-locale-warnings/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -180,10 +279,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/03/20/leetcode-compare-version-numbers/" title="Previous Post: [LeetCode]Compare Version Numbers">&laquo; [LeetCode]Compare Version Numbers</a>
+        <a class="basic-alignment left" href="/blog/2015/08/09/new-partition-set-up-on-linux/" title="Previous Post: New partition set up on Linux">&laquo; New partition set up on Linux</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/03/20/leetcode-climbing-stairs/" title="Next Post: [LeetCode]Climbing Stairs">[LeetCode]Climbing Stairs &raquo;</a>
       
     </p>
   </footer>
@@ -273,8 +370,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element/';
-        var disqus_url = 'http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element/';
+        var disqus_identifier = 'http://sumomoshinqi.github.io/blog/2015/08/09/fix-annoying-perl-locale-warnings/';
+        var disqus_url = 'http://sumomoshinqi.github.io/blog/2015/08/09/fix-annoying-perl-locale-warnings/';
         var disqus_script = 'embed.js';
       
     (function () {
