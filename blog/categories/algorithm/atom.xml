@@ -2,10 +2,17 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: algorithm | sumomoshinqi]]></title>
+<<<<<<< HEAD
   <link href="http://www.sumomoshinqi.com/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://www.sumomoshinqi.com/"/>
   <updated>2015-08-14T16:01:16+08:00</updated>
   <id>http://www.sumomoshinqi.com/</id>
+=======
+  <link href="http://sumomoshinqi.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
+  <link href="http://sumomoshinqi.github.io/"/>
+  <updated>2015-08-09T22:32:33+08:00</updated>
+  <id>http://sumomoshinqi.github.io/</id>
+>>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
     <email><![CDATA[edam.lqq@gmail.com]]></email>
@@ -15,9 +22,15 @@
   
   <entry>
     <title type="html"><![CDATA[Code Jam Qualification Round 2015]]></title>
+<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/04/12/code-jam-qualification-round-2015/"/>
     <updated>2015-04-12T13:56:09+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/04/12/code-jam-qualification-round-2015</id>
+=======
+    <link href="http://sumomoshinqi.github.io/blog/2015/04/12/code-jam-qualification-round-2015/"/>
+    <updated>2015-04-12T13:56:09+08:00</updated>
+    <id>http://sumomoshinqi.github.io/blog/2015/04/12/code-jam-qualification-round-2015</id>
+>>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<h4>Problem A. Standing Ovation</h4>
 
 <p>Problem</p>

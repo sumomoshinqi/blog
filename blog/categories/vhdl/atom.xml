@@ -2,10 +2,17 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: vhdl | sumomoshinqi]]></title>
+<<<<<<< HEAD
   <link href="http://www.sumomoshinqi.com/blog/categories/vhdl/atom.xml" rel="self"/>
   <link href="http://www.sumomoshinqi.com/"/>
   <updated>2015-08-14T16:01:16+08:00</updated>
   <id>http://www.sumomoshinqi.com/</id>
+=======
+  <link href="http://sumomoshinqi.github.io/blog/categories/vhdl/atom.xml" rel="self"/>
+  <link href="http://sumomoshinqi.github.io/"/>
+  <updated>2015-08-09T22:32:33+08:00</updated>
+  <id>http://sumomoshinqi.github.io/</id>
+>>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
     <email><![CDATA[edam.lqq@gmail.com]]></email>
@@ -15,9 +22,15 @@
   
   <entry>
     <title type="html"><![CDATA[8 bit CPU design]]></title>
+<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/05/05/8-bit-cpu-design/"/>
     <updated>2015-05-05T14:02:05+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/05/05/8-bit-cpu-design</id>
+=======
+    <link href="http://sumomoshinqi.github.io/blog/2015/05/05/8-bit-cpu-design/"/>
+    <updated>2015-05-05T14:02:05+08:00</updated>
+    <id>http://sumomoshinqi.github.io/blog/2015/05/05/8-bit-cpu-design</id>
+>>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>Finally it works! 😂</p>
 
 <!--more-->

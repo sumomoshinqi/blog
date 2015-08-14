@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+<<<<<<< HEAD
     <loc>http://www.sumomoshinqi.com/blog/2015/08/09/fix-annoying-perl-locale-warnings/</loc>
     <lastmod>2015-08-09T22:22:07+08:00</lastmod>
   </url>
@@ -103,5 +104,93 @@
   </url>
   <url>
     <loc>http://www.sumomoshinqi.com/blog/categories/jmeter/</loc>
+=======
+    <loc>http://sumomoshinqi.github.io/blog/2015/08/09/fix-annoying-perl-locale-warnings/</loc>
+    <lastmod>2015-08-09T22:22:07+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://sumomoshinqi.github.io/blog/2015/08/09/new-partition-set-up-on-linux/</loc>
+    <lastmod>2015-08-09T15:54:16+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://sumomoshinqi.github.io/blog/2015/08/08/customize-mongodb-maxconn/</loc>
+    <lastmod>2015-08-08T23:29:05+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://sumomoshinqi.github.io/blog/2015/06/23/add-a-plugged-notification-sound-for-mac/</loc>
+    <lastmod>2015-06-23T19:37:02+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://sumomoshinqi.github.io/blog/2015/05/05/8-bit-cpu-design/</loc>
+    <lastmod>2015-05-05T14:02:05+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://sumomoshinqi.github.io/blog/2015/04/12/code-jam-qualification-round-2015/</loc>
+    <lastmod>2015-04-12T13:56:09+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title/</loc>
+    <lastmod>2015-04-07T21:13:20+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://sumomoshinqi.github.io/blog/2015/03/23/csapp-data-lab/</loc>
+    <lastmod>2015-03-23T16:34:31+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-climbing-stairs/</loc>
+    <lastmod>2015-03-20T20:01:00+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element/</loc>
+    <lastmod>2015-03-20T19:57:22+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-compare-version-numbers/</loc>
+    <lastmod>2015-03-20T19:27:39+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://sumomoshinqi.github.io/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04/</loc>
+    <lastmod>2015-02-12T16:53:28+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://sumomoshinqi.github.io/blog/2015/02/03/git/</loc>
+    <lastmod>2015-02-03T16:38:18+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://sumomoshinqi.github.io/blog/2015/02/03/test-post/</loc>
+    <lastmod>2015-02-03T16:36:18+08:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://sumomoshinqi.github.io/blog/archives/</loc>
+    <lastmod>2015-08-09T22:32:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://sumomoshinqi.github.io/</loc>
+    <lastmod>2015-08-09T22:32:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>http://sumomoshinqi.github.io/about/</loc>
+    <lastmod>2015-08-09T22:32:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+>>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
   </url>
 </urlset>

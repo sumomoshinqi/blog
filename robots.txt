@@ -1,4 +1,8 @@
 User-agent: *
 Disallow: 
 
+<<<<<<< HEAD
 Sitemap: http://www.sumomoshinqi.com/sitemap.xml 
+=======
+Sitemap: http://sumomoshinqi.github.io/sitemap.xml 
+>>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1

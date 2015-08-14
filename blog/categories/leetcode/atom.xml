@@ -2,10 +2,17 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: leetcode | sumomoshinqi]]></title>
+<<<<<<< HEAD
   <link href="http://www.sumomoshinqi.com/blog/categories/leetcode/atom.xml" rel="self"/>
   <link href="http://www.sumomoshinqi.com/"/>
   <updated>2015-08-14T16:01:16+08:00</updated>
   <id>http://www.sumomoshinqi.com/</id>
+=======
+  <link href="http://sumomoshinqi.github.io/blog/categories/leetcode/atom.xml" rel="self"/>
+  <link href="http://sumomoshinqi.github.io/"/>
+  <updated>2015-08-09T22:32:33+08:00</updated>
+  <id>http://sumomoshinqi.github.io/</id>
+>>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
     <email><![CDATA[edam.lqq@gmail.com]]></email>
@@ -15,9 +22,15 @@
   
   <entry>
     <title type="html"><![CDATA[[LeetCode]Excel Sheet Column Title]]></title>
+<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/04/07/leetcode-excel-sheet-column-title/"/>
     <updated>2015-04-07T21:13:20+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/04/07/leetcode-excel-sheet-column-title</id>
+=======
+    <link href="http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title/"/>
+    <updated>2015-04-07T21:13:20+08:00</updated>
+    <id>http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title</id>
+>>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>Given a positive integer, return its corresponding column title as appear in an Excel sheet.</p>
 
 <!--more-->
@@ -68,9 +81,15 @@ public:
   
   <entry>
     <title type="html"><![CDATA[[LeetCode]Climbing Stairs]]></title>
+<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-climbing-stairs/"/>
     <updated>2015-03-20T20:01:00+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-climbing-stairs</id>
+=======
+    <link href="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-climbing-stairs/"/>
+    <updated>2015-03-20T20:01:00+08:00</updated>
+    <id>http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-climbing-stairs</id>
+>>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>You are climbing a stair case. It takes n steps to reach to the top.</p>
 
 <p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
@@ -98,9 +117,15 @@ public:
   
   <entry>
     <title type="html"><![CDATA[[LeetCode]Majority Element]]></title>
+<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-majority-element/"/>
     <updated>2015-03-20T19:57:22+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-majority-element</id>
+=======
+    <link href="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element/"/>
+    <updated>2015-03-20T19:57:22+08:00</updated>
+    <id>http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element</id>
+>>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>Given an array of size n, find the majority element. The majority element is the element that appears more than <em>⌊ n/2 ⌋</em> times.</p>
 
 <p>You may assume that the array is non-empty and the majority element always exist in the array.</p>
@@ -122,9 +147,15 @@ int majorityElement(int num[], int n) {
   
   <entry>
     <title type="html"><![CDATA[[LeetCode]Compare Version Numbers]]></title>
+<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-compare-version-numbers/"/>
     <updated>2015-03-20T19:27:39+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-compare-version-numbers</id>
+=======
+    <link href="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-compare-version-numbers/"/>
+    <updated>2015-03-20T19:27:39+08:00</updated>
+    <id>http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-compare-version-numbers</id>
+>>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>Compare two version numbers version1 and version2.  <br/>
 If version1 > version2 return 1, if version1 &lt; version2 return -1, otherwise return 0.</p>
 
