@@ -2,17 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[sumomoshinqi]]></title>
-<<<<<<< HEAD
   <link href="http://www.sumomoshinqi.com/atom.xml" rel="self"/>
   <link href="http://www.sumomoshinqi.com/"/>
   <updated>2015-08-14T16:01:16+08:00</updated>
   <id>http://www.sumomoshinqi.com/</id>
-=======
-  <link href="http://sumomoshinqi.github.io/atom.xml" rel="self"/>
-  <link href="http://sumomoshinqi.github.io/"/>
-  <updated>2015-08-09T22:32:33+08:00</updated>
-  <id>http://sumomoshinqi.github.io/</id>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
     <email><![CDATA[edam.lqq@gmail.com]]></email>
@@ -22,15 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Fix annoying perl locale warnings]]></title>
-<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/08/09/fix-annoying-perl-locale-warnings/"/>
     <updated>2015-08-09T22:22:07+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/08/09/fix-annoying-perl-locale-warnings</id>
-=======
-    <link href="http://sumomoshinqi.github.io/blog/2015/08/09/fix-annoying-perl-locale-warnings/"/>
-    <updated>2015-08-09T22:22:07+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/08/09/fix-annoying-perl-locale-warnings</id>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>When I was setting up Postgres on a new Linux VM server last Friday, a perl warning was keeping showing up.</p>
 
 <!--more-->
@@ -147,15 +134,9 @@
   
   <entry>
     <title type="html"><![CDATA[New partition set up on Linux]]></title>
-<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/08/09/new-partition-set-up-on-linux/"/>
     <updated>2015-08-09T15:54:16+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/08/09/new-partition-set-up-on-linux</id>
-=======
-    <link href="http://sumomoshinqi.github.io/blog/2015/08/09/new-partition-set-up-on-linux/"/>
-    <updated>2015-08-09T15:54:16+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/08/09/new-partition-set-up-on-linux</id>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>This article demonstrates how to set up new disk partition and make it auto-mounted on boot via Linux CLI. Instance here is a Ubuntu 12.04 remote server which just has a new disk attached to.</p>
 
 <!--more-->
@@ -523,15 +504,9 @@
   
   <entry>
     <title type="html"><![CDATA[Customize MongoDB maxConn]]></title>
-<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/08/08/customize-mongodb-maxconn/"/>
     <updated>2015-08-08T23:29:05+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/08/08/customize-mongodb-maxconn</id>
-=======
-    <link href="http://sumomoshinqi.github.io/blog/2015/08/08/customize-mongodb-maxconn/"/>
-    <updated>2015-08-08T23:29:05+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/08/08/customize-mongodb-maxconn</id>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>Sometimes we need MongoDB support very large number of concurrent connections. To do that, following configurations should be modified.</p>
 
 <!--more-->
@@ -700,15 +675,9 @@ It now looks something like</p>
   
   <entry>
     <title type="html"><![CDATA[Add a "Plugged In" notification sound for Mac]]></title>
-<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/06/23/add-a-plugged-notification-sound-for-mac/"/>
     <updated>2015-06-23T19:37:02+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/06/23/add-a-plugged-notification-sound-for-mac</id>
-=======
-    <link href="http://sumomoshinqi.github.io/blog/2015/06/23/add-a-plugged-notification-sound-for-mac/"/>
-    <updated>2015-06-23T19:37:02+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/06/23/add-a-plugged-notification-sound-for-mac</id>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>iPhone has a special notification sound when plugged in.<br/>
 In fact, Mac can do that too!</p>
 
@@ -745,26 +714,16 @@ Enter</p>
   
   <entry>
     <title type="html"><![CDATA[8 bit CPU design]]></title>
-<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/05/05/8-bit-cpu-design/"/>
     <updated>2015-05-05T14:02:05+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/05/05/8-bit-cpu-design</id>
-=======
-    <link href="http://sumomoshinqi.github.io/blog/2015/05/05/8-bit-cpu-design/"/>
-    <updated>2015-05-05T14:02:05+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/05/05/8-bit-cpu-design</id>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>Finally it works! 😂</p>
 
 <!--more-->
 
 
 <p>Design pattern<br/>
-<<<<<<< HEAD
 <img src="http://www.sumomoshinqi.com/images/posts/8bitcpu_design.png" alt="design pattern" /></p>
-=======
-<img src="http://sumomoshinqi.github.io/images/posts/8bitcpu_design.png" alt="design pattern" /></p>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
 
 <p>Source code of my CPU VHDL implementation on a Xilinx XC2S150 FPGA.</p>
 
@@ -2208,15 +2167,9 @@ Enter</p>
   
   <entry>
     <title type="html"><![CDATA[Code Jam Qualification Round 2015]]></title>
-<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/04/12/code-jam-qualification-round-2015/"/>
     <updated>2015-04-12T13:56:09+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/04/12/code-jam-qualification-round-2015</id>
-=======
-    <link href="http://sumomoshinqi.github.io/blog/2015/04/12/code-jam-qualification-round-2015/"/>
-    <updated>2015-04-12T13:56:09+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/04/12/code-jam-qualification-round-2015</id>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<h4>Problem A. Standing Ovation</h4>
 
 <p>Problem</p>
@@ -2691,11 +2644,7 @@ Input</p>
 
 <p>You were marked down one point on an algorithms exam for misspelling &ldquo;Dijkstra&rdquo; &ndash; between D and stra, you wrote some number of characters, each of which was either i, j, or k. You are prepared to argue to get your point back using quaternions, an actual number system (extended from complex numbers) with the following multiplicative structure:</p>
 
-<<<<<<< HEAD
 <p><img src="http://www.sumomoshinqi.com/images/posts/2015-4-12-Dijkstra.jpeg" alt="Dijkstra" /></p>
-=======
-<p><img src="http://sumomoshinqi.github.io/images/posts/2015-4-12-Dijkstra.jpeg" alt="Dijkstra" /></p>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
 
 <p>To multiply one quaternion by another, look at the row for the first quaternion and the column for the second quaternion. For example, to multiply i by j, look in the row for i and the column for j to find that the answer is k. To multiply j by i, look in the row for j and the column for i to find that the answer is -k.</p>
 
@@ -2988,19 +2937,11 @@ Input</p>
 
 <p>An N-omino is a two-dimensional shape formed by joining N unit cells fully along their edges in some way. More formally, a 1-omino is a 1x1 unit square, and an N-omino is an (N-1)omino with one or more of its edges joined to an adjacent 1x1 unit square. For the purpose of this problem, we consider two N-ominoes to be the same if one can be transformed into the other via reflection and/or rotation. For example, these are the five possible 4-ominoes:</p>
 
-<<<<<<< HEAD
 <p><img src="http://www.sumomoshinqi.com/images/posts/2015-4-12-omino.png" alt="Omino1" /></p>
 
 <p>And here are some of the 108 possible 7-ominoes:</p>
 
 <p><img src="http://www.sumomoshinqi.com/images/posts/2015-4-12-7-omino.png" alt="Omino2" /></p>
-=======
-<p><img src="http://sumomoshinqi.github.io/images/posts/2015-4-12-omino.png" alt="Omino1" /></p>
-
-<p>And here are some of the 108 possible 7-ominoes:</p>
-
-<p><img src="http://sumomoshinqi.github.io/images/posts/2015-4-12-7-omino.png" alt="Omino2" /></p>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
 
 <p>Richard and Gabriel are going to play a game with the following rules, for some predetermined values of <em>X</em>, <em>R</em>, and <em>C</em>:</p>
 
@@ -3145,15 +3086,9 @@ Limits</p>
   
   <entry>
     <title type="html"><![CDATA[[LeetCode]Excel Sheet Column Title]]></title>
-<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/04/07/leetcode-excel-sheet-column-title/"/>
     <updated>2015-04-07T21:13:20+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/04/07/leetcode-excel-sheet-column-title</id>
-=======
-    <link href="http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title/"/>
-    <updated>2015-04-07T21:13:20+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/04/07/leetcode-excel-sheet-column-title</id>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>Given a positive integer, return its corresponding column title as appear in an Excel sheet.</p>
 
 <!--more-->
@@ -3234,15 +3169,9 @@ Limits</p>
   
   <entry>
     <title type="html"><![CDATA[[CSAPP] Data Lab]]></title>
-<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/03/23/csapp-data-lab/"/>
     <updated>2015-03-23T16:34:31+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/03/23/csapp-data-lab</id>
-=======
-    <link href="http://sumomoshinqi.github.io/blog/2015/03/23/csapp-data-lab/"/>
-    <updated>2015-03-23T16:34:31+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/03/23/csapp-data-lab</id>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>Data Lab: Manipulating Bits</p>
 
 <!--more-->
@@ -4333,15 +4262,9 @@ Limits</p>
   
   <entry>
     <title type="html"><![CDATA[[LeetCode]Climbing Stairs]]></title>
-<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-climbing-stairs/"/>
     <updated>2015-03-20T20:01:00+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-climbing-stairs</id>
-=======
-    <link href="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-climbing-stairs/"/>
-    <updated>2015-03-20T20:01:00+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-climbing-stairs</id>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>You are climbing a stair case. It takes n steps to reach to the top.</p>
 
 <p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
@@ -4386,15 +4309,9 @@ Limits</p>
   
   <entry>
     <title type="html"><![CDATA[[LeetCode]Majority Element]]></title>
-<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-majority-element/"/>
     <updated>2015-03-20T19:57:22+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-majority-element</id>
-=======
-    <link href="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element/"/>
-    <updated>2015-03-20T19:57:22+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-majority-element</id>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>Given an array of size n, find the majority element. The majority element is the element that appears more than <em>⌊ n/2 ⌋</em> times.</p>
 
 <p>You may assume that the array is non-empty and the majority element always exist in the array.</p>
@@ -4427,15 +4344,9 @@ Limits</p>
   
   <entry>
     <title type="html"><![CDATA[[LeetCode]Compare Version Numbers]]></title>
-<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-compare-version-numbers/"/>
     <updated>2015-03-20T19:27:39+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-compare-version-numbers</id>
-=======
-    <link href="http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-compare-version-numbers/"/>
-    <updated>2015-03-20T19:27:39+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/03/20/leetcode-compare-version-numbers</id>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>Compare two version numbers version1 and version2.  <br/>
 If version1 > version2 return 1, if version1 &lt; version2 return -1, otherwise return 0.</p>
 
@@ -4528,7 +4439,6 @@ For instance, <code>2.5</code> is not &ldquo;two and a half&rdquo; or &ldquo;hal
   
   <entry>
     <title type="html"><![CDATA[Fixed: ARD cannot connect to Ubuntu 14.04]]></title>
-<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04/"/>
     <updated>2015-02-12T16:53:28+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04</id>
@@ -4536,15 +4446,6 @@ For instance, <code>2.5</code> is not &ldquo;two and a half&rdquo; or &ldquo;hal
 The original icon appears really big when standing on dock. I even resized it to make the icon look <em>normal</em>.</p>
 
 <p><img src="http://www.sumomoshinqi.com/images/posts/2015-02-12-dock.png" alt="dock" /></p>
-=======
-    <link href="http://sumomoshinqi.github.io/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04/"/>
-    <updated>2015-02-12T16:53:28+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve been so far using <a href="http://www.realvnc.com">RealVNC</a> as VNC client. It&rsquo;s perfect except one thing - the icon.<br/>
-The original icon appears really big when standing on dock. I even resized it to make the icon look <em>normal</em>.</p>
-
-<p><img src="http://sumomoshinqi.github.io/images/posts/2015-02-12-dock.png" alt="dock" /></p>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
 
 <!--more-->
 
@@ -4572,7 +4473,6 @@ I&rsquo;ve set up everything as usual (port, encryption, firewall &hellip;). Fin
 </ul>
 
 
-<<<<<<< HEAD
 <p><img src="http://www.sumomoshinqi.com/images/posts/2015-02-12-Ubuntu-setting.png" alt="Desktop-Sharing-setting" /></p>
 
 <p><img src="http://www.sumomoshinqi.com/images/posts/2015-02-12-gconf-Editor.png" alt="gconf-Editor" /></p>
@@ -4582,31 +4482,14 @@ I&rsquo;ve set up everything as usual (port, encryption, firewall &hellip;). Fin
 <p><img src="http://www.sumomoshinqi.com/images/posts/2015-02-12-Screen-Sharing.png" alt="Screen Sharing" /></p>
 
 <p><img src="http://www.sumomoshinqi.com/images/posts/2015-02-12-ARD.png" alt="Apple Remote Desktop" /></p>
-=======
-<p><img src="http://sumomoshinqi.github.io/images/posts/2015-02-12-Ubuntu-setting.png" alt="Desktop-Sharing-setting" /></p>
-
-<p><img src="http://sumomoshinqi.github.io/images/posts/2015-02-12-gconf-Editor.png" alt="gconf-Editor" /></p>
-
-<p>Now you can connect to the server using built-in <em>Screen Sharing</em> or <em>Apple Remote Desktop</em>.</p>
-
-<p><img src="http://sumomoshinqi.github.io/images/posts/2015-02-12-Screen-Sharing.png" alt="Screen Sharing" /></p>
-
-<p><img src="http://sumomoshinqi.github.io/images/posts/2015-02-12-ARD.png" alt="Apple Remote Desktop" /></p>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Git, fatal: The remote end hung up unexpectedly]]></title>
-<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/02/03/git/"/>
     <updated>2015-02-03T16:38:18+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/02/03/git</id>
-=======
-    <link href="http://sumomoshinqi.github.io/blog/2015/02/03/git/"/>
-    <updated>2015-02-03T16:38:18+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/02/03/git</id>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>Didn&rsquo;t expect that this would be my first post except the one for testing.😉</p>
 
 <p>So there was a problem when I had changed the blog theme and tried to <code>rake deploy</code>.</p>
@@ -4614,11 +4497,7 @@ I&rsquo;ve set up everything as usual (port, encryption, firewall &hellip;). Fin
 <!--more-->
 
 
-<<<<<<< HEAD
 <p><img src="http://www.sumomoshinqi.com/images/posts/2015-02-03-git.png" alt="problem" /></p>
-=======
-<p><img src="http://sumomoshinqi.github.io/images/posts/2015-02-03-git.png" alt="problem" /></p>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
 
 <p>Then I looked up stackoverflow and found it was due to git/https buffer settings, which means the size of my <strong>push</strong> was larger than the buffer size. In order to solve it, simply <code>git config http.postBuffer 524288000</code> and it just worked.</p>
 ]]></content>
@@ -4626,15 +4505,9 @@ I&rsquo;ve set up everything as usual (port, encryption, firewall &hellip;). Fin
   
   <entry>
     <title type="html"><![CDATA[Test Post]]></title>
-<<<<<<< HEAD
     <link href="http://www.sumomoshinqi.com/blog/2015/02/03/test-post/"/>
     <updated>2015-02-03T16:36:18+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/02/03/test-post</id>
-=======
-    <link href="http://sumomoshinqi.github.io/blog/2015/02/03/test-post/"/>
-    <updated>2015-02-03T16:36:18+08:00</updated>
-    <id>http://sumomoshinqi.github.io/blog/2015/02/03/test-post</id>
->>>>>>> 4068990c8ad5ab2d3d7a5493d720dd4d8b2fc1c1
     <content type="html"><![CDATA[<p>Testing post</p>
 
 <p>中文显示测试</p>
