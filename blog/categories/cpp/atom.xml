@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: cpp | sumomoshinqi]]></title>
+  <link href="http://www.sumomoshinqi.com/blog/categories/cpp/atom.xml" rel="self"/>
+  <link href="http://www.sumomoshinqi.com/"/>
+  <updated>2015-08-14T16:01:16+08:00</updated>
+  <id>http://www.sumomoshinqi.com/</id>
+  <author>
+    <name><![CDATA[sumomoshinqi]]></name>
+    <email><![CDATA[edam.lqq@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[LeetCode]Excel Sheet Column Title]]></title>
+    <link href="http://www.sumomoshinqi.com/blog/2015/04/07/leetcode-excel-sheet-column-title/"/>
+    <updated>2015-04-07T21:13:20+08:00</updated>
+    <id>http://www.sumomoshinqi.com/blog/2015/04/07/leetcode-excel-sheet-column-title</id>
+    <content type="html"><![CDATA[<p>Given a positive integer, return its corresponding column title as appear in an Excel sheet.</p>
+
+<!--more-->
+
+
+<p>For example:
+<code>
+    1 -&gt; A
+    2 -&gt; B
+    3 -&gt; C
+    ...
+    26 -&gt; Z
+    27 -&gt; AA
+    28 -&gt; AB
+</code></p>
+
+<p>Here is a very short C++ solution using charactor lookup array.</p>
+
+<p>The idea behind this algorithm is coming from the following numeric representation mapping to charactors:
+<code>
+   A       B             Z  
+1+26*0, 2+26*0, ..., 26+26*0  
+  AA      AB            AZ    
+1+26*1, 2+26*1, ..., 26+26*1   
+  BA      BB            BZ     
+1+26*2, 2+26*2, ..., 26+26*2   
+</code></p>
+
+<p>And we use a <em>tricky</em> charactor map which starts from &lsquo;Z&rsquo;.</p>
+
+<pre><code class="Cpp Excel Sheet Column Title">class Solution {
+public:
+    string convertToTitle(int n) {
+        string map = "ZABCDEFGHIJKLMNOPQRSTUVWXY";
+        string result;
+
+        while (n) {
+            result = map[n-- % 26] + result;
+            n /= 26;
+        }
+
+        return result;
+    }
+};
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
