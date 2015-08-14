@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: vnc | sumomoshinqi]]></title>
+  <link href="http://www.sumomoshinqi.com/blog/categories/vnc/atom.xml" rel="self"/>
+  <link href="http://www.sumomoshinqi.com/"/>
+  <updated>2015-08-14T16:53:19+08:00</updated>
+  <id>http://www.sumomoshinqi.com/</id>
+  <author>
+    <name><![CDATA[sumomoshinqi]]></name>
+    <email><![CDATA[edam.lqq@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Fixed: ARD cannot connect to Ubuntu 14.04]]></title>
+    <link href="http://www.sumomoshinqi.com/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04/"/>
+    <updated>2015-02-12T16:53:28+08:00</updated>
+    <id>http://www.sumomoshinqi.com/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been so far using <a href="http://www.realvnc.com">RealVNC</a> as VNC client. It&rsquo;s perfect except one thing - the icon.<br/>
+The original icon appears really big when standing on dock. I even resized it to make the icon look <em>normal</em>.</p>
+
+<p><img src="/images/posts/2015-02-12-dock.png" alt="dock" /></p>
+
+<!--more-->
+
+
+<p>But what about the OS X&rsquo;s built-in <em>Screen Sharing</em>? Well, here comes the problems.</p>
+
+<blockquote><p>Connection failed to “XXX&rsquo;s remote desktop on XXX”. The software on the remote computer appears to be incompatible with this version of Screen Sharing.</p></blockquote>
+
+<p>This message was showing up again and again when I tried to connect to a server running Ubuntu 14.04.<br/>
+I&rsquo;ve set up everything as usual (port, encryption, firewall &hellip;). Finally I made it work.</p>
+
+<p>In fact this issue was caused by a <a href="https://bugs.launchpad.net/ubuntu/+source/vino/+bug/1281250">BUG</a> introduced into <a href="https://wiki.gnome.org/Projects/Vino">Vino</a> (Default VNC server for GNOME).</p>
+
+<h4>Here&rsquo;s the solution:</h4>
+
+<ul>
+<li>Make sure <code>Desktop Sharing</code> has been set up properly.</li>
+<li>Install <code>gconf-tools</code>. e.g. &lsquo;sudo apt-get install dconf-tools&rsquo;</li>
+<li>Run <code>dconf-Editor</code>.</li>
+<li>Expand &lsquo;org&rsquo;</li>
+<li>Expand &lsquo;gnome&rsquo;</li>
+<li>Expand &lsquo;Desktop&rsquo;</li>
+<li>Select &lsquo;Remote Access&rsquo;</li>
+<li>Uncheck &lsquo;Require Encrption&rsquo;</li>
+</ul>
+
+
+<p><img src="/images/posts/2015-02-12-Ubuntu-setting.png" alt="Desktop-Sharing-setting" /></p>
+
+<p><img src="/images/posts/2015-02-12-gconf-Editor.png" alt="gconf-Editor" /></p>
+
+<p>Now you can connect to the server using built-in <em>Screen Sharing</em> or <em>Apple Remote Desktop</em>.</p>
+
+<p><img src="/images/posts/2015-02-12-Screen-Sharing.png" alt="Screen Sharing" /></p>
+
+<p><img src="/images/posts/2015-02-12-ARD.png" alt="Apple Remote Desktop" /></p>
+]]></content>
+  </entry>
+  
+</feed>
