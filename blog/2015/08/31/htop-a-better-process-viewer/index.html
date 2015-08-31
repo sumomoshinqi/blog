@@ -5,26 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Fix annoying perl locale warnings - sumomoshinqi</title>
+  <title>htop - A better process viewer - sumomoshinqi</title>
   <meta name="author" content="sumomoshinqi">
 
   
-  <meta name="description" content="When I was setting up Postgres on a new Linux VM server last Friday, a perl warning was keeping showing up. 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16 &hellip;">
+  <meta name="description" content="Here&rsquo;s a very good article about the interactive process viewer htop. I even replace the original top with htop after trying it. For fishshell &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -33,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.sumomoshinqi.com/blog/2015/08/09/fix-annoying-perl-locale-warnings/">
+  <link rel="canonical" href="http://www.sumomoshinqi.com/blog/2015/08/31/htop-a-better-process-viewer/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -95,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Fix Annoying Perl Locale Warnings</h1>
+      <h1 class="entry-title">Htop - a Better Process Viewer</h1>
     
     
       <p class="meta">
@@ -104,7 +89,7 @@
 
 
 
-<time class='entry-date' datetime='2015-08-09T22:22:07+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:22 pm</span></time>
+<time class='entry-date' datetime='2015-08-31T12:59:29+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>12:59 pm</span></time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -113,117 +98,23 @@
   </header>
 
 
-<div class="entry-content"><p>When I was setting up Postgres on a new Linux VM server last Friday, a perl warning was keeping showing up.</p>
-
-<!--more-->
+<div class="entry-content"><!-- more -->
 
 
+<p>Here&rsquo;s a very good <a href="https://delightlylinux.wordpress.com/2014/03/24/htop-a-better-process-viewer-then-top/">article</a> about the interactive process viewer <a href="http://hisham.hm/htop/"><strong>htop</strong></a>.</p>
 
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>perl: warning: Setting locale failed.
-</span><span class='line'>perl: warning: Please check that your locale settings:
-</span><span class='line'>  LANGUAGE = (unset),
-</span><span class='line'>  LC_ALL = (unset),
-</span><span class='line'>  LC_PAPER = &quot;zh_CN.UTF-8&quot;,
-</span><span class='line'>  LC_ADDRESS = &quot;zh_CN.UTF-8&quot;,
-</span><span class='line'>  LC_MONETARY = &quot;zh_CN.UTF-8&quot;,
-</span><span class='line'>  LC_NUMERIC = &quot;zh_CN.UTF-8&quot;,
-</span><span class='line'>  LC_TELEPHONE = &quot;zh_CN.UTF-8&quot;,
-</span><span class='line'>  LC_IDENTIFICATION = &quot;zh_CN.UTF-8&quot;,
-</span><span class='line'>  LC_MEASUREMENT = &quot;zh_CN.UTF-8&quot;,
-</span><span class='line'>  LC_TIME = &quot;zh_CN.UTF-8&quot;,
-</span><span class='line'>  LC_NAME = &quot;zh_CN.UTF-8&quot;,
-</span><span class='line'>  LANG = &quot;en_US.UTF-8&quot;
-</span><span class='line'>    are supported and installed on your system.
-</span><span class='line'>perl: warning: Falling back to the standard locale (&quot;C&quot;).
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Well it&rsquo;s annoying. XD</p>
-
-<p>Alright let&rsquo;s fix this.</p>
+<p>I even replace the original <strong>top</strong> with <strong>htop</strong> after trying it. For <strong>fishshell</strong> users, you can do this by adding a new function at the end of your <code>~/.config/fish/config.fish</code>:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo locale-gen en_US en_US.UTF-8
-</span><span class='line'><span class="o">[</span>sudo<span class="o">]</span> password <span class="k">for</span> administrator:
-</span><span class='line'>Generating locales...
-</span><span class='line'>  en_US.ISO-8859-1... <span class="k">done</span>
-</span><span class='line'>  en_US.UTF-8... up-to-date
-</span><span class='line'>Generation complete.
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="k">function</span> top
+</span><span class='line'>  <span class="nb">command </span>htop
+</span><span class='line'>end
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Then</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo dpkg-reconfigure locales
-</span><span class='line'>Generating locales...
-</span><span class='line'>  en_AG.UTF-8... <span class="k">done</span>
-</span><span class='line'>  en_AU.UTF-8... <span class="k">done</span>
-</span><span class='line'>  en_BW.UTF-8... <span class="k">done</span>
-</span><span class='line'>  en_CA.UTF-8... <span class="k">done</span>
-</span><span class='line'>  en_DK.UTF-8... <span class="k">done</span>
-</span><span class='line'>  en_GB.UTF-8... <span class="k">done</span>
-</span><span class='line'>  en_HK.UTF-8... <span class="k">done</span>
-</span><span class='line'>  en_IE.UTF-8... <span class="k">done</span>
-</span><span class='line'>  en_IN.UTF-8... <span class="k">done</span>
-</span><span class='line'>  en_NG.UTF-8... <span class="k">done</span>
-</span><span class='line'>  en_NZ.UTF-8... <span class="k">done</span>
-</span><span class='line'>  en_PH.UTF-8... <span class="k">done</span>
-</span><span class='line'>  en_SG.UTF-8... <span class="k">done</span>
-</span><span class='line'>  en_US.ISO-8859-1... up-to-date
-</span><span class='line'>  en_US.UTF-8... up-to-date
-</span><span class='line'>  en_ZA.UTF-8... <span class="k">done</span>
-</span><span class='line'>  en_ZM.UTF-8... <span class="k">done</span>
-</span><span class='line'>  en_ZW.UTF-8... <span class="k">done</span>
-</span><span class='line'>  zh_CN.UTF-8... up-to-date
-</span><span class='line'>Generation complete.
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>OK. Done. I guess there was a way to simply ignore these settings. Whatever.</p>
+<p><img src="/images/posts/htop-screenshot.png" alt="htop-screenshot" /></p>
 </div>
 
 
@@ -239,7 +130,7 @@
 
 
 
-<time class='entry-date' datetime='2015-08-09T22:22:07+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:22 pm</span></time>
+<time class='entry-date' datetime='2015-08-31T12:59:29+08:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>12:59 pm</span></time>
       
 
 <span class="categories">
@@ -253,7 +144,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.sumomoshinqi.com/blog/2015/08/09/fix-annoying-perl-locale-warnings/" data-via="sumomoshinqi" data-counturl="http://www.sumomoshinqi.com/blog/2015/08/09/fix-annoying-perl-locale-warnings/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.sumomoshinqi.com/blog/2015/08/31/htop-a-better-process-viewer/" data-via="sumomoshinqi" data-counturl="http://www.sumomoshinqi.com/blog/2015/08/31/htop-a-better-process-viewer/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -279,10 +170,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/08/09/new-partition-set-up-on-linux/" title="Previous Post: New partition set up on Linux">&laquo; New partition set up on Linux</a>
+        <a class="basic-alignment left" href="/blog/2015/08/09/fix-annoying-perl-locale-warnings/" title="Previous Post: Fix annoying perl locale warnings">&laquo; Fix annoying perl locale warnings</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/08/31/htop-a-better-process-viewer/" title="Next Post: htop - A better process viewer">htop - A better process viewer &raquo;</a>
       
     </p>
   </footer>
@@ -377,8 +266,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.sumomoshinqi.com/blog/2015/08/09/fix-annoying-perl-locale-warnings/';
-        var disqus_url = 'http://www.sumomoshinqi.com/blog/2015/08/09/fix-annoying-perl-locale-warnings/';
+        var disqus_identifier = 'http://www.sumomoshinqi.com/blog/2015/08/31/htop-a-better-process-viewer/';
+        var disqus_url = 'http://www.sumomoshinqi.com/blog/2015/08/31/htop-a-better-process-viewer/';
         var disqus_script = 'embed.js';
       
     (function () {

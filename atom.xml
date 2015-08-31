@@ -4,7 +4,7 @@
   <title><![CDATA[sumomoshinqi]]></title>
   <link href="http://www.sumomoshinqi.com/atom.xml" rel="self"/>
   <link href="http://www.sumomoshinqi.com/"/>
-  <updated>2015-08-30T16:41:59+08:00</updated>
+  <updated>2015-08-31T13:15:17+08:00</updated>
   <id>http://www.sumomoshinqi.com/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[htop - A better process viewer]]></title>
+    <link href="http://www.sumomoshinqi.com/blog/2015/08/31/htop-a-better-process-viewer/"/>
+    <updated>2015-08-31T12:59:29+08:00</updated>
+    <id>http://www.sumomoshinqi.com/blog/2015/08/31/htop-a-better-process-viewer</id>
+    <content type="html"><![CDATA[<!-- more -->
+
+
+<p>Here&rsquo;s a very good <a href="https://delightlylinux.wordpress.com/2014/03/24/htop-a-better-process-viewer-then-top/">article</a> about the interactive process viewer <a href="http://hisham.hm/htop/"><strong>htop</strong></a>.</p>
+
+<p>I even replace the original <strong>top</strong> with <strong>htop</strong> after trying it. For <strong>fishshell</strong> users, you can do this by adding a new function at the end of your <code>~/.config/fish/config.fish</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="k">function</span> top
+</span><span class='line'>  <span class="nb">command </span>htop
+</span><span class='line'>end
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://www.sumomoshinqi.com/images/posts/htop-screenshot.png" alt="htop-screenshot" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Fix annoying perl locale warnings]]></title>
