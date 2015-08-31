@@ -12,16 +12,16 @@ My name is _李秦琦_ (Lǐ Qín Qí). I also use *Edam Lee* as English name, so
 
 I was born in [Yangzhou](http://en.wikipedia.org/wiki/Yangzhou) and am now living in [Shanghai](http://en.wikipedia.org/wiki/Shanghai) studying computer science at [Fudan University](http://en.wikipedia.org/wiki/Fudan_University).  
 
-As a developer, I use multiple programming languages such as C/C++, Python, Obj-C, C#, Bash. I do most stuffs on my Mac and am familiar with Unix/Linux platform. While doing independent development, I’m a beginner of computer vision reseacher.  
+As a developer, I use multiple programming languages such as C/C++, Python, Obj-C, C#, Bash. I do most stuffs on my Mac and am familiar with Unix/Linux platforms. While doing independent development, I’m also a beginner of computer vision reseacher.  
 
 I speak Mandarin, English and limited Japanese. Lover of animes and rhythm games<del>, also a master of cooking</del>.  
 
-You can get in touch with me using any of the methods on the sidebar. Or just send your message to edam.lqq AT gmail.com. I use this account for instant messaging services like iMessage, WhatsApp and Viber as well.
+You can get in touch with me using any of the methods on the sidebar. Or just send your message via *i AT qinqi.li*.
 
 
 
 ### About this blog
-I'll write down ideas, interesting findings and experience of daily life here. I may also share some technical stuffs.    
+I'll write down ideas, interesting discovery and experience of daily life here. I may also share some technical stuff.    
 
 This blog is built and published with the wonderful [Octopress](http://octopress.org), using [Disqus](https://disqus.com) for comments.  
 
