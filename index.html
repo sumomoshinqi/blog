@@ -9,7 +9,7 @@
   <meta name="author" content="sumomoshinqi">
 
   
-  <meta name="description" content="">
+  <meta name="description" content="So far, there has been several well-known tools such as Trim Enabler for enabling Trim on OS X. In the latest update of OS X 10.10.4, Apple silently &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,69 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/09/29/enable-trim-for-yosemite-or-later/">Enable TRIM for Yosemite or Later</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-09-29T23:01:31+08:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:01 pm</span></time>
+        
+         | <a href="/blog/2015/09/29/enable-trim-for-yosemite-or-later/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>So far, there has been several well-known tools such as <a href="https://www.cindori.org/software/trimenabler/">Trim Enabler</a> for enabling Trim on OS X.</p>
+
+<p>In the latest update of OS X 10.10.4, Apple silently added a new tool called <strong>trimforce</strong> for such use as well. After suffering from the &ldquo;prohibitory&rdquo; sign on booting, I chose to enable Trim with trimforce this time. It worked. :-)</p>
+
+<p>Here&rsquo;s the manual for trimforce</p>
+
+<p><img src="/images/posts/TRIMFORCE-manual.png" alt="TRIM-manual" /></p>
+
+<p>Command to use trimforce is <code>sudo trimforce enable</code>, after which you&rsquo;ll see as following.</p>
+
+<p><img src="/images/posts/TRIMFORCE-screenshot.png" alt="TRIM-screenshot" /></p>
+
+<p>In case someone else is seeing the weird &ldquo;prohibitory&rdquo; sign on booting, here&rsquo;s how to fix it.</p>
+
+<ol>
+<li><p>Reboot and press Command+R to enter Recovery Mode.</p></li>
+<li><p>Open Terminal from the menu.</p></li>
+<li><p>Type following commands. Note, you may replace <em>YOURDISKNAME</em> with your disk name which can be found from  <code>ls /Volumes/</code>.</p></li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>rm -rf /Volumes/YOURDISKNAME/System/Library/Extensions/IOAHCIFamily.kext
+</span><span class='line'>cp -r /System/Library/Extensions/IOAHCIFamily.kext /Volumes/YOURDISKNAME/System/Library/Extensions/IOAHCIFamily.kext
+</span><span class='line'>touch /Volumes/YOURDISKNAME/System/Library/Extensions
+</span><span class='line'>kextcache -u /Volumes/YOURDISKNAME
+</span><span class='line'>reboot
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -429,44 +492,6 @@ Enter</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/20/leetcode-climbing-stairs/">[LeetCode]Climbing Stairs</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-20T20:01:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:01 pm</span></time>
-        
-         | <a href="/blog/2015/03/20/leetcode-climbing-stairs/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>You are climbing a stair case. It takes n steps to reach to the top.</p>
-
-<p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/03/20/leetcode-climbing-stairs/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="2">&larr; Older</a>
@@ -499,9 +524,9 @@ Enter</p>
 <li class='category'><a href='/blog/categories/leetcode/'>leetcode (4)</a></li>
 <li class='category'><a href='/blog/categories/linux/'>linux (4)</a></li>
 <li class='category'><a href='/blog/categories/mongodb/'>mongodb (1)</a></li>
-<li class='category'><a href='/blog/categories/os-x/'>os x (1)</a></li>
+<li class='category'><a href='/blog/categories/os-x/'>os x (2)</a></li>
 <li class='category'><a href='/blog/categories/testing/'>testing (1)</a></li>
-<li class='category'><a href='/blog/categories/tips/'>tips (3)</a></li>
+<li class='category'><a href='/blog/categories/tips/'>tips (4)</a></li>
 <li class='category'><a href='/blog/categories/vhdl/'>vhdl (1)</a></li>
 <li class='category'><a href='/blog/categories/vnc/'>vnc (1)</a></li>
 
@@ -509,6 +534,10 @@ Enter</p>
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/09/29/enable-trim-for-yosemite-or-later/">Enable TRIM for Yosemite or later</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/08/31/htop-a-better-process-viewer/">htop - A better process viewer</a>
@@ -524,10 +553,6 @@ Enter</p>
     
       <li class="post">
         <a href="/blog/2015/08/08/customize-mongodb-maxconn/">Customize MongoDB maxConn</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/06/23/add-a-plugged-notification-sound-for-mac/">Add a &#8220;Plugged In&#8221; notification sound for Mac</a>
       </li>
     
   </ul>
