@@ -10,7 +10,8 @@ So far, there has been several well-known tools such as [Trim Enabler](https://w
 
 In the latest update of OS X 10.10.4, Apple silently added a new tool called **trimforce** for such use as well. After suffering from the "prohibitory" sign on booting, I chose to enable Trim with trimforce this time. It worked. :-)
 
-Here's the manual for trimforce  
+Here's the manual for trimforce
+<!--more-->  
 
 ![TRIM-manual](/images/posts/TRIMFORCE-manual.png)  
 
