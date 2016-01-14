@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tips | sumomoshinqi]]></title>
   <link href="http://www.sumomoshinqi.com/blog/categories/tips/atom.xml" rel="self"/>
   <link href="http://www.sumomoshinqi.com/"/>
-  <updated>2015-09-29T23:36:50+08:00</updated>
+  <updated>2016-01-14T16:49:24+08:00</updated>
   <id>http://www.sumomoshinqi.com/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -139,9 +139,7 @@ I&rsquo;ve set up everything as usual (port, encryption, firewall &hellip;). Fin
     <link href="http://www.sumomoshinqi.com/blog/2015/02/03/git/"/>
     <updated>2015-02-03T16:38:18+08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/02/03/git</id>
-    <content type="html"><![CDATA[<p>Didn&rsquo;t expect that this would be my first post except the one for testing.😉</p>
-
-<p>So there was a problem when I had changed the blog theme and tried to <code>rake deploy</code>.</p>
+    <content type="html"><![CDATA[<p>There was a problem when I had changed the blog theme and tried to <code>rake deploy</code>.</p>
 
 <!--more-->
 
