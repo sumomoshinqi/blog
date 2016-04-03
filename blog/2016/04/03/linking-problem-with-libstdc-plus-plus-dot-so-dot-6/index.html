@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: os x - sumomoshinqi</title>
+  <title>Linking problem with libstdc++.so.6 - sumomoshinqi</title>
   <meta name="author" content="sumomoshinqi">
 
   
-  <meta name="description" content="Category: os x">
+  <meta name="description" content="I encountered a problem while compiling a C++ project under CLion.
+There&rsquo;s an error about undefined reference as shown below. I was on Ubuntu &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.sumomoshinqi.com/blog/categories/os-x/">
+  <link rel="canonical" href="http://www.sumomoshinqi.com/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -76,50 +77,129 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Os X</h1>
+    
+      <h1 class="entry-title">Linking Problem With libstdc++.so.6</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-04-03T13:53:58+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2016</span></span> <span class='time'>1:53 pm</span></time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>I encountered a problem while compiling a C++ project under CLion.
+There&rsquo;s an error about undefined reference as shown below.
+<img src="/images/posts/2016-04-03-link.png" alt="link" />
+I was on Ubuntu 14.04 and using Clang. But what is &ldquo;_ZNSs4_Rep10_M_destroyERKSaIcE@@GLIBCXX_3.4&rdquo;?</p>
 
-  
-  <h2>2015</h2>
+<p><strong>SOLUTION</strong><br/>
+Add the following parameters:<br/>
+<strong>-L /usr/lib64 -lstdc++</strong></p>
 
-<article>
-  
-<h1><a href="/blog/2015/09/29/enable-trim-for-yosemite-or-later/">Enable TRIM for Yosemite or later</a></h1>
-<time datetime="2015-09-29T23:01:31+08:00" pubdate><span class='month'>Sep</span> <span class='day'>29</span> <span class='year'>2015</span></time>
+<p>My CMakeLists.txt has this line:</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/os-x/'>os x</a>, <a class='category' href='/blog/categories/tips/'>tips</a></span>
-</footer>
-
-
-</article>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -L /usr/lib64 -lstdc++")</span></code></pre></td></tr></table></div></figure>
 
 
+<p>This will force link with stdc++. (g++ will automatically do this but gcc won&rsquo;t, not sure about clang)</p>
 
-<article>
-  
-<h1><a href="/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04/">Fixed: ARD cannot connect to Ubuntu 14.04</a></h1>
-<time datetime="2015-02-12T16:53:28+08:00" pubdate><span class='month'>Feb</span> <span class='day'>12</span> <span class='year'>2015</span></time>
+<p>I thought I was missing some lib files at first.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/os-x/'>os x</a>, <a class='category' href='/blog/categories/tips/'>tips</a>, <a class='category' href='/blog/categories/vnc/'>vnc</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>➜  ~ ldd /usr/lib/libstdc++.so.6
+</span><span class='line'>  linux-gate.so.1 =&gt;  (0xf77ab000)
+</span><span class='line'>  libm.so.6 =&gt; /lib/i386-linux-gnu/libm.so.6 (0xf7637000)
+</span><span class='line'>  libc.so.6 =&gt; /lib/i386-linux-gnu/libc.so.6 (0xf7489000)
+</span><span class='line'>  /lib/ld-linux.so.2 (0xf77ac000)
+</span><span class='line'>  libgcc_s.so.1 =&gt; /lib/i386-linux-gnu/libgcc_s.so.1 (0xf746b000)</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
-
+<p>So it&rsquo;s still the linking matter and it may due to compiler&rsquo;s default options.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">sumomoshinqi</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-04-03T13:53:58+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2016</span></span> <span class='time'>1:53 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.sumomoshinqi.com/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/" data-via="sumomoshinqi" data-counturl="http://www.sumomoshinqi.com/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+  
+     <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/09/29/enable-trim-for-yosemite-or-later/" title="Previous Post: Enable TRIM for Yosemite or later">&laquo; Enable TRIM for Yosemite or later</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -202,7 +282,10 @@
       var disqus_shortname = 'sumomoshinqi';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.sumomoshinqi.com/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/';
+        var disqus_url = 'http://www.sumomoshinqi.com/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

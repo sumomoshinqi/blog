@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | sumomoshinqi]]></title>
   <link href="http://www.sumomoshinqi.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://www.sumomoshinqi.com/"/>
-  <updated>2016-01-14T16:49:24+08:00</updated>
+  <updated>2016-04-03T15:00:14+08:00</updated>
   <id>http://www.sumomoshinqi.com/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linking problem with libstdc++.so.6]]></title>
+    <link href="http://www.sumomoshinqi.com/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/"/>
+    <updated>2016-04-03T13:53:58+08:00</updated>
+    <id>http://www.sumomoshinqi.com/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6</id>
+    <content type="html"><![CDATA[<p>I encountered a problem while compiling a C++ project under CLion.
+There&rsquo;s an error about undefined reference as shown below.
+<img src="/images/posts/2016-04-03-link.png" alt="link" />
+I was on Ubuntu 14.04 and using Clang. But what is &ldquo;_ZNSs4_Rep10_M_destroyERKSaIcE@@GLIBCXX_3.4&rdquo;?</p>
+
+<p><strong>SOLUTION</strong><br/>
+Add the following parameters:<br/>
+<strong>-L /usr/lib64 -lstdc++</strong></p>
+
+<p>My CMakeLists.txt has this line:
+<code>
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -L /usr/lib64 -lstdc++")
+</code></p>
+
+<p>This will force link with stdc++. (g++ will automatically do this but gcc won&rsquo;t, not sure about clang)</p>
+
+<p>I thought I was missing some lib files at first.
+<code>
+➜  ~ ldd /usr/lib/libstdc++.so.6
+    linux-gate.so.1 =&gt;  (0xf77ab000)
+    libm.so.6 =&gt; /lib/i386-linux-gnu/libm.so.6 (0xf7637000)
+    libc.so.6 =&gt; /lib/i386-linux-gnu/libc.so.6 (0xf7489000)
+    /lib/ld-linux.so.2 (0xf77ac000)
+    libgcc_s.so.1 =&gt; /lib/i386-linux-gnu/libgcc_s.so.1 (0xf746b000)
+</code>
+So it&rsquo;s still the linking matter and it may due to compiler&rsquo;s default options.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[htop - A better process viewer]]></title>

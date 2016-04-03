@@ -9,7 +9,8 @@
   <meta name="author" content="sumomoshinqi">
 
   
-  <meta name="description" content="So far, there has been several well-known tools such as Trim Enabler for enabling Trim on OS X. In the latest update of OS X 10.10.4, Apple silently &hellip;">
+  <meta name="description" content="I encountered a problem while compiling a C++ project under CLion.
+There&rsquo;s an error about undefined reference as shown below. I was on Ubuntu &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -49,7 +50,7 @@
   <header role="banner"><hgroup>
   <h1><a href="/">sumomoshinqi</a></h1>
   
-    <h2>Hommes∴Optarem</h2>
+    <h2>my blogspot</h2>
   
 </hgroup>
 
@@ -77,6 +78,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/">Linking Problem With libstdc++.so.6</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-04-03T13:53:58+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2016</span></span> <span class='time'>1:53 pm</span></time>
+        
+         | <a href="/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I encountered a problem while compiling a C++ project under CLion.
+There&rsquo;s an error about undefined reference as shown below.
+<img src="/images/posts/2016-04-03-link.png" alt="link" />
+I was on Ubuntu 14.04 and using Clang. But what is &ldquo;_ZNSs4_Rep10_M_destroyERKSaIcE@@GLIBCXX_3.4&rdquo;?</p>
+
+<p><strong>SOLUTION</strong><br/>
+Add the following parameters:<br/>
+<strong>-L /usr/lib64 -lstdc++</strong></p>
+
+<p>My CMakeLists.txt has this line:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -L /usr/lib64 -lstdc++")</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will force link with stdc++. (g++ will automatically do this but gcc won&rsquo;t, not sure about clang)</p>
+
+<p>I thought I was missing some lib files at first.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>➜  ~ ldd /usr/lib/libstdc++.so.6
+</span><span class='line'>  linux-gate.so.1 =&gt;  (0xf77ab000)
+</span><span class='line'>  libm.so.6 =&gt; /lib/i386-linux-gnu/libm.so.6 (0xf7637000)
+</span><span class='line'>  libc.so.6 =&gt; /lib/i386-linux-gnu/libc.so.6 (0xf7489000)
+</span><span class='line'>  /lib/ld-linux.so.2 (0xf77ac000)
+</span><span class='line'>  libgcc_s.so.1 =&gt; /lib/i386-linux-gnu/libgcc_s.so.1 (0xf746b000)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So it&rsquo;s still the linking matter and it may due to compiler&rsquo;s default options.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -433,44 +498,6 @@ Enter</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/20/leetcode-climbing-stairs/">[LeetCode]Climbing Stairs</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-20T20:01:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:01 pm</span></time>
-        
-         | <a href="/blog/2015/03/20/leetcode-climbing-stairs/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>You are climbing a stair case. It takes n steps to reach to the top.</p>
-
-<p>Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/03/20/leetcode-climbing-stairs/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="2">&larr; Older</a>
@@ -483,7 +510,7 @@ Enter</p>
   
     <section>
   <h1>About Me</h1>
-  <p>李秦琦  Edam Lee<br>Undergraduate student major in computer science at Fudan University.<br><br>I love cats.</p>
+  <p>李秦琦  Edam Lee<br>Senior undergraduate majors in computer science at Fudan University.<br><br>I love cats.</p>
   <p>Weibo:   <a href="http://weibo.com/sumomoshinqi">@sumomoshinqi</a><br/>
   人人:   <a href="http://www.renren.com/liqinqi">李秦琦</a><br/>
      Twitter: <a href="https://twitter.com/#!/sumomoshinqi">@sumomoshinqi</a><br/>
@@ -501,7 +528,7 @@ Enter</p>
 <li class='category'><a href='/blog/categories/git/'>git (1)</a></li>
 <li class='category'><a href='/blog/categories/jmeter/'>jmeter (1)</a></li>
 <li class='category'><a href='/blog/categories/leetcode/'>leetcode (4)</a></li>
-<li class='category'><a href='/blog/categories/linux/'>linux (4)</a></li>
+<li class='category'><a href='/blog/categories/linux/'>linux (5)</a></li>
 <li class='category'><a href='/blog/categories/mongodb/'>mongodb (1)</a></li>
 <li class='category'><a href='/blog/categories/os-x/'>os x (2)</a></li>
 <li class='category'><a href='/blog/categories/tips/'>tips (4)</a></li>
@@ -512,6 +539,10 @@ Enter</p>
 </section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/">Linking problem with libstdc++.so.6</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/09/29/enable-trim-for-yosemite-or-later/">Enable TRIM for Yosemite or later</a>
@@ -527,10 +558,6 @@ Enter</p>
     
       <li class="post">
         <a href="/blog/2015/08/09/new-partition-set-up-on-linux/">New partition set up on Linux</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/08/08/customize-mongodb-maxconn/">Customize MongoDB maxConn</a>
       </li>
     
   </ul>
