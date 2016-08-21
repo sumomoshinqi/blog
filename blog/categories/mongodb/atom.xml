@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mongodb | sumomoshinqi]]></title>
   <link href="http://www.sumomoshinqi.com/blog/categories/mongodb/atom.xml" rel="self"/>
   <link href="http://www.sumomoshinqi.com/"/>
-  <updated>2016-04-03T15:00:14+08:00</updated>
+  <updated>2016-08-21T15:46:45-07:00</updated>
   <id>http://www.sumomoshinqi.com/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Customize MongoDB maxConn]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/08/08/customize-mongodb-maxconn/"/>
-    <updated>2015-08-08T23:29:05+08:00</updated>
+    <updated>2015-08-08T08:29:05-07:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/08/08/customize-mongodb-maxconn</id>
     <content type="html"><![CDATA[<p>Sometimes we need MongoDB support very large number of concurrent connections. To do that, following configurations should be modified.</p>
 

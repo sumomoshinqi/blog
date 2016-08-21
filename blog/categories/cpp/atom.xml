@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cpp | sumomoshinqi]]></title>
   <link href="http://www.sumomoshinqi.com/blog/categories/cpp/atom.xml" rel="self"/>
   <link href="http://www.sumomoshinqi.com/"/>
-  <updated>2016-04-03T15:00:14+08:00</updated>
+  <updated>2016-08-21T15:46:45-07:00</updated>
   <id>http://www.sumomoshinqi.com/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[[LeetCode]Excel Sheet Column Title]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/04/07/leetcode-excel-sheet-column-title/"/>
-    <updated>2015-04-07T21:13:20+08:00</updated>
+    <updated>2015-04-07T06:13:20-07:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/04/07/leetcode-excel-sheet-column-title</id>
     <content type="html"><![CDATA[<p>Given a positive integer, return its corresponding column title as appear in an Excel sheet.</p>
 

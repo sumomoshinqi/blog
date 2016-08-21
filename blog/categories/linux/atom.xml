@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | sumomoshinqi]]></title>
   <link href="http://www.sumomoshinqi.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://www.sumomoshinqi.com/"/>
-  <updated>2016-04-03T15:00:14+08:00</updated>
+  <updated>2016-08-21T15:46:45-07:00</updated>
   <id>http://www.sumomoshinqi.com/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Linking problem with libstdc++.so.6]]></title>
-    <link href="http://www.sumomoshinqi.com/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/"/>
-    <updated>2016-04-03T13:53:58+08:00</updated>
-    <id>http://www.sumomoshinqi.com/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6</id>
+    <link href="http://www.sumomoshinqi.com/blog/2016/04/02/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/"/>
+    <updated>2016-04-02T22:53:58-07:00</updated>
+    <id>http://www.sumomoshinqi.com/blog/2016/04/02/linking-problem-with-libstdc-plus-plus-dot-so-dot-6</id>
     <content type="html"><![CDATA[<p>I encountered a problem while compiling a C++ project under CLion.
 There&rsquo;s an error about undefined reference as shown below.
 <img src="/images/posts/2016-04-03-link.png" alt="link" />
@@ -49,9 +49,9 @@ So it&rsquo;s still the linking matter and it may due to compiler&rsquo;s defaul
   
   <entry>
     <title type="html"><![CDATA[htop - A better process viewer]]></title>
-    <link href="http://www.sumomoshinqi.com/blog/2015/08/31/htop-a-better-process-viewer/"/>
-    <updated>2015-08-31T12:59:29+08:00</updated>
-    <id>http://www.sumomoshinqi.com/blog/2015/08/31/htop-a-better-process-viewer</id>
+    <link href="http://www.sumomoshinqi.com/blog/2015/08/30/htop-a-better-process-viewer/"/>
+    <updated>2015-08-30T21:59:29-07:00</updated>
+    <id>http://www.sumomoshinqi.com/blog/2015/08/30/htop-a-better-process-viewer</id>
     <content type="html"><![CDATA[<!-- more -->
 
 
@@ -71,7 +71,7 @@ So it&rsquo;s still the linking matter and it may due to compiler&rsquo;s defaul
   <entry>
     <title type="html"><![CDATA[Fix annoying perl locale warnings]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/08/09/fix-annoying-perl-locale-warnings/"/>
-    <updated>2015-08-09T22:22:07+08:00</updated>
+    <updated>2015-08-09T07:22:07-07:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/08/09/fix-annoying-perl-locale-warnings</id>
     <content type="html"><![CDATA[<p>When I was setting up Postgres on a new Linux VM server last Friday, a perl warning was keeping showing up.</p>
 
@@ -141,7 +141,7 @@ Generation complete.
   <entry>
     <title type="html"><![CDATA[New partition set up on Linux]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/08/09/new-partition-set-up-on-linux/"/>
-    <updated>2015-08-09T15:54:16+08:00</updated>
+    <updated>2015-08-09T00:54:16-07:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/08/09/new-partition-set-up-on-linux</id>
     <content type="html"><![CDATA[<p>This article demonstrates how to set up new disk partition and make it auto-mounted on boot via Linux CLI. Instance here is a Ubuntu 12.04 remote server which just has a new disk attached to.</p>
 
@@ -353,7 +353,7 @@ none                       102400       0    102400   0% /run/user
   <entry>
     <title type="html"><![CDATA[Customize MongoDB maxConn]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/08/08/customize-mongodb-maxconn/"/>
-    <updated>2015-08-08T23:29:05+08:00</updated>
+    <updated>2015-08-08T08:29:05-07:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/08/08/customize-mongodb-maxconn</id>
     <content type="html"><![CDATA[<p>Sometimes we need MongoDB support very large number of concurrent connections. To do that, following configurations should be modified.</p>
 

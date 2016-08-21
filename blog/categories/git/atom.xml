@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | sumomoshinqi]]></title>
   <link href="http://www.sumomoshinqi.com/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://www.sumomoshinqi.com/"/>
-  <updated>2016-04-03T15:00:14+08:00</updated>
+  <updated>2016-08-21T15:46:45-07:00</updated>
   <id>http://www.sumomoshinqi.com/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Git, fatal: The remote end hung up unexpectedly]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/02/03/git/"/>
-    <updated>2015-02-03T16:38:18+08:00</updated>
+    <updated>2015-02-03T00:38:18-08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/02/03/git</id>
     <content type="html"><![CDATA[<p>There was a problem when I had changed the blog theme and tried to <code>rake deploy</code>.</p>
 

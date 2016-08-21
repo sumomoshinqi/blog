@@ -4,7 +4,7 @@
   <title><![CDATA[sumomoshinqi]]></title>
   <link href="http://www.sumomoshinqi.com/atom.xml" rel="self"/>
   <link href="http://www.sumomoshinqi.com/"/>
-  <updated>2016-04-03T15:00:14+08:00</updated>
+  <updated>2016-08-21T15:46:45-07:00</updated>
   <id>http://www.sumomoshinqi.com/</id>
   <author>
     <name><![CDATA[sumomoshinqi]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Linking problem with libstdc++.so.6]]></title>
-    <link href="http://www.sumomoshinqi.com/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/"/>
-    <updated>2016-04-03T13:53:58+08:00</updated>
-    <id>http://www.sumomoshinqi.com/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6</id>
+    <link href="http://www.sumomoshinqi.com/blog/2016/04/02/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/"/>
+    <updated>2016-04-02T22:53:58-07:00</updated>
+    <id>http://www.sumomoshinqi.com/blog/2016/04/02/linking-problem-with-libstdc-plus-plus-dot-so-dot-6</id>
     <content type="html"><![CDATA[<p>I encountered a problem while compiling a C++ project under CLion.
 There&rsquo;s an error about undefined reference as shown below.
 <img src="http://www.sumomoshinqi.com/images/posts/2016-04-03-link.png" alt="link" />
@@ -58,7 +58,7 @@ Add the following parameters:<br/>
   <entry>
     <title type="html"><![CDATA[Enable TRIM for Yosemite or later]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/09/29/enable-trim-for-yosemite-or-later/"/>
-    <updated>2015-09-29T23:01:31+08:00</updated>
+    <updated>2015-09-29T08:01:31-07:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/09/29/enable-trim-for-yosemite-or-later</id>
     <content type="html"><![CDATA[<p>So far, there has been several well-known tools such as <a href="https://www.cindori.org/software/trimenabler/">Trim Enabler</a> for enabling Trim on OS X.</p>
 
@@ -103,9 +103,9 @@ Add the following parameters:<br/>
   
   <entry>
     <title type="html"><![CDATA[htop - A better process viewer]]></title>
-    <link href="http://www.sumomoshinqi.com/blog/2015/08/31/htop-a-better-process-viewer/"/>
-    <updated>2015-08-31T12:59:29+08:00</updated>
-    <id>http://www.sumomoshinqi.com/blog/2015/08/31/htop-a-better-process-viewer</id>
+    <link href="http://www.sumomoshinqi.com/blog/2015/08/30/htop-a-better-process-viewer/"/>
+    <updated>2015-08-30T21:59:29-07:00</updated>
+    <id>http://www.sumomoshinqi.com/blog/2015/08/30/htop-a-better-process-viewer</id>
     <content type="html"><![CDATA[<!-- more -->
 
 
@@ -129,7 +129,7 @@ Add the following parameters:<br/>
   <entry>
     <title type="html"><![CDATA[Fix annoying perl locale warnings]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/08/09/fix-annoying-perl-locale-warnings/"/>
-    <updated>2015-08-09T22:22:07+08:00</updated>
+    <updated>2015-08-09T07:22:07-07:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/08/09/fix-annoying-perl-locale-warnings</id>
     <content type="html"><![CDATA[<p>When I was setting up Postgres on a new Linux VM server last Friday, a perl warning was keeping showing up.</p>
 
@@ -248,7 +248,7 @@ Add the following parameters:<br/>
   <entry>
     <title type="html"><![CDATA[New partition set up on Linux]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/08/09/new-partition-set-up-on-linux/"/>
-    <updated>2015-08-09T15:54:16+08:00</updated>
+    <updated>2015-08-09T00:54:16-07:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/08/09/new-partition-set-up-on-linux</id>
     <content type="html"><![CDATA[<p>This article demonstrates how to set up new disk partition and make it auto-mounted on boot via Linux CLI. Instance here is a Ubuntu 12.04 remote server which just has a new disk attached to.</p>
 
@@ -618,7 +618,7 @@ Add the following parameters:<br/>
   <entry>
     <title type="html"><![CDATA[Customize MongoDB maxConn]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/08/08/customize-mongodb-maxconn/"/>
-    <updated>2015-08-08T23:29:05+08:00</updated>
+    <updated>2015-08-08T08:29:05-07:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/08/08/customize-mongodb-maxconn</id>
     <content type="html"><![CDATA[<p>Sometimes we need MongoDB support very large number of concurrent connections. To do that, following configurations should be modified.</p>
 
@@ -789,7 +789,7 @@ It now looks something like</p>
   <entry>
     <title type="html"><![CDATA[Add a "Plugged In" notification sound for Mac]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/06/23/add-a-plugged-notification-sound-for-mac/"/>
-    <updated>2015-06-23T19:37:02+08:00</updated>
+    <updated>2015-06-23T04:37:02-07:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/06/23/add-a-plugged-notification-sound-for-mac</id>
     <content type="html"><![CDATA[<p>iPhone has a special notification sound when plugged in.<br/>
 In fact, Mac can do that too!</p>
@@ -827,9 +827,9 @@ Enter</p>
   
   <entry>
     <title type="html"><![CDATA[8 bit CPU design]]></title>
-    <link href="http://www.sumomoshinqi.com/blog/2015/05/05/8-bit-cpu-design/"/>
-    <updated>2015-05-05T14:02:05+08:00</updated>
-    <id>http://www.sumomoshinqi.com/blog/2015/05/05/8-bit-cpu-design</id>
+    <link href="http://www.sumomoshinqi.com/blog/2015/05/04/8-bit-cpu-design/"/>
+    <updated>2015-05-04T23:02:05-07:00</updated>
+    <id>http://www.sumomoshinqi.com/blog/2015/05/04/8-bit-cpu-design</id>
     <content type="html"><![CDATA[<p>Finally it works! 😂</p>
 
 <!--more-->
@@ -2280,9 +2280,9 @@ Enter</p>
   
   <entry>
     <title type="html"><![CDATA[Code Jam Qualification Round 2015]]></title>
-    <link href="http://www.sumomoshinqi.com/blog/2015/04/12/code-jam-qualification-round-2015/"/>
-    <updated>2015-04-12T13:56:09+08:00</updated>
-    <id>http://www.sumomoshinqi.com/blog/2015/04/12/code-jam-qualification-round-2015</id>
+    <link href="http://www.sumomoshinqi.com/blog/2015/04/11/code-jam-qualification-round-2015/"/>
+    <updated>2015-04-11T22:56:09-07:00</updated>
+    <id>http://www.sumomoshinqi.com/blog/2015/04/11/code-jam-qualification-round-2015</id>
     <content type="html"><![CDATA[<h4>Problem A. Standing Ovation</h4>
 
 <p>Problem</p>
@@ -3200,7 +3200,7 @@ Limits</p>
   <entry>
     <title type="html"><![CDATA[[LeetCode]Excel Sheet Column Title]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/04/07/leetcode-excel-sheet-column-title/"/>
-    <updated>2015-04-07T21:13:20+08:00</updated>
+    <updated>2015-04-07T06:13:20-07:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/04/07/leetcode-excel-sheet-column-title</id>
     <content type="html"><![CDATA[<p>Given a positive integer, return its corresponding column title as appear in an Excel sheet.</p>
 
@@ -3283,7 +3283,7 @@ Limits</p>
   <entry>
     <title type="html"><![CDATA[[LeetCode]Climbing Stairs]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-climbing-stairs/"/>
-    <updated>2015-03-20T20:01:00+08:00</updated>
+    <updated>2015-03-20T05:01:00-07:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-climbing-stairs</id>
     <content type="html"><![CDATA[<p>You are climbing a stair case. It takes n steps to reach to the top.</p>
 
@@ -3330,7 +3330,7 @@ Limits</p>
   <entry>
     <title type="html"><![CDATA[[LeetCode]Majority Element]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-majority-element/"/>
-    <updated>2015-03-20T19:57:22+08:00</updated>
+    <updated>2015-03-20T04:57:22-07:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-majority-element</id>
     <content type="html"><![CDATA[<p>Given an array of size n, find the majority element. The majority element is the element that appears more than <em>⌊ n/2 ⌋</em> times.</p>
 
@@ -3365,7 +3365,7 @@ Limits</p>
   <entry>
     <title type="html"><![CDATA[[LeetCode]Compare Version Numbers]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-compare-version-numbers/"/>
-    <updated>2015-03-20T19:27:39+08:00</updated>
+    <updated>2015-03-20T04:27:39-07:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/03/20/leetcode-compare-version-numbers</id>
     <content type="html"><![CDATA[<p>Compare two version numbers version1 and version2.  <br/>
 If version1 > version2 return 1, if version1 &lt; version2 return -1, otherwise return 0.</p>
@@ -3460,7 +3460,7 @@ For instance, <code>2.5</code> is not &ldquo;two and a half&rdquo; or &ldquo;hal
   <entry>
     <title type="html"><![CDATA[Fixed: ARD cannot connect to Ubuntu 14.04]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04/"/>
-    <updated>2015-02-12T16:53:28+08:00</updated>
+    <updated>2015-02-12T00:53:28-08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/02/12/fixed-ard-cannot-connect-to-ubuntu-14-dot-04</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve been so far using <a href="http://www.realvnc.com">RealVNC</a> as VNC client. It&rsquo;s perfect except one thing - the icon.<br/>
 The original icon appears really big when standing on dock. I even resized it to make the icon look <em>normal</em>.</p>
@@ -3508,7 +3508,7 @@ I&rsquo;ve set up everything as usual (port, encryption, firewall &hellip;). Fin
   <entry>
     <title type="html"><![CDATA[Git, fatal: The remote end hung up unexpectedly]]></title>
     <link href="http://www.sumomoshinqi.com/blog/2015/02/03/git/"/>
-    <updated>2015-02-03T16:38:18+08:00</updated>
+    <updated>2015-02-03T00:38:18-08:00</updated>
     <id>http://www.sumomoshinqi.com/blog/2015/02/03/git</id>
     <content type="html"><![CDATA[<p>There was a problem when I had changed the blog theme and tried to <code>rake deploy</code>.</p>
 

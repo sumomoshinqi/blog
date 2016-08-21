@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Linking problem with libstdc++.so.6 - sumomoshinqi</title>
+  <title>htop - A better process viewer - sumomoshinqi</title>
   <meta name="author" content="sumomoshinqi">
 
   
-  <meta name="description" content="I encountered a problem while compiling a C++ project under CLion.
-There&rsquo;s an error about undefined reference as shown below. I was on Ubuntu &hellip;">
+  <meta name="description" content="Here&rsquo;s a very good article about the interactive process viewer htop. I even replace the original top with htop after trying it. For fishshell &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ There&rsquo;s an error about undefined reference as shown below. I was on Ubuntu
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.sumomoshinqi.com/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/">
+  <link rel="canonical" href="http://www.sumomoshinqi.com/blog/2015/08/30/htop-a-better-process-viewer/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +80,7 @@ There&rsquo;s an error about undefined reference as shown below. I was on Ubuntu
   
   <header>
     
-      <h1 class="entry-title">Linking Problem With libstdc++.so.6</h1>
+      <h1 class="entry-title">Htop - a Better Process Viewer</h1>
     
     
       <p class="meta">
@@ -90,7 +89,7 @@ There&rsquo;s an error about undefined reference as shown below. I was on Ubuntu
 
 
 
-<time class='entry-date' datetime='2016-04-03T13:53:58+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2016</span></span> <span class='time'>1:53 pm</span></time>
+<time class='entry-date' datetime='2015-08-30T21:59:29-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:59 pm</span></time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -99,40 +98,23 @@ There&rsquo;s an error about undefined reference as shown below. I was on Ubuntu
   </header>
 
 
-<div class="entry-content"><p>I encountered a problem while compiling a C++ project under CLion.
-There&rsquo;s an error about undefined reference as shown below.
-<img src="/images/posts/2016-04-03-link.png" alt="link" />
-I was on Ubuntu 14.04 and using Clang. But what is &ldquo;_ZNSs4_Rep10_M_destroyERKSaIcE@@GLIBCXX_3.4&rdquo;?</p>
-
-<p><strong>SOLUTION</strong><br/>
-Add the following parameters:<br/>
-<strong>-L /usr/lib64 -lstdc++</strong></p>
-
-<p>My CMakeLists.txt has this line:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -L /usr/lib64 -lstdc++")</span></code></pre></td></tr></table></div></figure>
+<div class="entry-content"><!-- more -->
 
 
-<p>This will force link with stdc++. (g++ will automatically do this but gcc won&rsquo;t, not sure about clang)</p>
+<p>Here&rsquo;s a very good <a href="https://delightlylinux.wordpress.com/2014/03/24/htop-a-better-process-viewer-then-top/">article</a> about the interactive process viewer <a href="http://hisham.hm/htop/"><strong>htop</strong></a>.</p>
 
-<p>I thought I was missing some lib files at first.</p>
+<p>I even replace the original <strong>top</strong> with <strong>htop</strong> after trying it. For <strong>fishshell</strong> users, you can do this by adding a new function at the end of your <code>~/.config/fish/config.fish</code>:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>➜  ~ ldd /usr/lib/libstdc++.so.6
-</span><span class='line'>  linux-gate.so.1 =&gt;  (0xf77ab000)
-</span><span class='line'>  libm.so.6 =&gt; /lib/i386-linux-gnu/libm.so.6 (0xf7637000)
-</span><span class='line'>  libc.so.6 =&gt; /lib/i386-linux-gnu/libc.so.6 (0xf7489000)
-</span><span class='line'>  /lib/ld-linux.so.2 (0xf77ac000)
-</span><span class='line'>  libgcc_s.so.1 =&gt; /lib/i386-linux-gnu/libgcc_s.so.1 (0xf746b000)</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="k">function</span> top
+</span><span class='line'>  <span class="nb">command </span>htop
+</span><span class='line'>end
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>So it&rsquo;s still the linking matter and it may due to compiler&rsquo;s default options.</p>
+<p><img src="/images/posts/htop-screenshot.png" alt="htop-screenshot" /></p>
 </div>
 
 
@@ -148,7 +130,7 @@ Add the following parameters:<br/>
 
 
 
-<time class='entry-date' datetime='2016-04-03T13:53:58+08:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2016</span></span> <span class='time'>1:53 pm</span></time>
+<time class='entry-date' datetime='2015-08-30T21:59:29-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:59 pm</span></time>
       
 
 <span class="categories">
@@ -162,7 +144,7 @@ Add the following parameters:<br/>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.sumomoshinqi.com/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/" data-via="sumomoshinqi" data-counturl="http://www.sumomoshinqi.com/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.sumomoshinqi.com/blog/2015/08/30/htop-a-better-process-viewer/" data-via="sumomoshinqi" data-counturl="http://www.sumomoshinqi.com/blog/2015/08/30/htop-a-better-process-viewer/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -188,8 +170,10 @@ Add the following parameters:<br/>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/09/29/enable-trim-for-yosemite-or-later/" title="Previous Post: Enable TRIM for Yosemite or later">&laquo; Enable TRIM for Yosemite or later</a>
+        <a class="basic-alignment left" href="/blog/2015/08/09/fix-annoying-perl-locale-warnings/" title="Previous Post: Fix annoying perl locale warnings">&laquo; Fix annoying perl locale warnings</a>
       
+      
+        <a class="basic-alignment right" href="/blog/2015/09/29/enable-trim-for-yosemite-or-later/" title="Next Post: Enable TRIM for Yosemite or later">Enable TRIM for Yosemite or later &raquo;</a>
       
     </p>
   </footer>
@@ -207,14 +191,15 @@ Add the following parameters:<br/>
   
     <section>
   <h1>About Me</h1>
-  <p>李秦琦  Edam Lee<br>Senior undergraduate majors in computer science at Fudan University.<br><br>I love cats.</p>
-  <p>Weibo:   <a href="http://weibo.com/sumomoshinqi">@sumomoshinqi</a><br/>
-  人人:   <a href="http://www.renren.com/liqinqi">李秦琦</a><br/>
-     Twitter: <a href="https://twitter.com/#!/sumomoshinqi">@sumomoshinqi</a><br/>
-     Facebook: <a href="https://www.facebook.com/edam.lqq">Edam Lee</a><br/>
-     WeChat:<br>
-  <img src="/images/wechat.jpg"  alt="WeChat" /><br/>
-     Other:   <a href="https://github.com/sumomoshinqi">Github</a>, <a href="https://plus.google.com/112017966298007566851">Google+</a>, <a href="cn.linkedin.com/pub/edam-lee/61/483/b92">LinkedIn</a></p>
+  <p>李秦琦  Edam Li<br>MS student at Carnegie Mellon University.<br><br>I love cats.</p>
+  <p>
+    LinkedIn: <a href="http://linkedin.com/in/edamli">Edam Li</a><br/>
+    Facebook: <a href="https://www.facebook.com/edam.lqq">Edam Li</a><br/>
+    GitHub: <a href="https://github.com/sumomoshinqi">sumomoshinqi</a><br/>
+    WeChat:<br>
+    <img src="/images/wechat.jpg"  alt="WeChat" /><br/>
+    人人: <a href="http://www.renren.com/liqinqi">李秦琦</a><br/>
+  </p>
   </p>
 </section><section>
   <h1>Categories</h1>
@@ -238,7 +223,7 @@ Add the following parameters:<br/>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/">Linking problem with libstdc++.so.6</a>
+        <a href="/blog/2016/04/02/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/">Linking problem with libstdc++.so.6</a>
       </li>
     
       <li class="post">
@@ -246,7 +231,7 @@ Add the following parameters:<br/>
       </li>
     
       <li class="post">
-        <a href="/blog/2015/08/31/htop-a-better-process-viewer/">htop - A better process viewer</a>
+        <a href="/blog/2015/08/30/htop-a-better-process-viewer/">htop - A better process viewer</a>
       </li>
     
       <li class="post">
@@ -283,8 +268,8 @@ Add the following parameters:<br/>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.sumomoshinqi.com/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/';
-        var disqus_url = 'http://www.sumomoshinqi.com/blog/2016/04/03/linking-problem-with-libstdc-plus-plus-dot-so-dot-6/';
+        var disqus_identifier = 'http://www.sumomoshinqi.com/blog/2015/08/30/htop-a-better-process-viewer/';
+        var disqus_url = 'http://www.sumomoshinqi.com/blog/2015/08/30/htop-a-better-process-viewer/';
         var disqus_script = 'embed.js';
       
     (function () {
